@@ -15,7 +15,7 @@ public class BonDAO implements BonInterface {
             PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql);
             statement.setString(1, bon.getID_Bon());
             statement.setDate(2, bon.getTanggal_Transaksi());
-            statement.setBigint(3, bon.getSubtotal());
+            statement.setLong(3, bon.getSubtotal());
             statement.setString(4, bon.getID_Petugas());
             
             int row = statement.executeUpdate();
@@ -36,7 +36,7 @@ public class BonDAO implements BonInterface {
         try {
             PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql);
             statement.setDate(1, bon.getTanggal_Transaksi());
-            statement.setBigint(2, bon.getSubtotal());
+            statement.setLong(2, bon.getSubtotal());
             statement.setString(3, bon.getID_Petugas());
             statement.setString(4, bon.getID_Bon());
 
@@ -80,7 +80,7 @@ public class BonDAO implements BonInterface {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                Bon bon = new Bon(rs.getString(1), rs.getDate(2), rs.getBigint(3), rs.getString(4));
+                Bon bon = new Bon(rs.getString(1), rs.getDate(2), rs.getLong(3), rs.getString(4));
                 bonList.add(bon);
             }
             statement.close();
@@ -100,7 +100,7 @@ public class BonDAO implements BonInterface {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                bon = new Bon(rs.getString(1), rs.getDate(2), rs.getBigint(3), rs.getString(4));
+                bon = new Bon(rs.getString(1), rs.getDate(2), rs.getLong(3), rs.getString(4));
             }
         } catch (Exception e) {
             Logger.getLogger(Bon.class.getName()).log(Level.SEVERE, null, e);

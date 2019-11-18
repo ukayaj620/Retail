@@ -4,10 +4,10 @@ import java.sql.*;
 public class Bon {
     private String ID_Bon;
     private Date Tanggal_Transaksi;
-    private bigint Subtotal;
+    private long Subtotal;
     private String ID_Petugas;
     
-    public Bon(String ID_Bon, Date Tanggal_Transaksi, bigint Subtotal, String ID_Petugas){
+    public Bon(String ID_Bon, Date Tanggal_Transaksi, long Subtotal, String ID_Petugas){
         this.ID_Bon = ID_Bon;
         this.Tanggal_Transaksi = Tanggal_Transaksi;
         this.Subtotal = Subtotal;
@@ -30,11 +30,11 @@ public class Bon {
         this.Tanggal_Transaksi = Tanggal_Transaksi;
     }
     
-    public bigint getSubtotal(){
+    public long getSubtotal(){
         return Subtotal;
     }
     
-    public void setSubtotal(bigint Subtotal){
+    public void setSubtotal(long Subtotal){
         this.Subtotal = Subtotal;
     }
     

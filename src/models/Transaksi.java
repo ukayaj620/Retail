@@ -5,10 +5,10 @@ public class Transaksi {
     private String ID_Transaksi;
     private String ID_Barang;
     private int Jumlah_Barang;
-    private bigint Harga_Total;
+    private long Harga_Total;
     private String ID_Bon;
     
-    public Transaksi(String ID_Transaksi, String ID_Barang, int Jumlah_Barang, bigint Harga_Total, String ID_Bon){
+    public Transaksi(String ID_Transaksi, String ID_Barang, int Jumlah_Barang, long Harga_Total, String ID_Bon){
         this.ID_Transaksi = ID_Transaksi;
         this.ID_Barang = ID_Barang;
         this.Jumlah_Barang = Jumlah_Barang;
@@ -40,11 +40,11 @@ public class Transaksi {
         this.Jumlah_Barang = Jumlah_Barang;
     }
     
-    public bigint getHarga_Total(){
+    public long getHarga_Total(){
         return Harga_Total;
     }
     
-    public void setHarga_Total(bigint Harga_Total){
+    public void setHarga_Total(long Harga_Total){
         this.Harga_Total = Harga_Total;
     }
     

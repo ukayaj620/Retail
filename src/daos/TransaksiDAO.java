@@ -16,7 +16,7 @@ public class TransaksiDAO implements TransaksiInterface {
             statement.setString(1, transaksi.getID_Transaksi());
             statement.setString(2, transaksi.getID_Barang());
             statement.setInt(3, transaksi.getJumlah_Barang());
-            statement.setBigint(4, transaksi.getHarga_Total());
+            statement.setLong(4, transaksi.getHarga_Total());
             statement.setString(5, transaksi.getID_Bon());
             
             int row = statement.executeUpdate();
@@ -38,7 +38,7 @@ public class TransaksiDAO implements TransaksiInterface {
             PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql);
             statement.setString(1, transaksi.getID_Barang());
             statement.setInt(2, transaksi.getJumlah_Barang());
-            statement.setBigint(3, transaksi.getHarga_Total());
+            statement.setLong(3, transaksi.getHarga_Total());
             statement.setString(4, transaksi.getID_Bon());
             statement.setString(5, transaksi.getID_Transaksi());
 
@@ -82,7 +82,7 @@ public class TransaksiDAO implements TransaksiInterface {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                Transaksi transaksi = new Transaksi(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getBigint(4), rs.getString(5));
+                Transaksi transaksi = new Transaksi(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getLong(4), rs.getString(5));
                 transaksiList.add(transaksi);
             }
             statement.close();
@@ -102,7 +102,7 @@ public class TransaksiDAO implements TransaksiInterface {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                transaksi = new Transaksi(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getBigint(4), rs.getString(5));
+                transaksi = new Transaksi(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getLong(4), rs.getString(5));
             }
         } catch (Exception e) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, e);
