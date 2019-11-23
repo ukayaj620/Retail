@@ -7,13 +7,23 @@ public class Petugas {
     private String ID_Cabang;
     private String Shift;
     private Date Tanggal_Masuk;
+    private String Tempat;
+    private Date Tanggal_Lahir;
+    private String Alamat;
+    private String No_Telepon;
+    private String Jenis_Kelamin;
     
-    public Petugas(String ID_Petugas, String Nama_Petugas, String ID_Cabang, String Shift, Date Tanggal_Masuk){
+    public Petugas(String ID_Petugas, String Nama_Petugas, String ID_Cabang, String Shift, Date Tanggal_Masuk, String Tempat, Date Tanggal_Lahir, String Alamat, String No_Telepon, String Jenis_Kelamin){
         this.ID_Petugas = ID_Petugas;
         this.Nama_Petugas = Nama_Petugas;
         this.ID_Cabang = ID_Cabang;
         this.Shift = Shift;
         this.Tanggal_Masuk = Tanggal_Masuk;
+        this.Tempat = Tempat;
+        this.Tanggal_Lahir = Tanggal_Lahir;
+        this.Alamat = Alamat;
+        this.No_Telepon = No_Telepon;
+        this.Jenis_Kelamin = Jenis_Kelamin;
     }
     
     public String getID_Petugas(){
@@ -54,5 +64,45 @@ public class Petugas {
     
     public void setTanggal_Masuk(Date Tanggal_Masuk){
         this.Tanggal_Masuk = Tanggal_Masuk;
+    }
+    
+    public String getTempat(){
+        return Tempat;
+    }
+    
+    public void setTempat(String Tempat){
+        this.Tempat = Tempat;
+    }
+    
+    public Date getTanggal_Lahir(){
+        return Tanggal_Lahir;
+    }
+    
+    public void setTanggal_Lahir(Date Tanggal_Lahir){
+        this.Tanggal_Lahir = Tanggal_Lahir;
+    }
+    
+    public String getAlamat(){
+        return Alamat;
+    }
+    
+    public void setAlamat(String Alamat){
+        this.Alamat = Alamat;
+    }
+    
+    public String getNo_Telepon(){
+        return No_Telepon;
+    }
+    
+    public void setNo_Telepon(String No_Telepon){
+        this.No_Telepon = No_Telepon;
+    }
+    
+    public String getJenis_Kelamin(){
+        return Jenis_Kelamin;
+    }
+    
+    public void setJenis_Kelamin(String Jenis_Kelamin){
+        this.Jenis_Kelamin = Jenis_Kelamin;
     }
 }

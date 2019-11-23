@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2019 at 08:26 AM
+-- Generation Time: Nov 23, 2019 at 07:48 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -94,7 +94,12 @@ CREATE TABLE `petugas` (
   `Nama_Petugas` varchar(30) NOT NULL,
   `ID_Cabang` varchar(10) NOT NULL,
   `Shift` varchar(5) NOT NULL,
-  `Tanggal_Masuk` date NOT NULL
+  `Tanggal_Masuk` date NOT NULL,
+  `Tempat` varchar(20) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Alamat` varchar(100) NOT NULL,
+  `No_Telepon` varchar(14) NOT NULL,
+  `Jenis_Kelamin` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
