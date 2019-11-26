@@ -124,6 +124,23 @@ public class Menu extends javax.swing.JFrame {
 
         TransaksiSearchByIDBon.setEnabled(false);
         TransaksiSearchByDate.setEnabled(false);
+    public class JTextFieldLimit extends javax.swing.text.PlainDocument {
+        private int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+
+        public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
+            if (str == null) {
+                return;
+            }
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
