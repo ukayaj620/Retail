@@ -28,11 +28,14 @@ public class BarangController extends Observable{
         }
         setChanged();
         
-        if(hasil){
+        if(hasil)
+        {
             notifyObservers(barang);
-        }else{
-            notifyObservers();
         }
+            else
+            {
+                notifyObservers();
+            }
     }
     
     public OperasiCRUD getCrudState(){
