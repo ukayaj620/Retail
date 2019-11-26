@@ -1,5 +1,13 @@
 package views;
 
+import controllers.BarangController;
+import controllers.BonController;
+import controllers.CabangController;
+import controllers.KatagoriController;
+import controllers.KotaController;
+import controllers.PetugasController;
+import controllers.SupplierController;
+import controllers.TransaksiController;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -12,6 +20,15 @@ public class Menu extends javax.swing.JFrame {
     Color yellow_tran = new Color(255, 250, 229, 230);
     Color normal_btn = new Color(255, 250, 229);
     Boolean hasLogin = false;
+
+    BarangController barangController = new BarangController();
+    BonController bonController = new BonController();
+    CabangController cabangController = new CabangController();
+    KatagoriController katagoriController = new KatagoriController();
+    KotaController kotaController = new KotaController();
+    PetugasController petugasController = new PetugasController();
+    SupplierController supplierController = new SupplierController();
+    TransaksiController transaksiController = new TransaksiController();
 
     public Menu() {
         initComponents();
