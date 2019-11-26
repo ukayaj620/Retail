@@ -25,4 +25,9 @@ public class Katagori {
     public void setNama_Katagori(String Nama_Katagori){
         this.Nama_Katagori = Nama_Katagori;
     }
+    
+    @Override
+    public String toString() {
+        return Nama_Katagori; //To change body of generated methods, choose Tools | Templates.
+    }
 }
