@@ -10,9 +10,13 @@ import controllers.SupplierController;
 import controllers.TransaksiController;
 import java.awt.Color;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import models.Barang;
+import models.Katagori;
+import models.OperasiCRUD;
 import retail.Koneksi;
 
 public class Menu extends javax.swing.JFrame {
@@ -201,7 +205,7 @@ public class Menu extends javax.swing.JFrame {
         AddBarang_TglExp = new javax.swing.JLabel();
         AddBarang_CancelButton = new javax.swing.JButton();
         AddBarang_SaveButton = new javax.swing.JButton();
-        IDKCbx = new javax.swing.JComboBox<>();
+        IDKCbx = new javax.swing.JComboBox();
         HargaBarangField = new javax.swing.JTextField();
         IDBarangField = new javax.swing.JTextField();
         BarangTglExp = new com.toedter.calendar.JDateChooser();
@@ -833,6 +837,11 @@ public class Menu extends javax.swing.JFrame {
         AddBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         AddBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         AddBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        AddBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                AddBarangMenuComponentShown(evt);
+            }
+        });
         AddBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AddBarangTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -863,9 +872,18 @@ public class Menu extends javax.swing.JFrame {
         AddBarang_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddBarang_SaveButton.setText("Simpan ");
         AddBarang_SaveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddBarang_SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBarang_SaveButtonActionPerformed(evt);
+            }
+        });
         AddBarangMenu.add(AddBarang_SaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, -1, -1));
 
-        IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Organik", "Anorganik", "B3" }));
+        IDKCbx.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IDKCbxMouseClicked(evt);
+            }
+        });
         AddBarangMenu.add(IDKCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 140, 40));
         AddBarangMenu.add(HargaBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 180, 30));
         AddBarangMenu.add(IDBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 180, 30));
@@ -2335,6 +2353,58 @@ public class Menu extends javax.swing.JFrame {
         model.setRowCount(0);
     }//GEN-LAST:event_PembelianResetMouseClicked
 
+    private void AddBarang_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBarang_SaveButtonActionPerformed
+        try {
+            if (IDBarangField.getText().equals(""))    throw new Exception("ID");
+            if (NamaBarangField.getText().equals(""))  throw new Exception("Nama");
+            if (HargaBarangField.getText().equals("")) throw new Exception("Harga");
+            if (BarangTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+            if (BarangTglExp.getDate() == null)        throw new Exception("TglKeluar");
+
+            String id = IDBarangField.getText();
+            String nama = NamaBarangField.getText();
+            String kategori = ((Katagori) IDKCbx.getSelectedItem()).getID_Katagori();
+            int harga = Integer.parseInt(HargaBarangField.getText());
+            Date masuk = BarangTglMasuk.getDate();
+            Date kadaluarsa = BarangTglExp.getDate();
+
+            Barang b = new Barang(id, nama, kategori, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            barangController.setDml(b, OperasiCRUD.INSERT);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_AddBarang_SaveButtonActionPerformed
+
+    private void AddBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddBarangMenuComponentShown
+        List<Katagori> list = katagoriController.getAllKatagori();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != IDKCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<Object>(list.toArray()));
+    }//GEN-LAST:event_AddBarangMenuComponentShown
+
+    private void IDKCbxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDKCbxMouseClicked
+        AddBarangMenuComponentShown(null);
+    }//GEN-LAST:event_IDKCbxMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2465,7 +2535,7 @@ public class Menu extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser HapusTglMasuk;
     private javax.swing.JTextField HargaBarangField;
     private javax.swing.JTextField IDBarangField;
-    private javax.swing.JComboBox<String> IDKCbx;
+    private javax.swing.JComboBox IDKCbx;
     private javax.swing.JSpinner JumlahCounter;
     private javax.swing.JComboBox<String> KotaCbx;
     private javax.swing.JPanel ListBarang;
