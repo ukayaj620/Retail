@@ -9,6 +9,7 @@ import controllers.PetugasController;
 import controllers.SupplierController;
 import controllers.TransaksiController;
 import java.awt.Color;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -129,6 +130,11 @@ public class Menu extends javax.swing.JFrame {
         IDBarangField.setDocument(new JTextFieldLimit(10));
         NamaBarangField.setDocument(new JTextFieldLimit(50));
     }
+
+    java.sql.Date DatetoSQL(Date d) {
+        return new java.sql.Date(d.getYear(), d.getMonth(), d.getDay());
+    }
+
     public class JTextFieldLimit extends javax.swing.text.PlainDocument {
         private int limit;
 
