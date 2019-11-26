@@ -124,6 +124,11 @@ public class Menu extends javax.swing.JFrame {
 
         TransaksiSearchByIDBon.setEnabled(false);
         TransaksiSearchByDate.setEnabled(false);
+        
+        // TextField Limits
+        IDBarangField.setDocument(new JTextFieldLimit(10));
+        NamaBarangField.setDocument(new JTextFieldLimit(50));
+    }
     public class JTextFieldLimit extends javax.swing.text.PlainDocument {
         private int limit;
 
