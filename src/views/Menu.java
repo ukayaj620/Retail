@@ -4,106 +4,107 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import retail.Koneksi;
 
-public class Menu extends javax.swing.JFrame 
-{
-Color gray = new Color(255, 240, 178);
-Color yellow_tran = new Color(255, 250, 229, 230);
-Color normal_btn = new Color(255, 250, 229);
+public class Menu extends javax.swing.JFrame {
 
-    public Menu() 
-    {
+    Color gray = new Color(255, 240, 178);
+    Color yellow_tran = new Color(255, 250, 229, 230);
+    Color normal_btn = new Color(255, 250, 229);
+    Boolean hasLogin = false;
+
+    public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         BarangLogo.setEnabled(false);
         TransaksiLogo.setEnabled(false);
         StafLogo.setEnabled(false);
         SupplyLogo.setEnabled(false);
         PembelianLogo.setEnabled(false);
         StokLogo.setEnabled(false);
-        
+
         DefaultTableCellRenderer rendererStok = (DefaultTableCellRenderer) TabelStok.getTableHeader().getDefaultRenderer();
         rendererStok.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererStaf = (DefaultTableCellRenderer) TabelStaf.getTableHeader().getDefaultRenderer();
         rendererStaf.setHorizontalAlignment(0);
 
         DefaultTableCellRenderer rendererBarang = (DefaultTableCellRenderer) TabelBarang.getTableHeader().getDefaultRenderer();
         rendererBarang.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererSupplier = (DefaultTableCellRenderer) TabelSupplier.getTableHeader().getDefaultRenderer();
         rendererSupplier.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererPembelian = (DefaultTableCellRenderer) TabelPembelian.getTableHeader().getDefaultRenderer();
         rendererPembelian.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererTransaksi = (DefaultTableCellRenderer) TabelTransaksi.getTableHeader().getDefaultRenderer();
         rendererTransaksi.setHorizontalAlignment(0);
-        
+
         //Login
         LoginPanel.setBackground(yellow_tran);
-        
+
         //Barang
         BarangPanel.setVisible(false);
         BarangPanel.setBackground(yellow_tran);
-        
+
         AddBarangMenu.setVisible(false);
         AddBarangMenu.setBackground(yellow_tran);
-        
+
         ListBarangMenu.setVisible(false);
         ListBarangMenu.setBackground(yellow_tran);
-        
+
         UpdateBarangMenu.setVisible(false);
         UpdateBarangMenu.setBackground(yellow_tran);
-        
+
         HapusBarangMenu.setVisible(false);
-        HapusBarangMenu.setBackground(yellow_tran);        
-        
+        HapusBarangMenu.setBackground(yellow_tran);
+
         //Staf
         StafPanel.setVisible(false);
         StafPanel.setBackground(yellow_tran);
-        
+
         AddStafMenu.setVisible(false);
         AddStafMenu.setBackground(yellow_tran);
-        
+
         ListStafMenu.setVisible(false);
         ListStafMenu.setBackground(yellow_tran);
-        
+
         UpdateStafMenu.setVisible(false);
         UpdateStafMenu.setBackground(yellow_tran);
-        
+
         HapusStafMenu.setVisible(false);
         HapusStafMenu.setBackground(yellow_tran);
-        
+
         //Supplier
         SupplierPanel.setVisible(false);
         SupplierPanel.setBackground(yellow_tran);
-        
+
         AddSupplierMenu.setVisible(false);
         AddSupplierMenu.setBackground(yellow_tran);
-        
+
         ListSupplierMenu.setVisible(false);
         ListSupplierMenu.setBackground(yellow_tran);
-        
+
         UpdateSupplierMenu.setVisible(false);
         UpdateSupplierMenu.setBackground(yellow_tran);
-        
+
         HapusSupplierMenu.setVisible(false);
         HapusSupplierMenu.setBackground(yellow_tran);
-        
+
         //Stok
         StokPanel.setVisible(false);
         StokPanel.setBackground(yellow_tran);
-        
+
         //Pembelian
         PembelianPanel.setVisible(false);
         PembelianPanel.setBackground(yellow_tran);
-        
+
         //Transaksi
         TransaksiPanel.setVisible(false);
         TransaksiPanel.setBackground(yellow_tran);
-        
+
         TransaksiSearchByIDBon.setEnabled(false);
         TransaksiSearchByDate.setEnabled(false);
     }
@@ -1859,21 +1860,25 @@ Color normal_btn = new Color(255, 250, 229);
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
-        if ("user".equals(UsernameField.getText()) && "pass".equals(PasswordField.getText()))
-        {
+        if (Koneksi.openConnection() == null) {
+            return;
+        }
+
+        if ("user".equals(UsernameField.getText()) && "pass".equals(PasswordField.getText())) {
             BarangLogo.setEnabled(true);
             TransaksiLogo.setEnabled(true);
             StafLogo.setEnabled(true);
             SupplyLogo.setEnabled(true);
             PembelianLogo.setEnabled(true);
             StokLogo.setEnabled(true);
-            
+
             LoginPanel.setVisible(false);
+
+            hasLogin = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Username atau password salah");
         }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Username atau password salah");
-            }
+        Koneksi.closeConnection();
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void AddStafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddStafLogoMouseClicked
@@ -1979,12 +1984,12 @@ Color normal_btn = new Color(255, 250, 229);
         ListBarangMenu.setVisible(true);
         AddBarangMenu.setVisible(false);
         UpdateBarangMenu.setVisible(false);
-        HapusBarangMenu.setVisible(false);        
+        HapusBarangMenu.setVisible(false);
     }//GEN-LAST:event_ListBarangLogoMouseClicked
 
     private void ListBarangLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListBarangLogoMouseEntered
         // TODO add your handling code here:
-        ListBarang.setBackground(gray);        
+        ListBarang.setBackground(gray);
     }//GEN-LAST:event_ListBarangLogoMouseEntered
 
     private void ListBarangLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListBarangLogoMouseExited
@@ -1997,7 +2002,7 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateBarangMenu.setVisible(true);
         AddBarangMenu.setVisible(false);
         ListBarangMenu.setVisible(false);
-        HapusBarangMenu.setVisible(false);        
+        HapusBarangMenu.setVisible(false);
     }//GEN-LAST:event_UpdataBarangLogoMouseClicked
 
     private void UpdataBarangLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdataBarangLogoMouseEntered
@@ -2041,17 +2046,17 @@ Color normal_btn = new Color(255, 250, 229);
         AddSupplierMenu.setVisible(true);
         ListSupplierMenu.setVisible(false);
         UpdateSupplierMenu.setVisible(false);
-        HapusSupplierMenu.setVisible(false);        
+        HapusSupplierMenu.setVisible(false);
     }//GEN-LAST:event_AddSupplierLogoMouseClicked
 
     private void AddSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseEntered
         // TODO add your handling code here:
-        AddSupplier.setBackground(gray);        
+        AddSupplier.setBackground(gray);
     }//GEN-LAST:event_AddSupplierLogoMouseEntered
 
     private void AddSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseExited
         // TODO add your handling code here:
-        AddSupplier.setBackground(yellow_tran);        
+        AddSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_AddSupplierLogoMouseExited
 
     private void ListSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSupplierLogoMouseClicked
@@ -2059,17 +2064,17 @@ Color normal_btn = new Color(255, 250, 229);
         ListSupplierMenu.setVisible(true);
         AddSupplierMenu.setVisible(false);
         UpdateSupplierMenu.setVisible(false);
-        HapusSupplierMenu.setVisible(false);           
+        HapusSupplierMenu.setVisible(false);
     }//GEN-LAST:event_ListSupplierLogoMouseClicked
 
     private void ListSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSupplierLogoMouseEntered
         // TODO add your handling code here:
-        ListSupplier.setBackground(gray);         
+        ListSupplier.setBackground(gray);
     }//GEN-LAST:event_ListSupplierLogoMouseEntered
 
     private void ListSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSupplierLogoMouseExited
         // TODO add your handling code here:
-        ListSupplier.setBackground(yellow_tran);         
+        ListSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_ListSupplierLogoMouseExited
 
     private void UpdateSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateSupplierLogoMouseClicked
@@ -2077,38 +2082,42 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateSupplierMenu.setVisible(true);
         AddSupplierMenu.setVisible(false);
         ListSupplierMenu.setVisible(false);
-        HapusSupplierMenu.setVisible(false);          
+        HapusSupplierMenu.setVisible(false);
     }//GEN-LAST:event_UpdateSupplierLogoMouseClicked
 
     private void UpdateSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateSupplierLogoMouseEntered
         // TODO add your handling code here:
-        UpdateSupplier.setBackground(gray);         
+        UpdateSupplier.setBackground(gray);
     }//GEN-LAST:event_UpdateSupplierLogoMouseEntered
 
     private void UpdateSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateSupplierLogoMouseExited
         // TODO add your handling code here:
-        UpdateSupplier.setBackground(yellow_tran);         
+        UpdateSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_UpdateSupplierLogoMouseExited
 
     private void HapusSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusSupplierLogoMouseClicked
         // TODO add your handling code here:
-        HapusSupplierMenu.setVisible(true);  
+        HapusSupplierMenu.setVisible(true);
         AddSupplierMenu.setVisible(false);
         ListSupplierMenu.setVisible(false);
-        UpdateSupplierMenu.setVisible(false); 
+        UpdateSupplierMenu.setVisible(false);
     }//GEN-LAST:event_HapusSupplierLogoMouseClicked
 
     private void HapusSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusSupplierLogoMouseEntered
         // TODO add your handling code here:
-        HapusSupplier.setBackground(gray); 
+        HapusSupplier.setBackground(gray);
     }//GEN-LAST:event_HapusSupplierLogoMouseEntered
 
     private void HapusSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusSupplierLogoMouseExited
         // TODO add your handling code here:
-        HapusSupplier.setBackground(yellow_tran); 
+        HapusSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_HapusSupplierLogoMouseExited
 
     private void BarangLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
+
         // TODO add your handling code here:
         BarangPanel.setVisible(true);
         StokPanel.setVisible(false);
@@ -2129,6 +2138,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_BarangLogoMouseExited
 
     private void StafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StafLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         StafPanel.setVisible(true);
         StokPanel.setVisible(false);
@@ -2149,6 +2161,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_StafLogoMouseExited
 
     private void StokLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StokLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         StokPanel.setVisible(true);
         StafPanel.setVisible(false);
@@ -2169,6 +2184,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_StokLogoMouseExited
 
     private void SupplyLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplyLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         SupplierPanel.setVisible(true);
         StokPanel.setVisible(false);
@@ -2189,6 +2207,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_SupplyLogoMouseExited
 
     private void TransaksiLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransaksiLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         TransaksiPanel.setVisible(true);
         BarangPanel.setVisible(false);
@@ -2210,19 +2231,19 @@ Color normal_btn = new Color(255, 250, 229);
 
     private void TransaksiSearchCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiSearchCbxActionPerformed
         // TODO add your handling code here:
-        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Barang"))
-        {
+        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Barang")) {
             TransaksiSearchByIDBon.setEnabled(true);
             TransaksiSearchByDate.setEnabled(false);
+        } else {
+            TransaksiSearchByDate.setEnabled(true);
+            TransaksiSearchByIDBon.setEnabled(false);
         }
-            else
-            {
-                TransaksiSearchByDate.setEnabled(true);
-                TransaksiSearchByIDBon.setEnabled(false);
-            }
     }//GEN-LAST:event_TransaksiSearchCbxActionPerformed
 
     private void PembelianLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PembelianLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         PembelianPanel.setVisible(true);
         BarangPanel.setVisible(false);
@@ -2252,13 +2273,10 @@ Color normal_btn = new Color(255, 250, 229);
         // TODO add your handling code here:
         PembelianIDBonField.setText(null);
         PembelianIDBonField.setEnabled(true);
-        
-        
+
         //SOMETHING MISSING HERE
         //MASUKKAN ISI TABEL PEMBELIAN SEBAGAI HISTORY TRANSAKSI DI SINI
         //WHEN FIXED, PLS DELETE THIS COMMENT
-        
-        
         DefaultTableModel model = (DefaultTableModel) TabelPembelian.getModel();
         model.setRowCount(0);
     }//GEN-LAST:event_PembelianBayarMouseClicked
@@ -2267,7 +2285,7 @@ Color normal_btn = new Color(255, 250, 229);
         // TODO add your handling code here:
         PembelianIDBonField.setText(null);
         PembelianIDBonField.setEnabled(true);
-        
+
         DefaultTableModel model = (DefaultTableModel) TabelPembelian.getModel();
         model.setRowCount(0);
     }//GEN-LAST:event_PembelianResetMouseClicked
@@ -2275,9 +2293,7 @@ Color normal_btn = new Color(255, 250, 229);
     /**
      * @param args the command line arguments
      */
-    
-    public static void main(String args[]) 
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -2293,15 +2309,15 @@ Color normal_btn = new Color(255, 250, 229);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    //</editor-fold>
-    //</editor-fold>
-    
+        //</editor-fold>
+        //</editor-fold>
+
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> 
-        {
+        java.awt.EventQueue.invokeLater(()
+                -> {
             new Menu().setVisible(true);
         });
     }
