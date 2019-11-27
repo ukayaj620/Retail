@@ -136,7 +136,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     java.sql.Date DatetoSQL(Date d) {
-        return new java.sql.Date(d.getYear(), d.getMonth(), d.getDay());
+        return new java.sql.Date(d.getYear(), d.getMonth(), d.getDate());
     }
 
     public class JTextFieldLimit extends javax.swing.text.PlainDocument {
