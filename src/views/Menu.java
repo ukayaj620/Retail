@@ -867,6 +867,11 @@ public class Menu extends javax.swing.JFrame {
         AddBarang_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddBarang_CancelButton.setText("Batal");
         AddBarang_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddBarang_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBarang_CancelButtonActionPerformed(evt);
+            }
+        });
         AddBarangMenu.add(AddBarang_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 120, -1));
 
         AddBarang_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -2406,6 +2411,15 @@ public class Menu extends javax.swing.JFrame {
     private void IDKCbxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDKCbxMouseClicked
         AddBarangMenuComponentShown(null);
     }//GEN-LAST:event_IDKCbxMouseClicked
+
+    private void AddBarang_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBarang_CancelButtonActionPerformed
+        IDBarangField.setText("");
+        NamaBarangField.setText("");
+        HargaBarangField.setText("");
+        BarangTglMasuk.setDate(null);
+        BarangTglExp.setDate(null);
+        IDKCbx.setSelectedIndex(0);
+    }//GEN-LAST:event_AddBarang_CancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
