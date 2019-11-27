@@ -976,6 +976,11 @@ public class Menu extends javax.swing.JFrame {
         UpdateBarangCancel.setText("Batal");
         UpdateBarangCancel.setEnabled(false);
         UpdateBarangCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateBarangCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateBarangCancelActionPerformed(evt);
+            }
+        });
         UpdateBarangMenu.add(UpdateBarangCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, 120, -1));
 
         UpdateBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -2530,6 +2535,26 @@ public class Menu extends javax.swing.JFrame {
 
         UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
     }//GEN-LAST:event_UpdateBarangMenuComponentShown
+
+    private void UpdateBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangCancelActionPerformed
+        UpdateBarang_IDBarangField.setText("");
+        UpdateBarang_NamaBarangField.setText("");
+        UpdateBarang_IDKCbx.setSelectedIndex(-1);
+        UpdateBarang_HargaField.setText("");
+        UpdateBarang_TglMasuk.setDate(null);
+        UpdateBarang_TglExp.setDate(null);
+        
+        SearchUpdateBarang.setEnabled(true);
+        UpdateBarang_IDBarangField.setEnabled(true);
+        UpdateBarang_IDKCbx.setEnabled(false);
+        UpdateBarang_NamaBarangField.setEnabled(false);
+        UpdateBarang_HargaField.setEnabled(false);
+        UpdateBarang_TglMasuk.setEnabled(false);
+        UpdateBarang_TglExp.setEnabled(false);
+        UpdateBarangConfirm.setEnabled(false);
+        UpdateBarangCancel.setEnabled(false);
+    }//GEN-LAST:event_UpdateBarangCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
