@@ -2123,7 +2123,45 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBarangLogoMouseExited
 
     private void SearchUpdateBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateBarangActionPerformed
-        // TODO add your handling code here:
+        if(UpdateBarang_IDBarangField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = UpdateBarang_IDBarangField.getText();
+        Barang b = barangController.getByID_Barang(id);
+        
+        if(b == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        SearchUpdateBarang.setEnabled(false);
+        UpdateBarang_IDBarangField.setEnabled(false);
+        UpdateBarang_IDKCbx.setEnabled(true);
+        UpdateBarang_NamaBarangField.setEnabled(true);
+        UpdateBarang_HargaField.setEnabled(true);
+        UpdateBarang_TglMasuk.setEnabled(true);
+        UpdateBarang_TglExp.setEnabled(true);
+        UpdateBarangConfirm.setEnabled(true);
+        UpdateBarangCancel.setEnabled(true);
+        
+        int size=UpdateBarang_IDKCbx.getModel().getSize();
+        int i;
+        for(i=0; i<size; i++){
+            Katagori cek = (Katagori) UpdateBarang_IDKCbx.getModel().getElementAt(i);
+            if (cek.getID_Katagori().equals(b.getID_Katagori()))
+                break;
+        }
+        
+        if(i == size)
+            i = 0;
+        
+        UpdateBarang_IDKCbx.setSelectedIndex(i);
+        UpdateBarang_NamaBarangField.setText(b.getNama_Barang());
+        UpdateBarang_HargaField.setText("" + b.getHarga_Barang());
+        UpdateBarang_TglMasuk.setDate(b.getTanggal_Masuk());
+        UpdateBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
     }//GEN-LAST:event_SearchUpdateBarangActionPerformed
 
     private void SearchHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHapusBarangActionPerformed
