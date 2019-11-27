@@ -227,7 +227,7 @@ public class Menu extends javax.swing.JFrame {
         UpdateBarangTglExp = new javax.swing.JLabel();
         UpdateBarangCancel = new javax.swing.JButton();
         UpdateBarangConfirm = new javax.swing.JButton();
-        UpdateBarang_IDKCbx = new javax.swing.JComboBox<>();
+        UpdateBarang_IDKCbx = new javax.swing.JComboBox();
         UpdateBarang_HargaField = new javax.swing.JTextField();
         UpdateBarang_IDBarangField = new javax.swing.JTextField();
         SearchUpdateBarang = new javax.swing.JButton();
@@ -937,6 +937,11 @@ public class Menu extends javax.swing.JFrame {
         UpdateBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         UpdateBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         UpdateBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        UpdateBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                UpdateBarangMenuComponentShown(evt);
+            }
+        });
         UpdateBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UpdateBarangTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -2466,6 +2471,30 @@ public class Menu extends javax.swing.JFrame {
         TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
     }//GEN-LAST:event_ListBarangMenuComponentShown
 
+
+    private void UpdateBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateBarangMenuComponentShown
+        List<Katagori> list = katagoriController.getAllKatagori();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != UpdateBarang_IDKCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateBarang_IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+    }//GEN-LAST:event_UpdateBarangMenuComponentShown
     /**
      * @param args the command line arguments
      */
@@ -2694,7 +2723,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel UpdateBarangTitle;
     private javax.swing.JTextField UpdateBarang_HargaField;
     private javax.swing.JTextField UpdateBarang_IDBarangField;
-    private javax.swing.JComboBox<String> UpdateBarang_IDKCbx;
+    private javax.swing.JComboBox UpdateBarang_IDKCbx;
     private javax.swing.JTextField UpdateBarang_NamaBarangField;
     private com.toedter.calendar.JDateChooser UpdateBarang_TglExp;
     private com.toedter.calendar.JDateChooser UpdateBarang_TglMasuk;
