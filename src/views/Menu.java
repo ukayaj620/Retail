@@ -987,6 +987,11 @@ public class Menu extends javax.swing.JFrame {
         UpdateBarangConfirm.setText("Simpan ");
         UpdateBarangConfirm.setEnabled(false);
         UpdateBarangConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateBarangConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateBarangConfirmActionPerformed(evt);
+            }
+        });
         UpdateBarangMenu.add(UpdateBarangConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
 
         UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Organik", "Anorganik", "B3" }));
@@ -2511,6 +2516,32 @@ public class Menu extends javax.swing.JFrame {
         TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
     }//GEN-LAST:event_ListBarangMenuComponentShown
 
+    private void UpdateBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangConfirmActionPerformed
+        try {
+            if (UpdateBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
+            if (UpdateBarang_NamaBarangField.getText().equals("")) throw new Exception("Nama");
+            if (UpdateBarang_HargaField.getText().equals(""))      throw new Exception("Harga");
+            if (UpdateBarang_TglMasuk.getDate() == null)           throw new Exception("TglMasuk");
+            if (UpdateBarang_TglExp.getDate() == null)             throw new Exception("TglKeluar");
+
+            String id = UpdateBarang_IDBarangField.getText();
+            String nama = UpdateBarang_NamaBarangField.getText();
+            String kategori = ((Katagori) UpdateBarang_IDKCbx.getSelectedItem()).getID_Katagori();
+            int harga = Integer.parseInt(UpdateBarang_HargaField.getText());
+            Date masuk = UpdateBarang_TglMasuk.getDate();
+            Date kadaluarsa = UpdateBarang_TglExp.getDate();
+            
+            Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            barangController.setDml(b, OperasiCRUD.UPDATE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil diupdate!", "Message", JOptionPane.PLAIN_MESSAGE);
+            UpdateBarangCancelActionPerformed(null);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_UpdateBarangConfirmActionPerformed
 
     private void UpdateBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateBarangMenuComponentShown
         List<Katagori> list = katagoriController.getAllKatagori();
