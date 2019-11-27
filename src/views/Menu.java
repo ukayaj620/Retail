@@ -969,16 +969,21 @@ public class Menu extends javax.swing.JFrame {
 
         UpdateBarangCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateBarangCancel.setText("Batal");
+        UpdateBarangCancel.setEnabled(false);
         UpdateBarangCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         UpdateBarangMenu.add(UpdateBarangCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, 120, -1));
 
         UpdateBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateBarangConfirm.setText("Simpan ");
+        UpdateBarangConfirm.setEnabled(false);
         UpdateBarangConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         UpdateBarangMenu.add(UpdateBarangConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
 
         UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Organik", "Anorganik", "B3" }));
+        UpdateBarang_IDKCbx.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_IDKCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 140, 40));
+
+        UpdateBarang_HargaField.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_HargaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 180, 30));
         UpdateBarangMenu.add(UpdateBarang_IDBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 180, 30));
 
@@ -990,8 +995,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         UpdateBarangMenu.add(SearchUpdateBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 90, 30));
+
+        UpdateBarang_NamaBarangField.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_NamaBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 180, 30));
+
+        UpdateBarang_TglMasuk.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_TglMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 180, 30));
+
+        UpdateBarang_TglExp.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_TglExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 180, 30));
 
         BarangPanel.add(UpdateBarangMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 710));
