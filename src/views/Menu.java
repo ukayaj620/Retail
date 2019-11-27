@@ -2367,8 +2367,8 @@ public class Menu extends javax.swing.JFrame {
             int harga = Integer.parseInt(HargaBarangField.getText());
             Date masuk = BarangTglMasuk.getDate();
             Date kadaluarsa = BarangTglExp.getDate();
-
-            Barang b = new Barang(id, nama, kategori, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            
+            Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
             barangController.setDml(b, OperasiCRUD.INSERT);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
