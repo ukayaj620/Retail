@@ -909,6 +909,11 @@ public class Menu extends javax.swing.JFrame {
         ListBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         ListBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         ListBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        ListBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                ListBarangMenuComponentShown(evt);
+            }
+        });
         ListBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelBarang.setModel(new javax.swing.table.DefaultTableModel(
@@ -2421,6 +2426,34 @@ public class Menu extends javax.swing.JFrame {
         BarangTglExp.setDate(null);
         IDKCbx.setSelectedIndex(0);
     }//GEN-LAST:event_AddBarang_CancelButtonActionPerformed
+
+    private void ListBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListBarangMenuComponentShown
+        List<Barang> list = barangController.getAllBarang();
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][6];
+        Object[] columnNames = {
+            "ID Barang", 
+            "ID Katagori", 
+            "Nama Barang", 
+            "Harga Barang", 
+            "Tanggal Masuk", 
+            "Tanggal Kadaluarsa"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Barang();
+            data[i][1] = list.get(i).getID_Katagori();
+            data[i][2] = list.get(i).getNama_Barang();
+            data[i][3] = list.get(i).getHarga_Barang();
+            data[i][4] = list.get(i).getTanggal_Masuk();
+            data[i][5] = list.get(i).getTanggal_Kadaluarsa();
+        }
+        
+        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+    }//GEN-LAST:event_ListBarangMenuComponentShown
 
     /**
      * @param args the command line arguments
