@@ -2148,14 +2148,11 @@ public class Menu extends javax.swing.JFrame {
         
         int size=UpdateBarang_IDKCbx.getModel().getSize();
         int i;
-        for(i=0; i<size; i++){
+        for(i=size-1; i>=0; i--){
             Katagori cek = (Katagori) UpdateBarang_IDKCbx.getModel().getElementAt(i);
             if (cek.getID_Katagori().equals(b.getID_Katagori()))
                 break;
         }
-        
-        if(i == size)
-            i = 0;
         
         UpdateBarang_IDKCbx.setSelectedIndex(i);
         UpdateBarang_NamaBarangField.setText(b.getNama_Barang());
