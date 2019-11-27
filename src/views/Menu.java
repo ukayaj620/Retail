@@ -2370,6 +2370,8 @@ public class Menu extends javax.swing.JFrame {
             
             Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
             barangController.setDml(b, OperasiCRUD.INSERT);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
