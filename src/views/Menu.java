@@ -2398,7 +2398,7 @@ public class Menu extends javax.swing.JFrame {
             return;
         }
 
-        IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<Object>(list.toArray()));
+        IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
     }//GEN-LAST:event_AddBarangMenuComponentShown
 
     private void IDKCbxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDKCbxMouseClicked
