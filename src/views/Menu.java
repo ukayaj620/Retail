@@ -244,7 +244,7 @@ public class Menu extends javax.swing.JFrame {
         HapusBarangTglExp = new javax.swing.JLabel();
         HapusBarangCancel = new javax.swing.JButton();
         HapusBarangConfirm = new javax.swing.JButton();
-        HapusBarang_IDKCbx = new javax.swing.JComboBox<>();
+        HapusBarang_IDKCbx = new javax.swing.JComboBox();
         HapusBarang_HargaField = new javax.swing.JTextField();
         HapusBarang_IDBarangField = new javax.swing.JTextField();
         SearchHapusBarang = new javax.swing.JButton();
@@ -1025,6 +1025,11 @@ public class Menu extends javax.swing.JFrame {
         HapusBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         HapusBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         HapusBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        HapusBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                HapusBarangMenuComponentShown(evt);
+            }
+        });
         HapusBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         HapusBarangTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -2586,6 +2591,30 @@ public class Menu extends javax.swing.JFrame {
         UpdateBarangCancel.setEnabled(false);
     }//GEN-LAST:event_UpdateBarangCancelActionPerformed
 
+    private void HapusBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusBarangMenuComponentShown
+        List<Katagori> list = katagoriController.getAllKatagori();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != HapusBarang_IDKCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusBarang_IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+    }//GEN-LAST:event_HapusBarangMenuComponentShown
+
     /**
      * @param args the command line arguments
      */
@@ -2680,7 +2709,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel HapusBarangTitle;
     private javax.swing.JTextField HapusBarang_HargaField;
     private javax.swing.JTextField HapusBarang_IDBarangField;
-    private javax.swing.JComboBox<String> HapusBarang_IDKCbx;
+    private javax.swing.JComboBox HapusBarang_IDKCbx;
     private javax.swing.JTextField HapusBarang_NamaBarangField;
     private com.toedter.calendar.JDateChooser HapusBarang_TglExp;
     private com.toedter.calendar.JDateChooser HapusBarang_TglMasuk;
