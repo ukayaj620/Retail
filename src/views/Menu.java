@@ -37,7 +37,6 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-        this.setLocationRelativeTo(null);
 
         BarangLogo.setEnabled(false);
         TransaksiLogo.setEnabled(false);
@@ -140,13 +139,14 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public class JTextFieldLimit extends javax.swing.text.PlainDocument {
-        private int limit;
+        private final int limit;
 
         JTextFieldLimit(int limit) {
             super();
             this.limit = limit;
         }
-
+        
+        @Override
         public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
             if (str == null) {
                 return;
@@ -395,6 +395,7 @@ public class Menu extends javax.swing.JFrame {
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
