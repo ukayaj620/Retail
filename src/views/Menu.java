@@ -1063,6 +1063,11 @@ public class Menu extends javax.swing.JFrame {
         HapusBarangCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangCancel.setText("Batal");
         HapusBarangCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusBarangCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusBarangCancelActionPerformed(evt);
+            }
+        });
         HapusBarangMenu.add(HapusBarangCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 120, -1));
 
         HapusBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -2639,6 +2644,16 @@ public class Menu extends javax.swing.JFrame {
 
         HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
     }//GEN-LAST:event_HapusBarangMenuComponentShown
+
+
+    private void HapusBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangCancelActionPerformed
+        HapusBarang_IDBarangField.setText("");
+        HapusBarang_NamaBarangField.setText("");
+        HapusBarang_IDKCbx.setSelectedIndex(-1);
+        HapusBarang_HargaField.setText("");
+        HapusBarang_TglMasuk.setDate(null);
+        HapusBarang_TglExp.setDate(null);
+    }//GEN-LAST:event_HapusBarangCancelActionPerformed
 
     /**
      * @param args the command line arguments
