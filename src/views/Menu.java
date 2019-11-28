@@ -2177,7 +2177,32 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchUpdateBarangActionPerformed
 
     private void SearchHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHapusBarangActionPerformed
-        // TODO add your handling code here:
+        if(HapusBarang_IDBarangField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = HapusBarang_IDBarangField.getText();
+        Barang b = barangController.getByID_Barang(id);
+        
+        if(b == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int size=HapusBarang_IDKCbx.getModel().getSize();
+        int i;
+        for(i=size-1; i>=0; i--){
+            Katagori cek = (Katagori) HapusBarang_IDKCbx.getModel().getElementAt(i);
+            if (cek.getID_Katagori().equals(b.getID_Katagori()))
+                break;
+        }
+        
+        HapusBarang_IDKCbx.setSelectedIndex(i);
+        HapusBarang_NamaBarangField.setText(b.getNama_Barang());
+        HapusBarang_HargaField.setText("" + b.getHarga_Barang());
+        HapusBarang_TglMasuk.setDate(b.getTanggal_Masuk());
+        HapusBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
     }//GEN-LAST:event_SearchHapusBarangActionPerformed
 
     private void AddSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseClicked
