@@ -1073,6 +1073,11 @@ public class Menu extends javax.swing.JFrame {
         HapusBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangConfirm.setText("Hapus");
         HapusBarangConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusBarangConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusBarangConfirmActionPerformed(evt);
+            }
+        });
         HapusBarangMenu.add(HapusBarangConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, -1, -1));
 
         HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Organik", "Anorganik", "B3" }));
@@ -2645,6 +2650,32 @@ public class Menu extends javax.swing.JFrame {
         HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
     }//GEN-LAST:event_HapusBarangMenuComponentShown
 
+    private void HapusBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangConfirmActionPerformed
+        try {
+            if (HapusBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
+            if (HapusBarang_NamaBarangField.getText().equals("")) throw new Exception("Nama");
+            if (HapusBarang_HargaField.getText().equals(""))      throw new Exception("Harga");
+            if (HapusBarang_TglMasuk.getDate() == null)           throw new Exception("TglMasuk");
+            if (HapusBarang_TglExp.getDate() == null)             throw new Exception("TglKeluar");
+
+            String id = HapusBarang_IDBarangField.getText();
+            String nama = HapusBarang_NamaBarangField.getText();
+            String kategori = ((Katagori) HapusBarang_IDKCbx.getSelectedItem()).getID_Katagori();
+            int harga = Integer.parseInt(HapusBarang_HargaField.getText());
+            Date masuk = HapusBarang_TglMasuk.getDate();
+            Date kadaluarsa = HapusBarang_TglExp.getDate();
+            
+            Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            barangController.setDml(b, OperasiCRUD.DELETE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
+            HapusBarangCancelActionPerformed(null);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_HapusBarangConfirmActionPerformed
 
     private void HapusBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangCancelActionPerformed
         HapusBarang_IDBarangField.setText("");
