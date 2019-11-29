@@ -1,22 +1,13 @@
 package views;
 
-import controllers.BarangController;
-import controllers.BonController;
-import controllers.CabangController;
-import controllers.KatagoriController;
-import controllers.KotaController;
-import controllers.PetugasController;
-import controllers.SupplierController;
-import controllers.TransaksiController;
+import controllers.*;
 import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import models.Barang;
-import models.Katagori;
-import models.OperasiCRUD;
+import models.*;
 import retail.Koneksi;
 
 public class Menu extends javax.swing.JFrame {
