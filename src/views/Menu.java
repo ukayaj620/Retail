@@ -2687,9 +2687,6 @@ public class Menu extends javax.swing.JFrame {
         HapusBarang_TglExp.setDate(null);
     }//GEN-LAST:event_HapusBarangCancelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2706,10 +2703,6 @@ public class Menu extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
