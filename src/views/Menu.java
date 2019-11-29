@@ -1057,6 +1057,7 @@ public class Menu extends javax.swing.JFrame {
 
         HapusBarangCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangCancel.setText("Batal");
+        HapusBarangCancel.setEnabled(false);
         HapusBarangCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         HapusBarangCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1067,6 +1068,7 @@ public class Menu extends javax.swing.JFrame {
 
         HapusBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangConfirm.setText("Hapus");
+        HapusBarangConfirm.setEnabled(false);
         HapusBarangConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         HapusBarangConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2342,6 +2344,11 @@ public class Menu extends javax.swing.JFrame {
         HapusBarang_HargaField.setText("" + b.getHarga_Barang());
         HapusBarang_TglMasuk.setDate(b.getTanggal_Masuk());
         HapusBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
+        
+        HapusBarang_IDBarangField.setEnabled(false);
+        SearchHapusBarang.setEnabled(false);
+        HapusBarangConfirm.setEnabled(true);
+        HapusBarangCancel.setEnabled(true);
     }//GEN-LAST:event_SearchHapusBarangActionPerformed
 
     private void AddSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseClicked
@@ -2777,30 +2784,20 @@ public class Menu extends javax.swing.JFrame {
         }
 
         HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        HapusBarang_IDKCbx.setSelectedIndex(-1);
     }//GEN-LAST:event_HapusBarangMenuComponentShown
 
     private void HapusBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangConfirmActionPerformed
         try {
             if (HapusBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
-            if (HapusBarang_NamaBarangField.getText().equals("")) throw new Exception("Nama");
-            if (HapusBarang_HargaField.getText().equals(""))      throw new Exception("Harga");
-            if (HapusBarang_TglMasuk.getDate() == null)           throw new Exception("TglMasuk");
-            if (HapusBarang_TglExp.getDate() == null)             throw new Exception("TglKeluar");
 
             String id = HapusBarang_IDBarangField.getText();
-            String nama = HapusBarang_NamaBarangField.getText();
-            String kategori = ((Katagori) HapusBarang_IDKCbx.getSelectedItem()).getID_Katagori();
-            int harga = Integer.parseInt(HapusBarang_HargaField.getText());
-            Date masuk = HapusBarang_TglMasuk.getDate();
-            Date kadaluarsa = HapusBarang_TglExp.getDate();
             
-            Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            Barang b = new Barang(id, null, null, 0, null, null);
             barangController.setDml(b, OperasiCRUD.DELETE);
             
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusBarangCancelActionPerformed(null);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
         }
@@ -2813,6 +2810,12 @@ public class Menu extends javax.swing.JFrame {
         HapusBarang_HargaField.setText("");
         HapusBarang_TglMasuk.setDate(null);
         HapusBarang_TglExp.setDate(null);
+        
+        
+        HapusBarang_IDBarangField.setEnabled(true);
+        SearchHapusBarang.setEnabled(true);
+        HapusBarangConfirm.setEnabled(false);
+        HapusBarangCancel.setEnabled(false);
     }//GEN-LAST:event_HapusBarangCancelActionPerformed
 
     private void AddStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddStafMenuComponentShown
