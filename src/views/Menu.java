@@ -2741,6 +2741,7 @@ public class Menu extends javax.swing.JFrame {
         }
 
         UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        UpdateBarang_IDKCbx.setSelectedIndex(-1);
     }//GEN-LAST:event_UpdateBarangMenuComponentShown
 
     private void UpdateBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangCancelActionPerformed
