@@ -25,4 +25,9 @@ public class Cabang {
     public void setID_Kota(String ID_Kota){
         this.ID_Kota = ID_Kota;
     }
+    
+    @Override
+    public String toString() {
+        return ID_Cabang; //To change body of generated methods, choose Tools | Templates.
+    }
 }
