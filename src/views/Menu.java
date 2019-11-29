@@ -1,22 +1,13 @@
 package views;
 
-import controllers.BarangController;
-import controllers.BonController;
-import controllers.CabangController;
-import controllers.KatagoriController;
-import controllers.KotaController;
-import controllers.PetugasController;
-import controllers.SupplierController;
-import controllers.TransaksiController;
+import controllers.*;
 import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import models.Barang;
-import models.Katagori;
-import models.OperasiCRUD;
+import models.*;
 import retail.Koneksi;
 
 public class Menu extends javax.swing.JFrame {
@@ -162,6 +153,9 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup_Staf_Add = new javax.swing.ButtonGroup();
+        btnGroup_Staf_Update = new javax.swing.ButtonGroup();
+        btnGroup_Staf_Hapus = new javax.swing.ButtonGroup();
         MainPanel = new javax.swing.JPanel();
         LoginPanel = new javax.swing.JPanel();
         Username = new javax.swing.JLabel();
@@ -272,7 +266,7 @@ public class Menu extends javax.swing.JFrame {
         AddStaf_SaveButton = new javax.swing.JButton();
         ShiftPagi = new javax.swing.JRadioButton();
         ShiftMalam = new javax.swing.JRadioButton();
-        CabangCbx = new javax.swing.JComboBox<>();
+        CabangCbx = new javax.swing.JComboBox();
         AddStaf_NamaField = new javax.swing.JTextField();
         AddStaf_IDField = new javax.swing.JTextField();
         StafTglMasuk = new com.toedter.calendar.JDateChooser();
@@ -291,7 +285,7 @@ public class Menu extends javax.swing.JFrame {
         UpdateSave = new javax.swing.JButton();
         UpdateShiftPagi = new javax.swing.JRadioButton();
         UpdateShiftMalam = new javax.swing.JRadioButton();
-        UpdateCabangCbx = new javax.swing.JComboBox<>();
+        UpdateCabangCbx = new javax.swing.JComboBox();
         UpdateStaf_NamaField = new javax.swing.JTextField();
         UpdateStaf_IDField = new javax.swing.JTextField();
         UpdateTglMasuk = new com.toedter.calendar.JDateChooser();
@@ -307,7 +301,7 @@ public class Menu extends javax.swing.JFrame {
         HapusStaf_ConfirmButton = new javax.swing.JButton();
         HapusShiftPagi = new javax.swing.JRadioButton();
         HapusShiftMalam = new javax.swing.JRadioButton();
-        HapusCabangCbx = new javax.swing.JComboBox<>();
+        HapusCabangCbx = new javax.swing.JComboBox();
         HapusStaf_NamaField = new javax.swing.JTextField();
         HapusStaf_IDField = new javax.swing.JTextField();
         HapusTglMasuk = new com.toedter.calendar.JDateChooser();
@@ -1063,6 +1057,7 @@ public class Menu extends javax.swing.JFrame {
 
         HapusBarangCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangCancel.setText("Batal");
+        HapusBarangCancel.setEnabled(false);
         HapusBarangCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         HapusBarangCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1073,6 +1068,7 @@ public class Menu extends javax.swing.JFrame {
 
         HapusBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangConfirm.setText("Hapus");
+        HapusBarangConfirm.setEnabled(false);
         HapusBarangConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         HapusBarangConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1269,6 +1265,11 @@ public class Menu extends javax.swing.JFrame {
         AddStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         AddStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         AddStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        AddStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                AddStafMenuComponentShown(evt);
+            }
+        });
         AddStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AddStafTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1298,19 +1299,32 @@ public class Menu extends javax.swing.JFrame {
         AddStaf_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddStaf_CancelButton.setText("Batal");
         AddStaf_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddStaf_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddStaf_CancelButtonActionPerformed(evt);
+            }
+        });
         AddStafMenu.add(AddStaf_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 120, -1));
 
         AddStaf_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddStaf_SaveButton.setText("Simpan ");
         AddStaf_SaveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddStaf_SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddStaf_SaveButtonActionPerformed(evt);
+            }
+        });
         AddStafMenu.add(AddStaf_SaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, -1, -1));
 
         ShiftPagi.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Add.add(ShiftPagi);
         ShiftPagi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ShiftPagi.setSelected(true);
         ShiftPagi.setText("Pagi");
         AddStafMenu.add(ShiftPagi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         ShiftMalam.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Add.add(ShiftMalam);
         ShiftMalam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         ShiftMalam.setText("Malam");
         AddStafMenu.add(ShiftMalam, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, -1));
@@ -1326,6 +1340,11 @@ public class Menu extends javax.swing.JFrame {
         ListStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         ListStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         ListStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        ListStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                ListStafMenuComponentShown(evt);
+            }
+        });
         ListStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelStaf.setModel(new javax.swing.table.DefaultTableModel(
@@ -1349,6 +1368,11 @@ public class Menu extends javax.swing.JFrame {
         UpdateStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         UpdateStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         UpdateStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        UpdateStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                UpdateStafMenuComponentShown(evt);
+            }
+        });
         UpdateStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UpdateStafTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1377,28 +1401,50 @@ public class Menu extends javax.swing.JFrame {
 
         UpdateCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateCancel.setText("Batal");
+        UpdateCancel.setEnabled(false);
         UpdateCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateCancelActionPerformed(evt);
+            }
+        });
         UpdateStafMenu.add(UpdateCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 120, -1));
 
         UpdateSave.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateSave.setText("Simpan ");
+        UpdateSave.setEnabled(false);
         UpdateSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateSaveActionPerformed(evt);
+            }
+        });
         UpdateStafMenu.add(UpdateSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, -1, -1));
 
         UpdateShiftPagi.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Update.add(UpdateShiftPagi);
         UpdateShiftPagi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        UpdateShiftPagi.setSelected(true);
         UpdateShiftPagi.setText("Pagi");
+        UpdateShiftPagi.setEnabled(false);
         UpdateStafMenu.add(UpdateShiftPagi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         UpdateShiftMalam.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Update.add(UpdateShiftMalam);
         UpdateShiftMalam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         UpdateShiftMalam.setText("Malam");
+        UpdateShiftMalam.setEnabled(false);
         UpdateStafMenu.add(UpdateShiftMalam, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
 
         UpdateCabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UBM-A", "UBM-S" }));
+        UpdateCabangCbx.setEnabled(false);
         UpdateStafMenu.add(UpdateCabangCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 40));
+
+        UpdateStaf_NamaField.setEnabled(false);
         UpdateStafMenu.add(UpdateStaf_NamaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 180, 30));
         UpdateStafMenu.add(UpdateStaf_IDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 180, 30));
+
+        UpdateTglMasuk.setEnabled(false);
         UpdateStafMenu.add(UpdateTglMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 180, 30));
 
         SearchUpdate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -1415,6 +1461,11 @@ public class Menu extends javax.swing.JFrame {
         HapusStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         HapusStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         HapusStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        HapusStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                HapusStafMenuComponentShown(evt);
+            }
+        });
         HapusStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         HapusStafTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1443,21 +1494,35 @@ public class Menu extends javax.swing.JFrame {
 
         HapusStaf_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusStaf_CancelButton.setText("Batal");
+        HapusStaf_CancelButton.setEnabled(false);
         HapusStaf_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusStaf_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusStaf_CancelButtonActionPerformed(evt);
+            }
+        });
         HapusStafMenu.add(HapusStaf_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 120, -1));
 
         HapusStaf_ConfirmButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusStaf_ConfirmButton.setText("Hapus");
+        HapusStaf_ConfirmButton.setEnabled(false);
         HapusStaf_ConfirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusStaf_ConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusStaf_ConfirmButtonActionPerformed(evt);
+            }
+        });
         HapusStafMenu.add(HapusStaf_ConfirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, -1, -1));
 
         HapusShiftPagi.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Hapus.add(HapusShiftPagi);
         HapusShiftPagi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         HapusShiftPagi.setText("Pagi");
         HapusShiftPagi.setEnabled(false);
         HapusStafMenu.add(HapusShiftPagi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, -1, -1));
 
         HapusShiftMalam.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Hapus.add(HapusShiftMalam);
         HapusShiftMalam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         HapusShiftMalam.setText("Malam");
         HapusShiftMalam.setEnabled(false);
@@ -2051,11 +2116,76 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateStafLogoMouseExited
 
     private void SearchUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateActionPerformed
-        // TODO add your handling code here:
+        if(UpdateStaf_IDField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = UpdateStaf_IDField.getText();
+        Petugas p = petugasController.getByID_Petugas(id);
+        
+        if(p == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        SearchUpdate.setEnabled(false);
+        UpdateStaf_IDField.setEnabled(false);
+        UpdateStaf_NamaField.setEnabled(true);
+        UpdateCabangCbx.setEnabled(true);
+        UpdateShiftPagi.setEnabled(true);
+        UpdateShiftMalam.setEnabled(true);
+        UpdateTglMasuk.setEnabled(true);
+        UpdateSave.setEnabled(true);
+        UpdateCancel.setEnabled(true);
+        
+        int size=UpdateCabangCbx.getModel().getSize();
+        int i;
+        for(i=size-1; i>=0; i--){
+            Cabang cek = (Cabang) UpdateCabangCbx.getModel().getElementAt(i);
+            if (cek.getID_Cabang().equals(p.getID_Cabang()))
+                break;
+        }
+        
+        UpdateCabangCbx.setSelectedIndex(i);
+        UpdateStaf_NamaField.setText(p.getNama_Petugas());
+        if(p.getShift().equals("Pagi")) UpdateShiftPagi.setSelected(true);
+        else UpdateShiftMalam.setSelected(true);
+        UpdateTglMasuk.setDate(p.getTanggal_Masuk());
     }//GEN-LAST:event_SearchUpdateActionPerformed
 
     private void HapusStaf_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_SearchButtonActionPerformed
-        // TODO add your handling code here:
+        if(HapusStaf_IDField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = HapusStaf_IDField.getText();
+        Petugas p = petugasController.getByID_Petugas(id);
+        
+        if(p == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int size=HapusCabangCbx.getModel().getSize();
+        int i;
+        for(i=size-1; i>=0; i--){
+            Cabang cek = (Cabang) HapusCabangCbx.getModel().getElementAt(i);
+            if (cek.getID_Cabang().equals(p.getID_Cabang()))
+                break;
+        }
+        
+        HapusCabangCbx.setSelectedIndex(i);
+        HapusStaf_NamaField.setText(p.getNama_Petugas());
+        if(p.getShift().equals("Pagi")) HapusShiftPagi.setSelected(true);
+        else HapusShiftMalam.setSelected(true);
+        HapusTglMasuk.setDate(p.getTanggal_Masuk());
+        
+        HapusStaf_IDField.setEnabled(false);
+        HapusStaf_SearchButton.setEnabled(false);
+        HapusStaf_ConfirmButton.setEnabled(true);
+        HapusStaf_CancelButton.setEnabled(true);
     }//GEN-LAST:event_HapusStaf_SearchButtonActionPerformed
 
     private void HapusStafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusStafLogoMouseClicked
@@ -2214,6 +2344,11 @@ public class Menu extends javax.swing.JFrame {
         HapusBarang_HargaField.setText("" + b.getHarga_Barang());
         HapusBarang_TglMasuk.setDate(b.getTanggal_Masuk());
         HapusBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
+        
+        HapusBarang_IDBarangField.setEnabled(false);
+        SearchHapusBarang.setEnabled(false);
+        HapusBarangConfirm.setEnabled(true);
+        HapusBarangCancel.setEnabled(true);
     }//GEN-LAST:event_SearchHapusBarangActionPerformed
 
     private void AddSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseClicked
@@ -2606,6 +2741,7 @@ public class Menu extends javax.swing.JFrame {
         }
 
         UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        UpdateBarang_IDKCbx.setSelectedIndex(-1);
     }//GEN-LAST:event_UpdateBarangMenuComponentShown
 
     private void UpdateBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangCancelActionPerformed
@@ -2649,30 +2785,20 @@ public class Menu extends javax.swing.JFrame {
         }
 
         HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        HapusBarang_IDKCbx.setSelectedIndex(-1);
     }//GEN-LAST:event_HapusBarangMenuComponentShown
 
     private void HapusBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangConfirmActionPerformed
         try {
             if (HapusBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
-            if (HapusBarang_NamaBarangField.getText().equals("")) throw new Exception("Nama");
-            if (HapusBarang_HargaField.getText().equals(""))      throw new Exception("Harga");
-            if (HapusBarang_TglMasuk.getDate() == null)           throw new Exception("TglMasuk");
-            if (HapusBarang_TglExp.getDate() == null)             throw new Exception("TglKeluar");
 
             String id = HapusBarang_IDBarangField.getText();
-            String nama = HapusBarang_NamaBarangField.getText();
-            String kategori = ((Katagori) HapusBarang_IDKCbx.getSelectedItem()).getID_Katagori();
-            int harga = Integer.parseInt(HapusBarang_HargaField.getText());
-            Date masuk = HapusBarang_TglMasuk.getDate();
-            Date kadaluarsa = HapusBarang_TglExp.getDate();
             
-            Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            Barang b = new Barang(id, null, null, 0, null, null);
             barangController.setDml(b, OperasiCRUD.DELETE);
             
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusBarangCancelActionPerformed(null);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
         }
@@ -2685,11 +2811,211 @@ public class Menu extends javax.swing.JFrame {
         HapusBarang_HargaField.setText("");
         HapusBarang_TglMasuk.setDate(null);
         HapusBarang_TglExp.setDate(null);
+        
+        
+        HapusBarang_IDBarangField.setEnabled(true);
+        SearchHapusBarang.setEnabled(true);
+        HapusBarangConfirm.setEnabled(false);
+        HapusBarangCancel.setEnabled(false);
     }//GEN-LAST:event_HapusBarangCancelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void AddStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddStafMenuComponentShown
+        List<Cabang> list = cabangController.getAllCabang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != CabangCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(CabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        CabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+    }//GEN-LAST:event_AddStafMenuComponentShown
+
+    private void AddStaf_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_SaveButtonActionPerformed
+        try {
+            if (AddStaf_IDField.getText().equals(""))    throw new Exception("ID");
+            if (AddStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
+            if (StafTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+
+            String id = AddStaf_IDField.getText();
+            String nama = AddStaf_NamaField.getText();
+            String cabang = ((Cabang) CabangCbx.getSelectedItem()).getID_Cabang();
+            String shift = ShiftPagi.isSelected() ? "Pagi" : "Malam";
+            Date masuk = StafTglMasuk.getDate();
+            
+            Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
+            petugasController.setDml(p, OperasiCRUD.INSERT);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
+            AddStaf_CancelButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_AddStaf_SaveButtonActionPerformed
+
+    private void AddStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_CancelButtonActionPerformed
+        AddStaf_IDField.setText("");
+        AddStaf_NamaField.setText("");
+        ShiftPagi.setSelected(true);
+        StafTglMasuk.setDate(null);
+        CabangCbx.setSelectedIndex(0);
+    }//GEN-LAST:event_AddStaf_CancelButtonActionPerformed
+
+    private void ListStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListStafMenuComponentShown
+        List<Petugas> list = petugasController.getAllPetugas();
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][5];
+        Object[] columnNames = {
+            "ID Petugas",  
+            "Nama Petugas", 
+            "ID Cabang",
+            "Shift",
+            "Tanggal Masuk"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Petugas();
+            data[i][1] = list.get(i).getNama_Petugas();
+            data[i][2] = list.get(i).getID_Cabang();
+            data[i][3] = list.get(i).getShift();
+            data[i][4] = list.get(i).getTanggal_Masuk();
+        }
+        
+        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+    }//GEN-LAST:event_ListStafMenuComponentShown
+
+    private void UpdateStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateStafMenuComponentShown
+        List<Cabang> list = cabangController.getAllCabang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != UpdateCabangCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateCabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        UpdateCabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        UpdateCabangCbx.setSelectedItem(-1);
+    }//GEN-LAST:event_UpdateStafMenuComponentShown
+
+    private void UpdateSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSaveActionPerformed
+        try {
+            if (UpdateStaf_IDField.getText().equals(""))    throw new Exception("ID");
+            if (UpdateStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
+            if (UpdateTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+
+            String id = UpdateStaf_IDField.getText();
+            String nama = UpdateStaf_NamaField.getText();
+            String cabang = ((Cabang) UpdateCabangCbx.getSelectedItem()).getID_Cabang();
+            String shift = UpdateShiftPagi.isSelected() ? "Pagi" : "Malam";
+            Date masuk = UpdateTglMasuk.getDate();
+            
+            Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
+            petugasController.setDml(p, OperasiCRUD.UPDATE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
+            UpdateCancelActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_UpdateSaveActionPerformed
+
+    private void UpdateCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCancelActionPerformed
+        UpdateStaf_IDField.setText("");
+        UpdateStaf_NamaField.setText("");
+        UpdateCabangCbx.setSelectedIndex(-1);
+        UpdateShiftPagi.setSelected(true);
+        UpdateTglMasuk.setDate(null);
+        
+        SearchUpdate.setEnabled(true);
+        UpdateStaf_IDField.setEnabled(true);
+        UpdateStaf_NamaField.setEnabled(false);
+        UpdateCabangCbx.setEnabled(false);
+        UpdateShiftPagi.setEnabled(false);
+        UpdateShiftMalam.setEnabled(false);
+        UpdateTglMasuk.setEnabled(false);
+    }//GEN-LAST:event_UpdateCancelActionPerformed
+
+    private void HapusStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusStafMenuComponentShown
+        List<Cabang> list = cabangController.getAllCabang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != HapusCabangCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusCabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        HapusCabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        HapusCabangCbx.setSelectedItem(-1);
+    }//GEN-LAST:event_HapusStafMenuComponentShown
+
+    private void HapusStaf_ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_ConfirmButtonActionPerformed
+        try {
+            if (HapusStaf_IDField.getText().equals(""))    throw new Exception("ID");
+
+            String id = HapusStaf_IDField.getText();
+            
+            Petugas p = new Petugas(id, null, null, null, null);
+            petugasController.setDml(p, OperasiCRUD.DELETE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
+            HapusStaf_CancelButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_HapusStaf_ConfirmButtonActionPerformed
+
+    private void HapusStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_CancelButtonActionPerformed
+        HapusStaf_IDField.setText("");
+        HapusStaf_NamaField.setText("");
+        HapusCabangCbx.setSelectedIndex(-1);
+        HapusShiftPagi.setSelected(true);
+        HapusTglMasuk.setDate(null);
+        
+        HapusStaf_IDField.setEnabled(true);
+        HapusStaf_SearchButton.setEnabled(true);
+        HapusStaf_ConfirmButton.setEnabled(false);
+        HapusStaf_CancelButton.setEnabled(false);
+    }//GEN-LAST:event_HapusStaf_CancelButtonActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2707,14 +3033,9 @@ public class Menu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(()
-                -> {
+        java.awt.EventQueue.invokeLater(()-> {
             new Menu().setVisible(true);
         });
     }
@@ -2765,7 +3086,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JScrollPane BarangTable;
     private com.toedter.calendar.JDateChooser BarangTglExp;
     private com.toedter.calendar.JDateChooser BarangTglMasuk;
-    private javax.swing.JComboBox<String> CabangCbx;
+    private javax.swing.JComboBox CabangCbx;
     private javax.swing.JLabel DeleteBarangLogo;
     private javax.swing.JPanel DeleteStaf;
     private javax.swing.JPanel HapusBarang;
@@ -2785,7 +3106,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextField HapusBarang_NamaBarangField;
     private com.toedter.calendar.JDateChooser HapusBarang_TglExp;
     private com.toedter.calendar.JDateChooser HapusBarang_TglMasuk;
-    private javax.swing.JComboBox<String> HapusCabangCbx;
+    private javax.swing.JComboBox HapusCabangCbx;
     private javax.swing.JComboBox<String> HapusKotaCbx;
     private javax.swing.JRadioButton HapusShiftMalam;
     private javax.swing.JRadioButton HapusShiftPagi;
@@ -2919,7 +3240,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextField UpdateBarang_NamaBarangField;
     private com.toedter.calendar.JDateChooser UpdateBarang_TglExp;
     private com.toedter.calendar.JDateChooser UpdateBarang_TglMasuk;
-    private javax.swing.JComboBox<String> UpdateCabangCbx;
+    private javax.swing.JComboBox UpdateCabangCbx;
     private javax.swing.JButton UpdateCancel;
     private javax.swing.JComboBox<String> UpdateKotaCbx;
     private javax.swing.JButton UpdateSave;
@@ -2951,5 +3272,8 @@ public class Menu extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser UpdateTglMasuk;
     private javax.swing.JLabel Username;
     private javax.swing.JTextField UsernameField;
+    private javax.swing.ButtonGroup btnGroup_Staf_Add;
+    private javax.swing.ButtonGroup btnGroup_Staf_Hapus;
+    private javax.swing.ButtonGroup btnGroup_Staf_Update;
     // End of variables declaration//GEN-END:variables
 }
