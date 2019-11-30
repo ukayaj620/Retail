@@ -2,9 +2,12 @@ package views;
 
 import controllers.*;
 import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -1942,6 +1945,11 @@ public class Menu extends javax.swing.JFrame {
                 PembelianBayarMouseClicked(evt);
             }
         });
+        PembelianBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianBayarActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(PembelianBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 490, 120, 50));
 
         PembelianReset.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -3306,6 +3314,59 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_PembelianResetActionPerformed
+
+    private void PembelianBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianBayarActionPerformed
+        if(PembelianIDBonField.isEnabled()){
+            JOptionPane.showMessageDialog(this, "BELI DULU!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Random randomGen = new Random();
+        
+        String ID_Bon = PembelianIDBonField.getText();
+        Date now = Date.from(LocalDateTime.now().atZone( ZoneId.systemDefault()).toInstant());
+        long Subtotal = Long.parseLong(PembelianSubtotalField.getText());
+        
+        String ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
+        do {
+            if(ID_Petugas == null || ID_Petugas.isBlank()){
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Error! ID Petugas tidak ditemukan!");
+            ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
+        } while(petugasController.getByID_Petugas(ID_Petugas) == null);
+        
+        Bon b = new Bon(ID_Bon, DatetoSQL(now), Subtotal, ID_Petugas);
+        bonController.setDml(b, OperasiCRUD.INSERT);
+        
+        // Get Table
+        int h = TabelPembelian.getModel().getRowCount();
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        for(int i=0; i<h; i++){
+            Boolean adaSama;
+            String ID_Transaksi = "" + randomGen.nextInt(999999999);
+            do {
+                adaSama = false;
+                for(Transaksi a : transaksiList){
+                    if(a.getID_Transaksi().equals(ID_Transaksi)){
+                        ID_Transaksi = "" + randomGen.nextInt(999999999);
+                        adaSama = true;
+                        break;
+                    }
+                }
+            } while(adaSama);
+            
+            String ID_Barang  = (String) TabelPembelian.getModel().getValueAt(i, 0);
+            int jumlah_barang = (int)    TabelPembelian.getModel().getValueAt(i, 3);
+            long Harga_Total  = (long)   TabelPembelian.getModel().getValueAt(i, 4);
+            
+            Transaksi t = new Transaksi(ID_Transaksi, ID_Barang, jumlah_barang, Harga_Total, ID_Bon);
+            transaksiController.setDml(t, OperasiCRUD.INSERT);
+        }
+        
+        PembelianResetActionPerformed(null);
+    }//GEN-LAST:event_PembelianBayarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
