@@ -121,9 +121,6 @@ public class Menu extends javax.swing.JFrame {
         //Transaksi
         TransaksiPanel.setVisible(false);
         TransaksiPanel.setBackground(yellow_tran);
-
-        TransaksiSearchByIDBon.setEnabled(false);
-        TransaksiSearchByDate.setEnabled(false);
         
         // TextField Limits
         IDBarangField.setDocument(new JTextFieldLimit(10));
@@ -2048,6 +2045,8 @@ public class Menu extends javax.swing.JFrame {
         });
         TransaksiPanel.add(TransaksiSearchCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 140, 40));
         TransaksiPanel.add(TransaksiSearchByIDBon, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 250, 40));
+
+        TransaksiSearchByDate.setEnabled(false);
         TransaksiPanel.add(TransaksiSearchByDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 250, 40));
 
         Transaksi_SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -2608,7 +2607,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void TransaksiSearchCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiSearchCbxActionPerformed
         // TODO add your handling code here:
-        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Barang")) {
+        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Bon")) {
             TransaksiSearchByIDBon.setEnabled(true);
             TransaksiSearchByDate.setEnabled(false);
         } else {
