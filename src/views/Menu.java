@@ -1947,6 +1947,8 @@ public class Menu extends javax.swing.JFrame {
         PembelianTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         PembelianTitle.setText("Pembelian");
         PembelianPanel.add(PembelianTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        JumlahCounter.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         PembelianPanel.add(JumlahCounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 50, 30));
 
         PembelianSubtotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
