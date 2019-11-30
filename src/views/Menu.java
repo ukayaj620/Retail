@@ -2,6 +2,7 @@ package views;
 
 import controllers.*;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -2005,6 +2006,11 @@ public class Menu extends javax.swing.JFrame {
                 PembelianAddtoCartMouseClicked(evt);
             }
         });
+        PembelianAddtoCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianAddtoCartActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(PembelianAddtoCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 120, 50));
 
         MainPanel.add(PembelianPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 1110, 580));
@@ -3166,6 +3172,97 @@ public class Menu extends javax.swing.JFrame {
         BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
         BarangSelectCbx.setSelectedIndex(-1);
     }//GEN-LAST:event_PembelianPanelComponentShown
+
+    private void PembelianAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianAddtoCartActionPerformed
+        String IDBon = PembelianIDBonField.getText();
+        
+        if(IDBon.isBlank()){
+            JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(bonController.getByID_Bon(IDBon) != null){
+            JOptionPane.showMessageDialog(this, "ID BON SUDAH ADA!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(BarangSelectCbx.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "ID BARANG TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
+        int jumlah = (int) JumlahCounter.getValue();
+        long total = b.getHarga_Barang() * jumlah;
+        
+        
+        // Update the table
+        int w = TabelPembelian.getModel().getColumnCount();
+        int h = TabelPembelian.getModel().getRowCount();
+        
+        Object[] coloumnNames = new Object[w];
+        for(int k=0; k<w; k++){
+            coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
+        }
+        
+        List<Object[]> dataList = new ArrayList<>();
+        for(int i=0; i<h; i++){
+            dataList.add(new Object[w]);
+            for(int k=0; k<w; k++){
+                dataList.get(i)[k] = TabelPembelian.getModel().getValueAt(i, k);
+            }
+        }
+        
+        Boolean isFound = false;
+        for(Object[] d : dataList){
+            if(b.getID_Barang().equals(d[0])){
+                // jumlah = jumlah + InputJumlah
+                d[3] = (int)d[3] + jumlah;
+                
+                // total = harga * jumlah
+                d[4] = (long)(int)d[2] *(int)d[3];
+                
+                isFound = true;
+                break;
+            }
+        }
+        
+        if(!isFound){
+            Object[] o = new Object[w];
+            
+            o[0] = b.getID_Barang();
+            o[1] = b.getNama_Barang();
+            o[2] = b.getHarga_Barang();
+            o[3] = jumlah;
+            o[4] = total;
+            
+            dataList.add(o);
+        }
+        
+        Object[][] data = dataList.toArray(new Object[dataList.size()][w]);
+        TabelPembelian.setModel(new DefaultTableModel(data, coloumnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        
+        
+        // Update Subtotal
+        h = TabelPembelian.getModel().getRowCount();
+        long subtotal = 0;
+        for(int i=0; i<h; i++){
+            subtotal += (long) data[i][4];
+        }
+        PembelianSubtotalField.setText("" + subtotal);
+        
+        
+        // Disable Bon Field and reset input field
+        PembelianIDBonField.setEnabled(false);
+        BarangSelectCbx.setSelectedIndex(-1);
+        JumlahCounter.setValue(1);
+        PembelianTotalField.setText("");
+    }//GEN-LAST:event_PembelianAddtoCartActionPerformed
 
     private void BarangSelectCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarangSelectCbxActionPerformed
         if(BarangSelectCbx.getSelectedIndex() == -1){
