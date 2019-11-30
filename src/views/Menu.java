@@ -25,6 +25,7 @@ public class Menu extends javax.swing.JFrame {
     PetugasController petugasController = new PetugasController();
     SupplierController supplierController = new SupplierController();
     TransaksiController transaksiController = new TransaksiController();
+    StorageController storageController = new StorageController();
 
     public Menu() {
         initComponents();
@@ -1860,6 +1861,11 @@ public class Menu extends javax.swing.JFrame {
         StokPanel.setBackground(new java.awt.Color(255, 250, 229));
         StokPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         StokPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        StokPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                StokPanelComponentShown(evt);
+            }
+        });
         StokPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SearchCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Barang", "Nama Barang", "Kata Kunci" }));
@@ -3015,6 +3021,33 @@ public class Menu extends javax.swing.JFrame {
         HapusStaf_ConfirmButton.setEnabled(false);
         HapusStaf_CancelButton.setEnabled(false);
     }//GEN-LAST:event_HapusStaf_CancelButtonActionPerformed
+
+    private void StokPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StokPanelComponentShown
+        List<Storage> list = storageController.getAllStorage();
+        
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][5];
+        Object[] columnNames = {
+            "ID Barang",  
+            "Nama Barang", 
+            "Katagori",
+            "Supplier",
+            "Stok"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Barang();
+            data[i][1] = list.get(i).getNama_Barang();
+            data[i][2] = list.get(i).getNama_Katagori();
+            data[i][3] = list.get(i).getNama_Supplier();
+            data[i][4] = list.get(i).getStok();
+        }
+        
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+    }//GEN-LAST:event_StokPanelComponentShown
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
