@@ -1971,8 +1971,8 @@ public class Menu extends javax.swing.JFrame {
         PembelianTotal.setText("Harga Total");
         PembelianPanel.add(PembelianTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
 
+        PembelianSubtotalField.setEditable(false);
         PembelianSubtotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        PembelianSubtotalField.setEnabled(false);
         PembelianPanel.add(PembelianSubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 420, 250, 40));
 
         PembelianIDBonField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
