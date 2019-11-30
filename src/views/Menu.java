@@ -1917,7 +1917,15 @@ public class Menu extends javax.swing.JFrame {
             new String [] {
                 "ID Barang", "Nama Barang", "Harga Satuan", "Jumlah", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         PembelianTable.setViewportView(TabelPembelian);
 
         PembelianPanel.add(PembelianTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 510, 370));
