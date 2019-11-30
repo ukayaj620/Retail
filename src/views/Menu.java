@@ -1934,8 +1934,9 @@ public class Menu extends javax.swing.JFrame {
 
         PembelianPanel.add(PembelianTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 510, 370));
 
+        PembelianTotalField.setEditable(false);
         PembelianTotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        PembelianTotalField.setEnabled(false);
+        PembelianTotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         PembelianPanel.add(PembelianTotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 250, 40));
 
         PembelianBayar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -2000,6 +2001,7 @@ public class Menu extends javax.swing.JFrame {
 
         PembelianSubtotalField.setEditable(false);
         PembelianSubtotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PembelianSubtotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         PembelianPanel.add(PembelianSubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 420, 250, 40));
 
         PembelianIDBonField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -2068,7 +2070,8 @@ public class Menu extends javax.swing.JFrame {
         Subtotal.setText("Subtotal");
         TransaksiPanel.add(Subtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, -1, -1));
 
-        SubtotalField.setEnabled(false);
+        SubtotalField.setEditable(false);
+        SubtotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TransaksiPanel.add(SubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 250, 40));
 
         MainPanel.add(TransaksiPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 1110, 580));
