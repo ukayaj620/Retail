@@ -1949,6 +1949,11 @@ public class Menu extends javax.swing.JFrame {
         PembelianPanel.add(PembelianTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
         JumlahCounter.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        JumlahCounter.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                JumlahCounterStateChanged(evt);
+            }
+        });
         PembelianPanel.add(JumlahCounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 50, 30));
 
         PembelianSubtotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -1978,7 +1983,11 @@ public class Menu extends javax.swing.JFrame {
         PembelianIDBonField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         PembelianPanel.add(PembelianIDBonField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 250, 40));
 
-        BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BarangSelectCbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BarangSelectCbxActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(BarangSelectCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 250, 40));
 
         PembelianAddtoCart.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -3149,6 +3158,20 @@ public class Menu extends javax.swing.JFrame {
         BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
         BarangSelectCbx.setSelectedIndex(-1);
     }//GEN-LAST:event_PembelianPanelComponentShown
+
+    private void BarangSelectCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarangSelectCbxActionPerformed
+        if(BarangSelectCbx.getSelectedIndex() == -1){
+            return;
+        }
+        
+        Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
+        
+        PembelianTotalField.setText(b.getHarga_Barang() * (int)JumlahCounter.getValue() + "");
+    }//GEN-LAST:event_BarangSelectCbxActionPerformed
+
+    private void JumlahCounterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JumlahCounterStateChanged
+        BarangSelectCbxActionPerformed(null);
+    }//GEN-LAST:event_JumlahCounterStateChanged
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
