@@ -3341,13 +3341,16 @@ public class Menu extends javax.swing.JFrame {
         long Subtotal = Long.parseLong(PembelianSubtotalField.getText());
         
         String ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
-        do {
+        if(ID_Petugas == null || ID_Petugas.isBlank()){
+            return;
+        }
+        while(petugasController.getByID_Petugas(ID_Petugas) == null) {
             if(ID_Petugas == null || ID_Petugas.isBlank()){
                 return;
             }
             JOptionPane.showMessageDialog(this, "Error! ID Petugas tidak ditemukan!");
             ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
-        } while(petugasController.getByID_Petugas(ID_Petugas) == null);
+        } 
         
         Bon b = new Bon(ID_Bon, DatetoSQL(now), Subtotal, ID_Petugas);
         bonController.setDml(b, OperasiCRUD.INSERT);
