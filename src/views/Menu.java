@@ -2033,6 +2033,11 @@ public class Menu extends javax.swing.JFrame {
         TransaksiPanel.setBackground(new java.awt.Color(255, 250, 229));
         TransaksiPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         TransaksiPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        TransaksiPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                TransaksiPanelComponentShown(evt);
+            }
+        });
         TransaksiPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TransaksiSearchCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Bon", "Tanggal Transaksi" }));
@@ -3375,6 +3380,47 @@ public class Menu extends javax.swing.JFrame {
         
         PembelianResetActionPerformed(null);
     }//GEN-LAST:event_PembelianBayarActionPerformed
+
+    private void TransaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_TransaksiPanelComponentShown
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        Object[] namaKolom = {
+            "ID Barang",
+            "Nama Barang",
+            "Tanggal Transaksi",
+            "Jumlah",
+            "Harga Satuan",
+            "Total"
+        };
+        
+        int w = namaKolom.length;
+        int h = transaksiList.size();
+        long subtotal=0;
+        
+        Object[][] data = new Object[h][w];
+        for(int i=0; i<h; i++){
+            Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
+            Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
+            
+            data[i][0] = transaksiList.get(i).getID_Barang();
+            data[i][1] = b != null ? b.getNama_Barang() : null;
+            data[i][2] = bon != null ? bon.getTanggal_Transaksi() : null;
+            data[i][3] = transaksiList.get(i).getJumlah_Barang();
+            data[i][4] = b != null ? b.getHarga_Barang() : null;
+            data[i][5] = transaksiList.get(i).getHarga_Total();
+            
+            subtotal += (long) data[i][5];
+        }
+        
+        SubtotalField.setText("" + subtotal);
+        
+        TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_TransaksiPanelComponentShown
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
