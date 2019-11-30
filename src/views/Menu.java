@@ -2743,7 +2743,12 @@ public class Menu extends javax.swing.JFrame {
             data[i][5] = list.get(i).getTanggal_Kadaluarsa();
         }
         
-        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_ListBarangMenuComponentShown
 
     private void UpdateBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangConfirmActionPerformed
