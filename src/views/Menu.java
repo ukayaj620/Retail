@@ -1875,6 +1875,11 @@ public class Menu extends javax.swing.JFrame {
         SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SearchButton.setText("Cari");
         SearchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchButtonActionPerformed(evt);
+            }
+        });
         StokPanel.add(SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 90, 40));
 
         TabelStok.setModel(new javax.swing.table.DefaultTableModel(
@@ -3021,6 +3026,55 @@ public class Menu extends javax.swing.JFrame {
         HapusStaf_ConfirmButton.setEnabled(false);
         HapusStaf_CancelButton.setEnabled(false);
     }//GEN-LAST:event_HapusStaf_CancelButtonActionPerformed
+
+    private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
+        if(SearchBar.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE); 
+            return;
+        }
+        
+        List<Storage> list;
+        String searchType = (String) SearchCbx.getSelectedItem();
+        String searchText = SearchBar.getText();
+        
+        switch(searchType){
+            case "ID Barang":
+                list = storageController.getByID_Barang(searchText);
+                break;
+            case "Nama Barang":
+                list = storageController.getByNama_Barang(searchText);
+                break;
+            case "Kata Kunci":
+                list = storageController.getByKataKunci(searchText);
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Search Type: " + searchType + " not found!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+        
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][5];
+        Object[] columnNames = {
+            "ID Barang",  
+            "Nama Barang", 
+            "Katagori",
+            "Supplier",
+            "Stok"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Barang();
+            data[i][1] = list.get(i).getNama_Barang();
+            data[i][2] = list.get(i).getNama_Katagori();
+            data[i][3] = list.get(i).getNama_Supplier();
+            data[i][4] = list.get(i).getStok();
+        }
+        
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+    }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void StokPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StokPanelComponentShown
         List<Storage> list = storageController.getAllStorage();
