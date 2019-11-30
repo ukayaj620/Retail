@@ -1951,6 +1951,11 @@ public class Menu extends javax.swing.JFrame {
                 PembelianResetMouseClicked(evt);
             }
         });
+        PembelianReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianResetActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(PembelianReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 490, 120, 50));
 
         PembelianTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -3277,6 +3282,30 @@ public class Menu extends javax.swing.JFrame {
     private void JumlahCounterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JumlahCounterStateChanged
         BarangSelectCbxActionPerformed(null);
     }//GEN-LAST:event_JumlahCounterStateChanged
+
+    private void PembelianResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianResetActionPerformed
+        PembelianIDBonField.setEnabled(true);
+        PembelianIDBonField.setText("");
+        BarangSelectCbx.setSelectedIndex(-1);
+        JumlahCounter.setValue(1);
+        PembelianTotalField.setText("");
+        PembelianSubtotalField.setText("");
+        
+        // Clear the table
+        int w = TabelPembelian.getModel().getColumnCount();
+        
+        Object[] coloumnNames = new Object[w];
+        for(int k=0; k<w; k++){
+            coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
+        }
+        
+        TabelPembelian.setModel(new DefaultTableModel(new Object[][]{}, coloumnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_PembelianResetActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
