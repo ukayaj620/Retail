@@ -65,4 +65,9 @@ public class Barang {
     public void setTanggal_Kadaluarsa(Date Tanggal_Kadaluarsa){
         this.Tanggal_Kadaluarsa = Tanggal_Kadaluarsa;
     }
+
+    @Override
+    public String toString() {
+        return Nama_Barang;
+    }
 }
