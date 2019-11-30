@@ -2,8 +2,12 @@ package views;
 
 import controllers.*;
 import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -375,7 +379,7 @@ public class Menu extends javax.swing.JFrame {
         PembelianTotal = new javax.swing.JLabel();
         PembelianSubtotalField = new javax.swing.JTextField();
         PembelianIDBonField = new javax.swing.JTextField();
-        BarangSelectCbx = new javax.swing.JComboBox<>();
+        BarangSelectCbx = new javax.swing.JComboBox();
         PembelianAddtoCart = new javax.swing.JButton();
         TransaksiPanel = new javax.swing.JPanel();
         TransaksiSearchCbx = new javax.swing.JComboBox<>();
@@ -1903,6 +1907,11 @@ public class Menu extends javax.swing.JFrame {
         PembelianPanel.setBackground(new java.awt.Color(255, 250, 229));
         PembelianPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         PembelianPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        PembelianPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                PembelianPanelComponentShown(evt);
+            }
+        });
         PembelianPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelPembelian.setModel(new javax.swing.table.DefaultTableModel(
@@ -1912,7 +1921,15 @@ public class Menu extends javax.swing.JFrame {
             new String [] {
                 "ID Barang", "Nama Barang", "Harga Satuan", "Jumlah", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         PembelianTable.setViewportView(TabelPembelian);
 
         PembelianPanel.add(PembelianTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 510, 370));
@@ -1928,6 +1945,11 @@ public class Menu extends javax.swing.JFrame {
                 PembelianBayarMouseClicked(evt);
             }
         });
+        PembelianBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianBayarActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(PembelianBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 490, 120, 50));
 
         PembelianReset.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -1937,11 +1959,23 @@ public class Menu extends javax.swing.JFrame {
                 PembelianResetMouseClicked(evt);
             }
         });
+        PembelianReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianResetActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(PembelianReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 490, 120, 50));
 
         PembelianTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         PembelianTitle.setText("Pembelian");
         PembelianPanel.add(PembelianTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        JumlahCounter.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        JumlahCounter.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                JumlahCounterStateChanged(evt);
+            }
+        });
         PembelianPanel.add(JumlahCounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 50, 30));
 
         PembelianSubtotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -1964,14 +1998,18 @@ public class Menu extends javax.swing.JFrame {
         PembelianTotal.setText("Harga Total");
         PembelianPanel.add(PembelianTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
 
+        PembelianSubtotalField.setEditable(false);
         PembelianSubtotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        PembelianSubtotalField.setEnabled(false);
         PembelianPanel.add(PembelianSubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 420, 250, 40));
 
         PembelianIDBonField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         PembelianPanel.add(PembelianIDBonField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 250, 40));
 
-        BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BarangSelectCbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BarangSelectCbxActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(BarangSelectCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 250, 40));
 
         PembelianAddtoCart.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -1979,6 +2017,11 @@ public class Menu extends javax.swing.JFrame {
         PembelianAddtoCart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PembelianAddtoCartMouseClicked(evt);
+            }
+        });
+        PembelianAddtoCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianAddtoCartActionPerformed(evt);
             }
         });
         PembelianPanel.add(PembelianAddtoCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 120, 50));
@@ -2700,7 +2743,12 @@ public class Menu extends javax.swing.JFrame {
             data[i][5] = list.get(i).getTanggal_Kadaluarsa();
         }
         
-        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_ListBarangMenuComponentShown
 
     private void UpdateBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangConfirmActionPerformed
@@ -2907,7 +2955,12 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = list.get(i).getTanggal_Masuk();
         }
         
-        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_ListStafMenuComponentShown
 
     private void UpdateStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateStafMenuComponentShown
@@ -3073,7 +3126,12 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = list.get(i).getStok();
         }
         
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void StokPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StokPanelComponentShown
@@ -3100,8 +3158,220 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = list.get(i).getStok();
         }
         
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_StokPanelComponentShown
+
+    private void PembelianPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PembelianPanelComponentShown
+        List<Barang> list = barangController.getAllBarang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != BarangSelectCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(BarangSelectCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        BarangSelectCbx.setSelectedIndex(-1);
+    }//GEN-LAST:event_PembelianPanelComponentShown
+
+    private void PembelianAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianAddtoCartActionPerformed
+        String IDBon = PembelianIDBonField.getText();
+        
+        if(IDBon.isBlank()){
+            JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(bonController.getByID_Bon(IDBon) != null){
+            JOptionPane.showMessageDialog(this, "ID BON SUDAH ADA!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(BarangSelectCbx.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "ID BARANG TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
+        int jumlah = (int) JumlahCounter.getValue();
+        long total = b.getHarga_Barang() * jumlah;
+        
+        
+        // Update the table
+        int w = TabelPembelian.getModel().getColumnCount();
+        int h = TabelPembelian.getModel().getRowCount();
+        
+        Object[] coloumnNames = new Object[w];
+        for(int k=0; k<w; k++){
+            coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
+        }
+        
+        List<Object[]> dataList = new ArrayList<>();
+        for(int i=0; i<h; i++){
+            dataList.add(new Object[w]);
+            for(int k=0; k<w; k++){
+                dataList.get(i)[k] = TabelPembelian.getModel().getValueAt(i, k);
+            }
+        }
+        
+        Boolean isFound = false;
+        for(Object[] d : dataList){
+            if(b.getID_Barang().equals(d[0])){
+                // jumlah = jumlah + InputJumlah
+                d[3] = (int)d[3] + jumlah;
+                
+                // total = harga * jumlah
+                d[4] = (long)(int)d[2] *(int)d[3];
+                
+                isFound = true;
+                break;
+            }
+        }
+        
+        if(!isFound){
+            Object[] o = new Object[w];
+            
+            o[0] = b.getID_Barang();
+            o[1] = b.getNama_Barang();
+            o[2] = b.getHarga_Barang();
+            o[3] = jumlah;
+            o[4] = total;
+            
+            dataList.add(o);
+        }
+        
+        Object[][] data = dataList.toArray(new Object[dataList.size()][w]);
+        TabelPembelian.setModel(new DefaultTableModel(data, coloumnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        
+        
+        // Update Subtotal
+        h = TabelPembelian.getModel().getRowCount();
+        long subtotal = 0;
+        for(int i=0; i<h; i++){
+            subtotal += (long) data[i][4];
+        }
+        PembelianSubtotalField.setText("" + subtotal);
+        
+        
+        // Disable Bon Field and reset input field
+        PembelianIDBonField.setEnabled(false);
+        BarangSelectCbx.setSelectedIndex(-1);
+        JumlahCounter.setValue(1);
+        PembelianTotalField.setText("");
+    }//GEN-LAST:event_PembelianAddtoCartActionPerformed
+
+    private void BarangSelectCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarangSelectCbxActionPerformed
+        if(BarangSelectCbx.getSelectedIndex() == -1){
+            return;
+        }
+        
+        Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
+        
+        PembelianTotalField.setText(b.getHarga_Barang() * (int)JumlahCounter.getValue() + "");
+    }//GEN-LAST:event_BarangSelectCbxActionPerformed
+
+    private void JumlahCounterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JumlahCounterStateChanged
+        BarangSelectCbxActionPerformed(null);
+    }//GEN-LAST:event_JumlahCounterStateChanged
+
+    private void PembelianResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianResetActionPerformed
+        PembelianIDBonField.setEnabled(true);
+        PembelianIDBonField.setText("");
+        BarangSelectCbx.setSelectedIndex(-1);
+        JumlahCounter.setValue(1);
+        PembelianTotalField.setText("");
+        PembelianSubtotalField.setText("");
+        
+        // Clear the table
+        int w = TabelPembelian.getModel().getColumnCount();
+        
+        Object[] coloumnNames = new Object[w];
+        for(int k=0; k<w; k++){
+            coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
+        }
+        
+        TabelPembelian.setModel(new DefaultTableModel(new Object[][]{}, coloumnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_PembelianResetActionPerformed
+
+    private void PembelianBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianBayarActionPerformed
+        if(PembelianIDBonField.isEnabled()){
+            JOptionPane.showMessageDialog(this, "BELI DULU!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Random randomGen = new Random();
+        
+        String ID_Bon = PembelianIDBonField.getText();
+        Date now = Date.from(LocalDateTime.now().atZone( ZoneId.systemDefault()).toInstant());
+        long Subtotal = Long.parseLong(PembelianSubtotalField.getText());
+        
+        String ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
+        do {
+            if(ID_Petugas == null || ID_Petugas.isBlank()){
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Error! ID Petugas tidak ditemukan!");
+            ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
+        } while(petugasController.getByID_Petugas(ID_Petugas) == null);
+        
+        Bon b = new Bon(ID_Bon, DatetoSQL(now), Subtotal, ID_Petugas);
+        bonController.setDml(b, OperasiCRUD.INSERT);
+        
+        // Get Table
+        int h = TabelPembelian.getModel().getRowCount();
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        for(int i=0; i<h; i++){
+            Boolean adaSama;
+            String ID_Transaksi = "" + randomGen.nextInt(999999999);
+            do {
+                adaSama = false;
+                for(Transaksi a : transaksiList){
+                    if(a.getID_Transaksi().equals(ID_Transaksi)){
+                        ID_Transaksi = "" + randomGen.nextInt(999999999);
+                        adaSama = true;
+                        break;
+                    }
+                }
+            } while(adaSama);
+            
+            String ID_Barang  = (String) TabelPembelian.getModel().getValueAt(i, 0);
+            int jumlah_barang = (int)    TabelPembelian.getModel().getValueAt(i, 3);
+            long Harga_Total  = (long)   TabelPembelian.getModel().getValueAt(i, 4);
+            
+            Transaksi t = new Transaksi(ID_Transaksi, ID_Barang, jumlah_barang, Harga_Total, ID_Bon);
+            transaksiController.setDml(t, OperasiCRUD.INSERT);
+        }
+        
+        PembelianResetActionPerformed(null);
+    }//GEN-LAST:event_PembelianBayarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -3169,7 +3439,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel BarangBar;
     private javax.swing.JLabel BarangLogo;
     private javax.swing.JPanel BarangPanel;
-    private javax.swing.JComboBox<String> BarangSelectCbx;
+    private javax.swing.JComboBox BarangSelectCbx;
     private javax.swing.JScrollPane BarangTable;
     private com.toedter.calendar.JDateChooser BarangTglExp;
     private com.toedter.calendar.JDateChooser BarangTglMasuk;
