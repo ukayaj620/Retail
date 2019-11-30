@@ -2907,7 +2907,12 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = list.get(i).getTanggal_Masuk();
         }
         
-        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_ListStafMenuComponentShown
 
     private void UpdateStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateStafMenuComponentShown
@@ -3073,7 +3078,12 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = list.get(i).getStok();
         }
         
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void StokPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StokPanelComponentShown
@@ -3100,7 +3110,12 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = list.get(i).getStok();
         }
         
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }//GEN-LAST:event_StokPanelComponentShown
 
     public static void main(String args[]) {
