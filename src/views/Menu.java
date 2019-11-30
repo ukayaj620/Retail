@@ -375,7 +375,7 @@ public class Menu extends javax.swing.JFrame {
         PembelianTotal = new javax.swing.JLabel();
         PembelianSubtotalField = new javax.swing.JTextField();
         PembelianIDBonField = new javax.swing.JTextField();
-        BarangSelectCbx = new javax.swing.JComboBox<>();
+        BarangSelectCbx = new javax.swing.JComboBox();
         PembelianAddtoCart = new javax.swing.JButton();
         TransaksiPanel = new javax.swing.JPanel();
         TransaksiSearchCbx = new javax.swing.JComboBox<>();
@@ -1903,6 +1903,11 @@ public class Menu extends javax.swing.JFrame {
         PembelianPanel.setBackground(new java.awt.Color(255, 250, 229));
         PembelianPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         PembelianPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        PembelianPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                PembelianPanelComponentShown(evt);
+            }
+        });
         PembelianPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelPembelian.setModel(new javax.swing.table.DefaultTableModel(
@@ -3118,6 +3123,31 @@ public class Menu extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_StokPanelComponentShown
 
+    private void PembelianPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PembelianPanelComponentShown
+        List<Barang> list = barangController.getAllBarang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != BarangSelectCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(BarangSelectCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        BarangSelectCbx.setSelectedIndex(-1);
+    }//GEN-LAST:event_PembelianPanelComponentShown
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -3184,7 +3214,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel BarangBar;
     private javax.swing.JLabel BarangLogo;
     private javax.swing.JPanel BarangPanel;
-    private javax.swing.JComboBox<String> BarangSelectCbx;
+    private javax.swing.JComboBox BarangSelectCbx;
     private javax.swing.JScrollPane BarangTable;
     private com.toedter.calendar.JDateChooser BarangTglExp;
     private com.toedter.calendar.JDateChooser BarangTglMasuk;
