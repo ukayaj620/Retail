@@ -121,9 +121,6 @@ public class Menu extends javax.swing.JFrame {
         //Transaksi
         TransaksiPanel.setVisible(false);
         TransaksiPanel.setBackground(yellow_tran);
-
-        TransaksiSearchByIDBon.setEnabled(false);
-        TransaksiSearchByDate.setEnabled(false);
         
         // TextField Limits
         IDBarangField.setDocument(new JTextFieldLimit(10));
@@ -1934,8 +1931,9 @@ public class Menu extends javax.swing.JFrame {
 
         PembelianPanel.add(PembelianTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 510, 370));
 
+        PembelianTotalField.setEditable(false);
         PembelianTotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        PembelianTotalField.setEnabled(false);
+        PembelianTotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         PembelianPanel.add(PembelianTotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 250, 40));
 
         PembelianBayar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -2000,6 +1998,7 @@ public class Menu extends javax.swing.JFrame {
 
         PembelianSubtotalField.setEditable(false);
         PembelianSubtotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PembelianSubtotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         PembelianPanel.add(PembelianSubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 420, 250, 40));
 
         PembelianIDBonField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -2031,6 +2030,11 @@ public class Menu extends javax.swing.JFrame {
         TransaksiPanel.setBackground(new java.awt.Color(255, 250, 229));
         TransaksiPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         TransaksiPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        TransaksiPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                TransaksiPanelComponentShown(evt);
+            }
+        });
         TransaksiPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TransaksiSearchCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Bon", "Tanggal Transaksi" }));
@@ -2041,11 +2045,18 @@ public class Menu extends javax.swing.JFrame {
         });
         TransaksiPanel.add(TransaksiSearchCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 140, 40));
         TransaksiPanel.add(TransaksiSearchByIDBon, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 250, 40));
+
+        TransaksiSearchByDate.setEnabled(false);
         TransaksiPanel.add(TransaksiSearchByDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 250, 40));
 
         Transaksi_SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Transaksi_SearchButton.setText("Cari");
         Transaksi_SearchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Transaksi_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Transaksi_SearchButtonActionPerformed(evt);
+            }
+        });
         TransaksiPanel.add(Transaksi_SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 90, 40));
 
         TabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
@@ -2056,6 +2067,11 @@ public class Menu extends javax.swing.JFrame {
                 "ID Barang", "Nama Barang", "Tanggal Transaksi", "Jumlah", "Harga Satuan", "Total"
             }
         ));
+        TabelTransaksi.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                TabelTransaksiPropertyChange(evt);
+            }
+        });
         TransaksiTable.setViewportView(TabelTransaksi);
 
         TransaksiPanel.add(TransaksiTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 1010, 330));
@@ -2068,7 +2084,8 @@ public class Menu extends javax.swing.JFrame {
         Subtotal.setText("Subtotal");
         TransaksiPanel.add(Subtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, -1, -1));
 
-        SubtotalField.setEnabled(false);
+        SubtotalField.setEditable(false);
+        SubtotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TransaksiPanel.add(SubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 250, 40));
 
         MainPanel.add(TransaksiPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 1110, 580));
@@ -2595,7 +2612,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void TransaksiSearchCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiSearchCbxActionPerformed
         // TODO add your handling code here:
-        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Barang")) {
+        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Bon")) {
             TransaksiSearchByIDBon.setEnabled(true);
             TransaksiSearchByDate.setEnabled(false);
         } else {
@@ -3333,13 +3350,16 @@ public class Menu extends javax.swing.JFrame {
         long Subtotal = Long.parseLong(PembelianSubtotalField.getText());
         
         String ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
-        do {
+        if(ID_Petugas == null || ID_Petugas.isBlank()){
+            return;
+        }
+        while(petugasController.getByID_Petugas(ID_Petugas) == null) {
             if(ID_Petugas == null || ID_Petugas.isBlank()){
                 return;
             }
             JOptionPane.showMessageDialog(this, "Error! ID Petugas tidak ditemukan!");
             ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
-        } while(petugasController.getByID_Petugas(ID_Petugas) == null);
+        } 
         
         Bon b = new Bon(ID_Bon, DatetoSQL(now), Subtotal, ID_Petugas);
         bonController.setDml(b, OperasiCRUD.INSERT);
@@ -3372,6 +3392,116 @@ public class Menu extends javax.swing.JFrame {
         
         PembelianResetActionPerformed(null);
     }//GEN-LAST:event_PembelianBayarActionPerformed
+
+    private void TransaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_TransaksiPanelComponentShown
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        Object[] namaKolom = {
+            "ID Barang",
+            "Nama Barang",
+            "Tanggal Transaksi",
+            "Jumlah",
+            "Harga Satuan",
+            "Total"
+        };
+        
+        int w = namaKolom.length;
+        int h = transaksiList.size();
+        
+        Object[][] data = new Object[h][w];
+        for(int i=0; i<h; i++){
+            Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
+            Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
+            
+            data[i][0] = transaksiList.get(i).getID_Barang();
+            data[i][1] = b != null ? b.getNama_Barang() : null;
+            data[i][2] = bon != null ? bon.getTanggal_Transaksi() : null;
+            data[i][3] = transaksiList.get(i).getJumlah_Barang();
+            data[i][4] = b != null ? b.getHarga_Barang() : null;
+            data[i][5] = transaksiList.get(i).getHarga_Total();
+        }
+        
+        TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_TransaksiPanelComponentShown
+
+    private void TabelTransaksiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TabelTransaksiPropertyChange
+        long subtotal = 0;
+        
+        int h = TabelTransaksi.getModel().getRowCount();
+        for(int i=0; i<h; i++){
+            subtotal += (long) TabelTransaksi.getModel().getValueAt(i, 5);
+        }
+        
+        SubtotalField.setText("" + subtotal);
+    }//GEN-LAST:event_TabelTransaksiPropertyChange
+
+    private void Transaksi_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transaksi_SearchButtonActionPerformed
+        Boolean isIDMode = TransaksiSearchByIDBon.isEnabled();
+        String ID = TransaksiSearchByIDBon.getText();
+        Date d = TransaksiSearchByDate.getDate();
+        
+        if(isIDMode){
+            if(ID.isBlank()){
+                JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if(d == null){
+                JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        Object[] namaKolom = {
+            "ID Barang",
+            "Nama Barang",
+            "Tanggal Transaksi",
+            "Jumlah",
+            "Harga Satuan",
+            "Total"
+        };
+        
+        int w = namaKolom.length;
+        int h = transaksiList.size();
+        
+        ArrayList<Object[]> dataList = new ArrayList<>();
+        for(int i=0; i<h; i++){
+            Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
+            if(isIDMode){
+                if(!bon.getID_Bon().equals(ID)){
+                    continue;
+                }
+            } else {
+                if(!bon.getTanggal_Transaksi().equals(d)){
+                    continue;
+                }
+            }
+            
+            Object[] data = new Object[w];
+            Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
+            
+            data[0] = transaksiList.get(i).getID_Barang();
+            data[1] = b != null ? b.getNama_Barang() : null;
+            data[2] = bon != null ? bon.getTanggal_Transaksi() : null;
+            data[3] = transaksiList.get(i).getJumlah_Barang();
+            data[4] = b != null ? b.getHarga_Barang() : null;
+            data[5] = transaksiList.get(i).getHarga_Total();
+            
+            dataList.add(data);
+        }
+        
+        TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_Transaksi_SearchButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
