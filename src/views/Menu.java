@@ -2052,6 +2052,11 @@ public class Menu extends javax.swing.JFrame {
         Transaksi_SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Transaksi_SearchButton.setText("Cari");
         Transaksi_SearchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Transaksi_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Transaksi_SearchButtonActionPerformed(evt);
+            }
+        });
         TransaksiPanel.add(Transaksi_SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 90, 40));
 
         TabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
@@ -3434,6 +3439,69 @@ public class Menu extends javax.swing.JFrame {
         
         SubtotalField.setText("" + subtotal);
     }//GEN-LAST:event_TabelTransaksiPropertyChange
+
+    private void Transaksi_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transaksi_SearchButtonActionPerformed
+        Boolean isIDMode = TransaksiSearchByIDBon.isEnabled();
+        String ID = TransaksiSearchByIDBon.getText();
+        Date d = TransaksiSearchByDate.getDate();
+        
+        if(isIDMode){
+            if(ID.isBlank()){
+                JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if(d == null){
+                JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        Object[] namaKolom = {
+            "ID Barang",
+            "Nama Barang",
+            "Tanggal Transaksi",
+            "Jumlah",
+            "Harga Satuan",
+            "Total"
+        };
+        
+        int w = namaKolom.length;
+        int h = transaksiList.size();
+        
+        ArrayList<Object[]> dataList = new ArrayList<>();
+        for(int i=0; i<h; i++){
+            Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
+            if(isIDMode){
+                if(!bon.getID_Bon().equals(ID)){
+                    continue;
+                }
+            } else {
+                if(!bon.getTanggal_Transaksi().equals(d)){
+                    continue;
+                }
+            }
+            
+            Object[] data = new Object[w];
+            Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
+            
+            data[0] = transaksiList.get(i).getID_Barang();
+            data[1] = b != null ? b.getNama_Barang() : null;
+            data[2] = bon != null ? bon.getTanggal_Transaksi() : null;
+            data[3] = transaksiList.get(i).getJumlah_Barang();
+            data[4] = b != null ? b.getHarga_Barang() : null;
+            data[5] = transaksiList.get(i).getHarga_Total();
+            
+            dataList.add(data);
+        }
+        
+        TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_Transaksi_SearchButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
