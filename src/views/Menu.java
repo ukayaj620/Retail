@@ -2063,6 +2063,11 @@ public class Menu extends javax.swing.JFrame {
                 "ID Barang", "Nama Barang", "Tanggal Transaksi", "Jumlah", "Harga Satuan", "Total"
             }
         ));
+        TabelTransaksi.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                TabelTransaksiPropertyChange(evt);
+            }
+        });
         TransaksiTable.setViewportView(TabelTransaksi);
 
         TransaksiPanel.add(TransaksiTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 1010, 330));
@@ -3398,7 +3403,6 @@ public class Menu extends javax.swing.JFrame {
         
         int w = namaKolom.length;
         int h = transaksiList.size();
-        long subtotal=0;
         
         Object[][] data = new Object[h][w];
         for(int i=0; i<h; i++){
@@ -3411,11 +3415,7 @@ public class Menu extends javax.swing.JFrame {
             data[i][3] = transaksiList.get(i).getJumlah_Barang();
             data[i][4] = b != null ? b.getHarga_Barang() : null;
             data[i][5] = transaksiList.get(i).getHarga_Total();
-            
-            subtotal += (long) data[i][5];
         }
-        
-        SubtotalField.setText("" + subtotal);
         
         TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom){
             @Override
@@ -3424,6 +3424,17 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_TransaksiPanelComponentShown
+
+    private void TabelTransaksiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TabelTransaksiPropertyChange
+        long subtotal = 0;
+        
+        int h = TabelTransaksi.getModel().getRowCount();
+        for(int i=0; i<h; i++){
+            subtotal += (long) TabelTransaksi.getModel().getValueAt(i, 5);
+        }
+        
+        SubtotalField.setText("" + subtotal);
+    }//GEN-LAST:event_TabelTransaksiPropertyChange
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
