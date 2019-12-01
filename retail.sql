@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2019 at 08:26 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Generation Time: Dec 01, 2019 at 10:57 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -46,8 +46,7 @@ CREATE TABLE `barang` (
 CREATE TABLE `bon` (
   `ID_Bon` varchar(15) NOT NULL,
   `Tanggal_Transaksi` date NOT NULL,
-  `Subtotal` bigint(20) NOT NULL,
-  `ID_Petugas` varchar(10) NOT NULL
+  `Subtotal` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -151,8 +150,7 @@ ALTER TABLE `barang`
 -- Indexes for table `bon`
 --
 ALTER TABLE `bon`
-  ADD PRIMARY KEY (`ID_Bon`),
-  ADD KEY `petugas` (`ID_Petugas`);
+  ADD PRIMARY KEY (`ID_Bon`);
 
 --
 -- Indexes for table `cabang`
@@ -212,12 +210,6 @@ ALTER TABLE `transaksi`
 --
 ALTER TABLE `barang`
   ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`ID_Katagori`) REFERENCES `katagori` (`ID_Katagori`);
-
---
--- Constraints for table `bon`
---
-ALTER TABLE `bon`
-  ADD CONSTRAINT `bon_ibfk_1` FOREIGN KEY (`ID_Petugas`) REFERENCES `petugas` (`ID_Petugas`);
 
 --
 -- Constraints for table `cabang`
