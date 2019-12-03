@@ -3,7 +3,8 @@ package interfaces;
 import java.util.List;
 import models.Barang;
 
-public interface BarangInterface {
+public interface BarangInterface 
+{
     public boolean insert(Barang barang);
     public boolean update(Barang barang);
     public boolean delete(Barang barang);

@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="btnGroup_Staf_Add">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="btnGroup_Staf_Update">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="btnGroup_Staf_Hapus">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="locationByPlatform" type="boolean" value="true"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1280, 720]"/>
     </Property>
@@ -814,6 +823,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="AddBarangMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -897,6 +909,9 @@
                     <Property name="text" type="java.lang.String" value="Batal"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddBarang_CancelButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="540" y="420" width="120" height="-1"/>
@@ -911,6 +926,9 @@
                     <Property name="text" type="java.lang.String" value="Simpan "/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddBarang_SaveButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="260" y="420" width="-1" height="-1"/>
@@ -918,13 +936,11 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="IDKCbx">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Organik&quot;, &quot;Anorganik&quot;, &quot;B3&quot; })" type="code"/>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="IDKCbxMouseClicked"/>
+                  </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1007,6 +1023,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="ListBarangMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -1109,6 +1128,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="UpdateBarangMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -1216,8 +1238,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Batal"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateBarangCancelActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="490" y="510" width="120" height="-1"/>
@@ -1230,8 +1256,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Simpan "/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateBarangConfirmActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="170" y="510" width="-1" height="-1"/>
@@ -1243,9 +1273,10 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Organik&quot;, &quot;Anorganik&quot;, &quot;B3&quot; })" type="code"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1254,6 +1285,9 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="UpdateBarang_HargaField">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="350" y="330" width="180" height="30"/>
@@ -1284,6 +1318,9 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="UpdateBarang_NamaBarangField">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="350" y="190" width="180" height="30"/>
@@ -1291,6 +1328,9 @@
                   </Constraints>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="UpdateBarang_TglMasuk">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="350" y="390" width="180" height="30"/>
@@ -1298,6 +1338,9 @@
                   </Constraints>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="UpdateBarang_TglExp">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="350" y="440" width="180" height="30"/>
@@ -1318,6 +1361,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="HapusBarangMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -1425,8 +1471,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Batal"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HapusBarangCancelActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="430" y="500" width="120" height="-1"/>
@@ -1439,8 +1489,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Hapus"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HapusBarangConfirmActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="170" y="500" width="-1" height="-1"/>
@@ -1455,7 +1509,7 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1789,6 +1843,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="AddStafMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -1885,6 +1942,9 @@
                     <Property name="text" type="java.lang.String" value="Batal"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddStaf_CancelButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="420" y="430" width="120" height="-1"/>
@@ -1899,6 +1959,9 @@
                     <Property name="text" type="java.lang.String" value="Simpan "/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddStaf_SaveButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="200" y="430" width="-1" height="-1"/>
@@ -1910,9 +1973,13 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e5" green="fa" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroup_Staf_Add"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
+                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Pagi"/>
                   </Properties>
                   <Constraints>
@@ -1925,6 +1992,9 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e5" green="fa" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroup_Staf_Add"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -1944,7 +2014,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1987,6 +2057,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="ListStafMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -2083,6 +2156,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="UpdateStafMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -2177,8 +2253,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Batal"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateCancelActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="430" y="450" width="120" height="-1"/>
@@ -2191,8 +2271,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Simpan "/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateSaveActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="190" y="450" width="-1" height="-1"/>
@@ -2204,10 +2288,15 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e5" green="fa" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroup_Staf_Update"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
+                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Pagi"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2220,10 +2309,14 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e5" green="fa" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroup_Staf_Update"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Malam"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2236,9 +2329,10 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;UBM-A&quot;, &quot;UBM-S&quot; })" type="code"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2247,6 +2341,9 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="UpdateStaf_NamaField">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="350" y="180" width="180" height="30"/>
@@ -2261,6 +2358,9 @@
                   </Constraints>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="UpdateTglMasuk">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="350" y="380" width="180" height="30"/>
@@ -2297,6 +2397,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="HapusStafMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -2391,8 +2494,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Batal"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HapusStaf_CancelButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="400" y="440" width="120" height="-1"/>
@@ -2405,8 +2512,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Hapus"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HapusStaf_ConfirmButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="190" y="440" width="-1" height="-1"/>
@@ -2417,6 +2528,9 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e5" green="fa" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroup_Staf_Hapus"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -2434,6 +2548,9 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="e5" green="fa" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroup_Staf_Hapus"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -2455,7 +2572,7 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2532,7 +2649,7 @@
             <Property name="useNullLayout" type="boolean" value="false"/>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="StafBar1">
+            <Container class="javax.swing.JPanel" name="SupplierBar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="80" green="e3" red="ff" type="rgb"/>
@@ -2769,6 +2886,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="AddSupplierMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -2839,6 +2959,9 @@
                     <Property name="text" type="java.lang.String" value="Batal"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddSupplier_CancelButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="420" y="400" width="120" height="-1"/>
@@ -2853,6 +2976,9 @@
                     <Property name="text" type="java.lang.String" value="Simpan "/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddSupplier_SaveButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="210" y="400" width="-1" height="-1"/>
@@ -2866,7 +2992,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2902,6 +3028,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="ListSupplierMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -2986,6 +3115,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="UpdateSupplierMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -3054,8 +3186,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Batal"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateSupplier_CancelButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="420" y="400" width="120" height="-1"/>
@@ -3068,8 +3204,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Simpan "/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateSupplier_SaveButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="210" y="400" width="-1" height="-1"/>
@@ -3081,9 +3221,10 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;JKT&quot;, &quot;BDG&quot;, &quot;BGR&quot;, &quot;U-DNKY&quot;, &quot;S&amp;P&quot;, &quot;SSK&quot; })" type="code"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3092,6 +3233,9 @@
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="UpdateSupplier_NamaField">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="350" y="200" width="180" height="30"/>
@@ -3112,6 +3256,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cari"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateSupplier_SearchButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="560" y="121" width="80" height="30"/>
@@ -3132,6 +3279,9 @@
                   <Dimension value="[1280, 600]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="HapusSupplierMenuComponentShown"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="0" width="980" height="710"/>
@@ -3200,8 +3350,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Batal"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HapusSupplier_CancelButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="420" y="400" width="120" height="-1"/>
@@ -3214,8 +3368,12 @@
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Hapus"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HapusSupplier_ConfirmButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="210" y="400" width="-1" height="-1"/>
@@ -3230,7 +3388,7 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3262,6 +3420,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cari"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HapusSupplier_SearchButtonActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="560" y="121" width="80" height="30"/>
@@ -3284,6 +3445,9 @@
               <Dimension value="[1280, 600]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="StokPanelComponentShown"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="160" y="130" width="1110" height="580"/>
@@ -3324,6 +3488,9 @@
                 <Property name="text" type="java.lang.String" value="Cari"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SearchButtonActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="510" y="110" width="90" height="40"/>
@@ -3416,6 +3583,9 @@
               <Dimension value="[1280, 600]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="PembelianPanelComponentShown"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="160" y="130" width="1110" height="580"/>
@@ -3442,11 +3612,11 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="0">
-                        <Column editable="true" title="ID Barang" type="java.lang.Object"/>
-                        <Column editable="true" title="Nama Barang" type="java.lang.Object"/>
-                        <Column editable="true" title="Harga Satuan" type="java.lang.Object"/>
-                        <Column editable="true" title="Jumlah" type="java.lang.Object"/>
-                        <Column editable="true" title="Total" type="java.lang.Object"/>
+                        <Column editable="false" title="ID Barang" type="java.lang.Object"/>
+                        <Column editable="false" title="Nama Barang" type="java.lang.Object"/>
+                        <Column editable="false" title="Harga Satuan" type="java.lang.Object"/>
+                        <Column editable="false" title="Jumlah" type="java.lang.Object"/>
+                        <Column editable="false" title="Total" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -3487,10 +3657,11 @@
             </Container>
             <Component class="javax.swing.JTextField" name="PembelianTotalField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="1"/>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3507,6 +3678,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PembelianBayarMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PembelianBayarActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3523,6 +3695,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PembelianResetMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PembelianResetActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3544,6 +3717,14 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JSpinner" name="JumlahCounter">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="JumlahCounterStateChanged"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="200" y="230" width="50" height="30"/>
@@ -3617,10 +3798,11 @@
             </Component>
             <Component class="javax.swing.JTextField" name="PembelianSubtotalField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="1"/>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3643,16 +3825,14 @@
             <Component class="javax.swing.JComboBox" name="BarangSelectCbx">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BarangSelectCbxActionPerformed"/>
+              </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3669,6 +3849,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PembelianAddtoCartMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PembelianAddtoCartActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3690,6 +3871,9 @@
               <Dimension value="[1280, 600]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="TransaksiPanelComponentShown"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="160" y="130" width="1110" height="580"/>
@@ -3702,8 +3886,11 @@
           <SubComponents>
             <Component class="javax.swing.JComboBox" name="TransaksiSearchCbx">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;ID Bon&quot;, &quot;Tanggal Transaksi&quot; })" type="code"/>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value="ID Bon"/>
+                    <StringItem index="1" value="Tanggal Transaksi"/>
+                  </StringArray>
                 </Property>
               </Properties>
               <Events>
@@ -3726,6 +3913,9 @@
               </Constraints>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="TransaksiSearchByDate">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="660" y="110" width="250" height="40"/>
@@ -3740,6 +3930,9 @@
                 <Property name="text" type="java.lang.String" value="Cari"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Transaksi_SearchButtonActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="510" y="110" width="90" height="40"/>
@@ -3808,6 +4001,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="TabelTransaksiPropertyChange"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -3839,7 +4035,8 @@
             </Component>
             <Component class="javax.swing.JTextField" name="SubtotalField">
               <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
