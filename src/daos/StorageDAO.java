@@ -92,7 +92,7 @@ public class StorageDAO implements StorageInterface{
             while (rs.next()) {
                 Storage s = new Storage(
                         new Barang(rs.getString(1), null, rs.getString(2), 0, null, null), 
-                        new Katagori(rs.getString(3), rs.getString(2)),
+                        new Katagori(rs.getString(3), rs.getString(4)),
                         rs.getInt(5),
                         new Supplier(rs.getString(6), rs.getString(7), null)
                 );
@@ -120,7 +120,7 @@ public class StorageDAO implements StorageInterface{
             while (rs.next()) {
                 Storage s = new Storage(
                         new Barang(rs.getString(1), null, rs.getString(2), 0, null, null), 
-                        new Katagori(rs.getString(3), rs.getString(2)),
+                        new Katagori(rs.getString(3), rs.getString(4)),
                         rs.getInt(5),
                         new Supplier(rs.getString(6), rs.getString(7), null)
                 );
@@ -149,7 +149,7 @@ public class StorageDAO implements StorageInterface{
             while (rs.next()) {
                 Storage s = new Storage(
                         new Barang(rs.getString(1), null, rs.getString(2), 0, null, null), 
-                        new Katagori(rs.getString(3), rs.getString(2)),
+                        new Katagori(rs.getString(3), rs.getString(4)),
                         rs.getInt(5),
                         new Supplier(rs.getString(6), rs.getString(7), null)
                 );
@@ -178,7 +178,7 @@ public class StorageDAO implements StorageInterface{
             while (rs.next()) {
                 Storage s = new Storage(
                         new Barang(rs.getString(1), null, rs.getString(2), 0, null, null), 
-                        new Katagori(rs.getString(3), rs.getString(2)),
+                        new Katagori(rs.getString(3), rs.getString(4)),
                         rs.getInt(5),
                         new Supplier(rs.getString(6), rs.getString(7), null)
                 );
