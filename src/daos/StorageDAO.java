@@ -13,112 +13,88 @@ import models.Supplier;
 import retail.Koneksi;
 import interfaces.StorageInterface;
 
+public class StorageDAO implements StorageInterface {
 
-public class StorageDAO implements StorageInterface
-{
     @Override
-    public boolean insert(Storage storage) 
-    {
+    public boolean insert(Storage storage) {
         String sql = "INSERT INTO storage VALUES(?, ?, ?, ?)";
-        try 
-        {
+        try {
             int row;
-            try (PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) 
-            {
+            try ( PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) {
                 statement.setString(1, storage.getID_Barang());
                 statement.setString(2, storage.getID_Katagori());
                 statement.setInt(3, storage.getStok());
                 statement.setString(4, storage.getID_Supplier());
                 row = statement.executeUpdate();
             }
-            
-            if (row > 0) 
-            {
+
+            if (row > 0) {
                 return true;
             }
-        } 
-            catch (SQLException e) 
-            {
-                Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
-            }
-        
+        } catch (SQLException e) {
+            Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
+        }
+
         return false;
     }
 
     @Override
-    public boolean update(Storage storage) 
-    {
+    public boolean update(Storage storage) {
         String sql = "UPDATE storage SET storage.ID_Katagori = ?, "
-                    + "storage.Stock = ?, "
-                    + "storage.ID_Supplier = ?"
-                    + "WHERE storage.ID_Barang = ?";
-        try 
-        {
+                + "storage.Stock = ?, "
+                + "storage.ID_Supplier = ?"
+                + "WHERE storage.ID_Barang = ?";
+        try {
             int row;
-            try (PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) 
-            {
+            try ( PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) {
                 statement.setString(1, storage.getID_Katagori());
                 statement.setInt(2, storage.getStok());
                 statement.setString(3, storage.getID_Supplier());
                 statement.setString(4, storage.getID_Barang());
                 row = statement.executeUpdate();
             }
-            
-            if (row > 0) 
-            {
+
+            if (row > 0) {
                 return true;
             }
-        } 
-            catch (SQLException e)
-            {
-                Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
-            }
+        } catch (SQLException e) {
+            Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
+        }
         return false;
     }
 
     @Override
-    public boolean delete(Storage storage) 
-    {
+    public boolean delete(Storage storage) {
         String sql = "DELETE FROM storage WHERE storage.ID_Barang = ?";
-        try 
-        {
+        try {
             int row;
-            try (PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) 
-            {
+            try ( PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) {
                 statement.setString(1, storage.getID_Barang());
                 row = statement.executeUpdate();
             }
-            
-            if (row > 0)
-            {
+
+            if (row > 0) {
                 return true;
             }
-        } 
-            catch (SQLException e) 
-            {
-                Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
-            }
+        } catch (SQLException e) {
+            Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
+        }
         return false;
     }
 
     @Override
-    public List<Storage> getAllStorage()
-    {
+    public List<Storage> getAllStorage() {
         List<Storage> storageList = new ArrayList<>();
-        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n" +
-                     "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n" +
-                     "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n" +
-                     "inner join Supplier on storage.ID_Supplier =  Supplier.ID_Supplier;";
-        try 
-        {
-            try (PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) 
-            {
+        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n"
+                + "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n"
+                + "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n"
+                + "inner join Supplier on storage.ID_Supplier =  Supplier.ID_Supplier;";
+        try {
+            try ( PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) {
                 ResultSet rs = statement.executeQuery();
-                
-                while (rs.next()) 
-                {
-                    Storage s = new Storage
-                    (
+
+                while (rs.next()) {
+                    Storage s = new Storage(
                             new Barang(rs.getString(1), null, rs.getString(2), 0, null, null),
                             new Katagori(rs.getString(3), rs.getString(2)),
                             rs.getInt(5),
@@ -127,106 +103,28 @@ public class StorageDAO implements StorageInterface
                     storageList.add(s);
                 }
             }
+        } catch (SQLException e) {
+            Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
         }
-            catch (SQLException e)
-            {
-                Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
-            }
-        
-        return storageList;}
+
+        return storageList;
+    }
 
     @Override
-    public List<Storage> getByID_Barang(String ID_Barang) 
-    {
+    public List<Storage> getByID_Barang(String ID_Barang) {
         List<Storage> storageList = new ArrayList<>();
-        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n" +
-                     "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n" +
-                     "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n" +
-                     "inner join Supplier on storage.ID_Supplier = Supplier.ID_Supplier " + 
-                     "where storage.ID_Barang = ?;";
-        try 
-        {
-            try (PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) 
-            {
+        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n"
+                + "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n"
+                + "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n"
+                + "inner join Supplier on storage.ID_Supplier = Supplier.ID_Supplier "
+                + "where storage.ID_Barang = ?;";
+        try {
+            try ( PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) {
                 statement.setString(1, ID_Barang);
                 ResultSet rs = statement.executeQuery();
-                
-                while (rs.next()) 
-                {
-                    Storage s = new Storage
-                    (
-                            new Barang(rs.getString(1), null, rs.getString(2), 0, null, null),
-                            new Katagori(rs.getString(3), rs.getString(2)),
-                            rs.getInt(5),
-                            new Supplier(rs.getString(6), rs.getString(7), null)
-                    );
-                    storageList.add(s);
-                }
-            }
-        } 
-            catch (SQLException e) 
-            {
-                Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
-            }
-        
-        return storageList;
-    }
 
-    @Override
-    public List<Storage> getByNama_Barang(String Nama_Barang) 
-    {
-        List<Storage> storageList = new ArrayList<>();
-        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n" +
-                     "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n" +
-                     "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n" +
-                     "inner join Supplier on storage.ID_Supplier = Supplier.ID_Supplier " + 
-                     "where Barang.Nama_Barang LIKE ?;";
-        try 
-        {
-            try (PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) 
-            {
-                statement.setString(1, Nama_Barang+"%");
-                ResultSet rs = statement.executeQuery();
-                
-                while (rs.next()) 
-                {
-                    Storage s = new Storage
-                    (
-                            new Barang(rs.getString(1), null, rs.getString(2), 0, null, null),
-                            new Katagori(rs.getString(3), rs.getString(2)),
-                            rs.getInt(5),
-                            new Supplier(rs.getString(6), rs.getString(7), null)
-                    );
-                    storageList.add(s);
-                }
-            }
-        } 
-            catch (SQLException e) 
-            {
-                Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
-            }
-        return storageList;
-    }
-
-    @Override
-    public List<Storage> getByKataKunci(String KataKunci) 
-    {
-        List<Storage> storageList = new ArrayList<>();
-        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n" +
-                     "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n" +
-                     "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n" +
-                     "inner join Supplier on storage.ID_Supplier = Supplier.ID_Supplier " + 
-                     "where Barang.Nama_Barang LIKE ?;";
-        try
-        {
-            try (PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) 
-            {
-                statement.setString(1, "%"+KataKunci+"%");
-                ResultSet rs = statement.executeQuery();
-                
                 while (rs.next()) {
-                    Storage s = new Storage
-                    (
+                    Storage s = new Storage(
                             new Barang(rs.getString(1), null, rs.getString(2), 0, null, null),
                             new Katagori(rs.getString(3), rs.getString(2)),
                             rs.getInt(5),
@@ -235,13 +133,70 @@ public class StorageDAO implements StorageInterface
                     storageList.add(s);
                 }
             }
-        } 
-            catch (SQLException e) 
-            {
-                Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
-            }
-        
+        } catch (SQLException e) {
+            Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
+        }
+
         return storageList;
     }
-    
+
+    @Override
+    public List<Storage> getByNama_Barang(String Nama_Barang) {
+        List<Storage> storageList = new ArrayList<>();
+        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n"
+                + "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n"
+                + "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n"
+                + "inner join Supplier on storage.ID_Supplier = Supplier.ID_Supplier "
+                + "where Barang.Nama_Barang LIKE ?;";
+        try {
+            try ( PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) {
+                statement.setString(1, Nama_Barang + "%");
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    Storage s = new Storage(
+                            new Barang(rs.getString(1), null, rs.getString(2), 0, null, null),
+                            new Katagori(rs.getString(3), rs.getString(2)),
+                            rs.getInt(5),
+                            new Supplier(rs.getString(6), rs.getString(7), null)
+                    );
+                    storageList.add(s);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return storageList;
+    }
+
+    @Override
+    public List<Storage> getByKataKunci(String KataKunci) {
+        List<Storage> storageList = new ArrayList<>();
+        String sql = "SELECT storage.ID_Barang, Barang.Nama_Barang, storage.ID_Katagori, Katagori.Nama_Katagori, Stock, storage.ID_Supplier, Supplier.Nama_Supplier FROM storage \n"
+                + "inner join Barang on storage.ID_Barang = Barang.ID_Barang \n"
+                + "inner join Katagori on storage.ID_Katagori = Katagori.ID_Katagori \n"
+                + "inner join Supplier on storage.ID_Supplier = Supplier.ID_Supplier "
+                + "where Barang.Nama_Barang LIKE ?;";
+        try {
+            try ( PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql)) {
+                statement.setString(1, "%" + KataKunci + "%");
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    Storage s = new Storage(
+                            new Barang(rs.getString(1), null, rs.getString(2), 0, null, null),
+                            new Katagori(rs.getString(3), rs.getString(2)),
+                            rs.getInt(5),
+                            new Supplier(rs.getString(6), rs.getString(7), null)
+                    );
+                    storageList.add(s);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Storage.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return storageList;
+    }
+
 }

@@ -1,9 +1,8 @@
 package retail;
 
-public class Retail 
-{
-    public static void main(String[] args) 
-    {
+public class Retail {
+
+    public static void main(String[] args) {
 
     }
 }

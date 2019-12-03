@@ -7,65 +7,53 @@ import models.Cabang;
 import interfaces.CabangInterface;
 import models.OperasiCRUD;
 
-public class CabangController extends Observable
-{
-private CabangInterface dao = new CabangDAO();
-private OperasiCRUD crud;
-    
-    public void setDAO(CabangInterface cabang)
-    {
+public class CabangController extends Observable {
+
+    private CabangInterface dao = new CabangDAO();
+    private OperasiCRUD crud;
+
+    public void setDAO(CabangInterface cabang) {
         dao = cabang;
     }
-    
-    public void setDml(Cabang cabang, OperasiCRUD c)
-    {
+
+    public void setDml(Cabang cabang, OperasiCRUD c) {
         boolean hasil = false;
         this.crud = c;
-        
-        switch(c)
-        {
-            case INSERT: 
-            {
+
+        switch (c) {
+            case INSERT: {
                 hasil = dao.insert(cabang);
                 break;
-            } 
-                
-            case UPDATE: 
-            {
+            }
+
+            case UPDATE: {
                 hasil = dao.update(cabang);
                 break;
-            } 
-                
-            case DELETE: 
-            {
+            }
+
+            case DELETE: {
                 hasil = dao.delete(cabang);
                 break;
             }
         }
         setChanged();
-        
-        if(hasil)
-        {
+
+        if (hasil) {
             notifyObservers(cabang);
+        } else {
+            notifyObservers();
         }
-            else
-            {
-                notifyObservers();
-            }
     }
-    
-    public OperasiCRUD getCrudState()
-    {
+
+    public OperasiCRUD getCrudState() {
         return crud;
-    }    
-    
-    public List<Cabang> getAllCabang()
-    {
+    }
+
+    public List<Cabang> getAllCabang() {
         return dao.getAllCabang();
     }
-    
-    public Cabang getByID_Cabang(String ID_Cabang)
-    {
+
+    public Cabang getByID_Cabang(String ID_Cabang) {
         return dao.getByID_Cabang(ID_Cabang);
     }
 }

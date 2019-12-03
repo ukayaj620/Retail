@@ -7,64 +7,52 @@ import models.Barang;
 import interfaces.BarangInterface;
 import models.OperasiCRUD;
 
-public class BarangController extends Observable
-{
-private BarangInterface dao = new BarangDAO();
-private OperasiCRUD crud;
-    
-    public void setDAO(BarangInterface barang)
-    {
+public class BarangController extends Observable {
+
+    private BarangInterface dao = new BarangDAO();
+    private OperasiCRUD crud;
+
+    public void setDAO(BarangInterface barang) {
         dao = barang;
     }
-    
-    public void setDml(Barang barang, OperasiCRUD c)
-    {
+
+    public void setDml(Barang barang, OperasiCRUD c) {
         boolean hasil = false;
         this.crud = c;
-        switch(c)
-        {
-            case INSERT: 
-            {
+        switch (c) {
+            case INSERT: {
                 hasil = dao.insert(barang);
                 break;
-            } 
-                
-            case UPDATE: 
-            {
+            }
+
+            case UPDATE: {
                 hasil = dao.update(barang);
                 break;
-            } 
-                
-            case DELETE: 
-            {
+            }
+
+            case DELETE: {
                 hasil = dao.delete(barang);
                 break;
             }
         }
         setChanged();
-        
-        if(hasil)
-        {
+
+        if (hasil) {
             notifyObservers(barang);
+        } else {
+            notifyObservers();
         }
-            else
-            {
-                notifyObservers();
-            }
     }
-    
-    public OperasiCRUD getCrudState()
-    {
+
+    public OperasiCRUD getCrudState() {
         return crud;
-    }    
-    
-    public List<Barang> getAllBarang()
-    {
+    }
+
+    public List<Barang> getAllBarang() {
         return dao.getAllBarang();
     }
-    
-    public Barang getByID_Barang(String ID_Barang)
-    {
+
+    public Barang getByID_Barang(String ID_Barang) {
         return dao.getByID_Barang(ID_Barang);
     }
 }

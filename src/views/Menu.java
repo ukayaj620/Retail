@@ -15,25 +15,24 @@ import javax.swing.table.DefaultTableCellRenderer;
 import models.*;
 import retail.Koneksi;
 
-public class Menu extends javax.swing.JFrame 
-{
-Color gray = new Color(255, 240, 178);
-Color yellow_tran = new Color(255, 250, 229, 230);
-Color normal_btn = new Color(255, 250, 229);
-Boolean hasLogin = false;
+public class Menu extends javax.swing.JFrame {
 
-BarangController barangController = new BarangController();
-BonController bonController = new BonController();
-CabangController cabangController = new CabangController();
-KatagoriController katagoriController = new KatagoriController();
-KotaController kotaController = new KotaController();
-PetugasController petugasController = new PetugasController();
-SupplierController supplierController = new SupplierController();
-TransaksiController transaksiController = new TransaksiController();
-StorageController storageController = new StorageController();
+    Color gray = new Color(255, 240, 178);
+    Color yellow_tran = new Color(255, 250, 229, 230);
+    Color normal_btn = new Color(255, 250, 229);
+    Boolean hasLogin = false;
 
-    public Menu() 
-    {
+    BarangController barangController = new BarangController();
+    BonController bonController = new BonController();
+    CabangController cabangController = new CabangController();
+    KatagoriController katagoriController = new KatagoriController();
+    KotaController kotaController = new KotaController();
+    PetugasController petugasController = new PetugasController();
+    SupplierController supplierController = new SupplierController();
+    TransaksiController transaksiController = new TransaksiController();
+    StorageController storageController = new StorageController();
+
+    public Menu() {
         initComponents();
 
         BarangLogo.setEnabled(false);
@@ -123,36 +122,32 @@ StorageController storageController = new StorageController();
         //Transaksi
         TransaksiPanel.setVisible(false);
         TransaksiPanel.setBackground(yellow_tran);
-        
+
         // TextField Limits
         IDBarangField.setDocument(new JTextFieldLimit(10));
         NamaBarangField.setDocument(new JTextFieldLimit(50));
     }
 
-    java.sql.Date DatetoSQL(Date d) 
-    {
+    java.sql.Date DatetoSQL(Date d) {
         return new java.sql.Date(d.getYear(), d.getMonth(), d.getDate());
     }
 
-    public class JTextFieldLimit extends javax.swing.text.PlainDocument 
-    {
+    public class JTextFieldLimit extends javax.swing.text.PlainDocument {
+
         private final int limit;
 
-        JTextFieldLimit(int limit) 
-        {
+        JTextFieldLimit(int limit) {
             super();
             this.limit = limit;
         }
-        
+
         @Override
         public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-            if (str == null) 
-            {
+            if (str == null) {
                 return;
             }
 
-            if ((getLength() + str.length()) <= limit)
-            {
+            if ((getLength() + str.length()) <= limit) {
                 super.insertString(offset, str, attr);
             }
         }
@@ -2185,13 +2180,11 @@ StorageController storageController = new StorageController();
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
-        if (Koneksi.openConnection() == null) 
-        {
+        if (Koneksi.openConnection() == null) {
             return;
         }
 
-        if ("user".equals(UsernameField.getText()) && "pass".equals(PasswordField.getText())) 
-        {
+        if ("user".equals(UsernameField.getText()) && "pass".equals(PasswordField.getText())) {
             BarangLogo.setEnabled(true);
             TransaksiLogo.setEnabled(true);
             StafLogo.setEnabled(true);
@@ -2202,12 +2195,10 @@ StorageController storageController = new StorageController();
             LoginPanel.setVisible(false);
 
             hasLogin = true;
-        } 
-            else 
-            {
-                JOptionPane.showMessageDialog(null, "Username atau password salah");
-            }
-        
+        } else {
+            JOptionPane.showMessageDialog(null, "Username atau password salah");
+        }
+
         Koneksi.closeConnection();
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -2267,21 +2258,19 @@ StorageController storageController = new StorageController();
 
     private void SearchUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateActionPerformed
         // TODO add your handling code here:
-        if(UpdateStaf_IDField.getText().equals(""))
-        {
+        if (UpdateStaf_IDField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = UpdateStaf_IDField.getText();
         Petugas p = petugasController.getByID_Petugas(id);
-        
-        if(p == null)
-        {
+
+        if (p == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         SearchUpdate.setEnabled(false);
         UpdateStaf_IDField.setEnabled(false);
         UpdateStaf_NamaField.setEnabled(true);
@@ -2291,79 +2280,67 @@ StorageController storageController = new StorageController();
         UpdateTglMasuk.setEnabled(true);
         UpdateSave.setEnabled(true);
         UpdateCancel.setEnabled(true);
-        
+
         int size = UpdateCabangCbx.getModel().getSize();
         int i;
-        
-        for(i = size - 1; i >= 0; i--)
-        {
+
+        for (i = size - 1; i >= 0; i--) {
             Cabang cek = (Cabang) UpdateCabangCbx.getModel().getElementAt(i);
-            
-            if (cek.getID_Cabang().equals(p.getID_Cabang()))
-            {
+
+            if (cek.getID_Cabang().equals(p.getID_Cabang())) {
                 break;
             }
         }
-        
+
         UpdateCabangCbx.setSelectedIndex(i);
         UpdateStaf_NamaField.setText(p.getNama_Petugas());
-        
-        if(p.getShift().equals("Pagi"))
-        {
+
+        if (p.getShift().equals("Pagi")) {
             UpdateShiftPagi.setSelected(true);
+        } else {
+            UpdateShiftMalam.setSelected(true);
         }
-            else 
-            {
-                UpdateShiftMalam.setSelected(true);
-            }
-        
+
         UpdateTglMasuk.setDate(p.getTanggal_Masuk());
     }//GEN-LAST:event_SearchUpdateActionPerformed
 
     private void HapusStaf_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_SearchButtonActionPerformed
         // TODO add your handling code here:
-        if(HapusStaf_IDField.getText().equals(""))
-        {
+        if (HapusStaf_IDField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = HapusStaf_IDField.getText();
         Petugas p = petugasController.getByID_Petugas(id);
-        
-        if(p == null)
-        {
+
+        if (p == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         int size = HapusCabangCbx.getModel().getSize();
         int i;
-        
-        for(i = size - 1; i >= 0; i--)
-        {
+
+        for (i = size - 1; i >= 0; i--) {
             Cabang cek = (Cabang) HapusCabangCbx.getModel().getElementAt(i);
-            
-            if (cek.getID_Cabang().equals(p.getID_Cabang()))
-            {
+
+            if (cek.getID_Cabang().equals(p.getID_Cabang())) {
                 break;
             }
         }
-        
+
         HapusCabangCbx.setSelectedIndex(i);
         HapusStaf_NamaField.setText(p.getNama_Petugas());
-        
-        if(p.getShift().equals("Pagi"))
-        {
+
+        if (p.getShift().equals("Pagi")) {
             HapusShiftPagi.setSelected(true);
-        }        
-            else 
-            {
-                HapusShiftMalam.setSelected(true);
-            }
-        
+        } else {
+            HapusShiftMalam.setSelected(true);
+        }
+
         HapusTglMasuk.setDate(p.getTanggal_Masuk());
-        
+
         HapusStaf_IDField.setEnabled(false);
         HapusStaf_SearchButton.setEnabled(false);
         HapusStaf_ConfirmButton.setEnabled(true);
@@ -2461,21 +2438,19 @@ StorageController storageController = new StorageController();
     }//GEN-LAST:event_DeleteBarangLogoMouseExited
 
     private void SearchUpdateBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateBarangActionPerformed
-        if(UpdateBarang_IDBarangField.getText().isBlank())
-        {
+        if (UpdateBarang_IDBarangField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = UpdateBarang_IDBarangField.getText();
         Barang b = barangController.getByID_Barang(id);
-        
-        if(b == null)
-        {
+
+        if (b == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         SearchUpdateBarang.setEnabled(false);
         UpdateBarang_IDBarangField.setEnabled(false);
         UpdateBarang_IDKCbx.setEnabled(true);
@@ -2485,19 +2460,17 @@ StorageController storageController = new StorageController();
         UpdateBarang_TglExp.setEnabled(true);
         UpdateBarangConfirm.setEnabled(true);
         UpdateBarangCancel.setEnabled(true);
-        
-        int size=UpdateBarang_IDKCbx.getModel().getSize();
+
+        int size = UpdateBarang_IDKCbx.getModel().getSize();
         int i;
-        
-        for(i = size - 1; i >= 0; i--)
-        {
+
+        for (i = size - 1; i >= 0; i--) {
             Katagori cek = (Katagori) UpdateBarang_IDKCbx.getModel().getElementAt(i);
-            if (cek.getID_Katagori().equals(b.getID_Katagori()))
-            {
+            if (cek.getID_Katagori().equals(b.getID_Katagori())) {
                 break;
             }
         }
-        
+
         UpdateBarang_IDKCbx.setSelectedIndex(i);
         UpdateBarang_NamaBarangField.setText(b.getNama_Barang());
         UpdateBarang_HargaField.setText("" + b.getHarga_Barang());
@@ -2506,39 +2479,35 @@ StorageController storageController = new StorageController();
     }//GEN-LAST:event_SearchUpdateBarangActionPerformed
 
     private void SearchHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHapusBarangActionPerformed
-        if(HapusBarang_IDBarangField.getText().equals(""))
-        {
+        if (HapusBarang_IDBarangField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = HapusBarang_IDBarangField.getText();
         Barang b = barangController.getByID_Barang(id);
-        
-        if(b == null)
-        {
+
+        if (b == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        int size=HapusBarang_IDKCbx.getModel().getSize();
+
+        int size = HapusBarang_IDKCbx.getModel().getSize();
         int i;
-        
-        for(i = size - 1; i >= 0; i--)
-        {
+
+        for (i = size - 1; i >= 0; i--) {
             Katagori cek = (Katagori) HapusBarang_IDKCbx.getModel().getElementAt(i);
-            if (cek.getID_Katagori().equals(b.getID_Katagori()))
-            {
+            if (cek.getID_Katagori().equals(b.getID_Katagori())) {
                 break;
             }
         }
-        
+
         HapusBarang_IDKCbx.setSelectedIndex(i);
         HapusBarang_NamaBarangField.setText(b.getNama_Barang());
         HapusBarang_HargaField.setText("" + b.getHarga_Barang());
         HapusBarang_TglMasuk.setDate(b.getTanggal_Masuk());
         HapusBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
-        
+
         HapusBarang_IDBarangField.setEnabled(false);
         SearchHapusBarang.setEnabled(false);
         HapusBarangConfirm.setEnabled(true);
@@ -2619,8 +2588,7 @@ StorageController storageController = new StorageController();
 
     private void BarangLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangLogoMouseClicked
         // TODO add your handling code here:
-        if (!hasLogin) 
-        {
+        if (!hasLogin) {
             return;
         }
 
@@ -2644,8 +2612,7 @@ StorageController storageController = new StorageController();
 
     private void StafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StafLogoMouseClicked
         // TODO add your handling code here:
-        if (!hasLogin) 
-        {
+        if (!hasLogin) {
             return;
         }
 
@@ -2669,8 +2636,7 @@ StorageController storageController = new StorageController();
 
     private void StokLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StokLogoMouseClicked
         // TODO add your handling code here:
-        if (!hasLogin) 
-        {
+        if (!hasLogin) {
             return;
         }
 
@@ -2694,8 +2660,7 @@ StorageController storageController = new StorageController();
 
     private void SupplyLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplyLogoMouseClicked
         // TODO add your handling code here:
-        if (!hasLogin) 
-        {
+        if (!hasLogin) {
             return;
         }
 
@@ -2719,8 +2684,7 @@ StorageController storageController = new StorageController();
 
     private void TransaksiLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransaksiLogoMouseClicked
         // TODO add your handling code here:
-        if (!hasLogin) 
-        {
+        if (!hasLogin) {
             return;
         }
 
@@ -2744,22 +2708,18 @@ StorageController storageController = new StorageController();
 
     private void TransaksiSearchCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiSearchCbxActionPerformed
         // TODO add your handling code here:
-        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Bon")) 
-        {
+        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Bon")) {
             TransaksiSearchByIDBon.setEnabled(true);
             TransaksiSearchByDate.setEnabled(false);
-        } 
-            else 
-            {
-                TransaksiSearchByDate.setEnabled(true);
-                TransaksiSearchByIDBon.setEnabled(false);
-            }
+        } else {
+            TransaksiSearchByDate.setEnabled(true);
+            TransaksiSearchByIDBon.setEnabled(false);
+        }
     }//GEN-LAST:event_TransaksiSearchCbxActionPerformed
 
     private void PembelianLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PembelianLogoMouseClicked
         // TODO add your handling code here:
-        if (!hasLogin) 
-        {
+        if (!hasLogin) {
             return;
         }
 
@@ -2807,13 +2767,22 @@ StorageController storageController = new StorageController();
 
     private void AddBarang_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBarang_SaveButtonActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (IDBarangField.getText().equals(""))    throw new Exception("ID");
-            if (NamaBarangField.getText().equals(""))  throw new Exception("Nama");
-            if (HargaBarangField.getText().equals("")) throw new Exception("Harga");
-            if (BarangTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
-            if (BarangTglExp.getDate() == null)        throw new Exception("TglKeluar");
+        try {
+            if (IDBarangField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (NamaBarangField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (HargaBarangField.getText().equals("")) {
+                throw new Exception("Harga");
+            }
+            if (BarangTglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
+            if (BarangTglExp.getDate() == null) {
+                throw new Exception("TglKeluar");
+            }
 
             String id = IDBarangField.getText();
             String nama = NamaBarangField.getText();
@@ -2821,22 +2790,17 @@ StorageController storageController = new StorageController();
             int harga = Integer.parseInt(HargaBarangField.getText());
             Date masuk = BarangTglMasuk.getDate();
             Date kadaluarsa = BarangTglExp.getDate();
-            
+
             Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
             barangController.setDml(b, OperasiCRUD.INSERT);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddBarang_CancelButtonActionPerformed(null);
-        } 
-            catch (NumberFormatException ex) 
-            {
-                JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            } 
-
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AddBarang_SaveButtonActionPerformed
 
     private void AddBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddBarangMenuComponentShown
@@ -2846,24 +2810,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != IDKCbx.getModel().getSize()) 
-        {
+        if (size != IDKCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(IDKCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -2888,25 +2846,23 @@ StorageController storageController = new StorageController();
     private void ListBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListBarangMenuComponentShown
         // TODO add your handling code here:
         List<Barang> list = barangController.getAllBarang();
-        if(list == null)
-        {
+        if (list == null) {
             return;
         }
-        
+
         int size = list.size();
         Object[][] data = new Object[size][6];
-        Object[] columnNames = 
-        {
-            "ID Barang", 
-            "ID Katagori", 
-            "Nama Barang", 
-            "Harga Barang", 
-            "Tanggal Masuk", 
-            "Tanggal Kadaluarsa"
-        };
-        
-        for(int i = 0; i < size; i++)
-        {
+        Object[] columnNames
+                = {
+                    "ID Barang",
+                    "ID Katagori",
+                    "Nama Barang",
+                    "Harga Barang",
+                    "Tanggal Masuk",
+                    "Tanggal Kadaluarsa"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Barang();
             data[i][1] = list.get(i).getID_Katagori();
             data[i][2] = list.get(i).getNama_Barang();
@@ -2914,12 +2870,10 @@ StorageController storageController = new StorageController();
             data[i][4] = list.get(i).getTanggal_Masuk();
             data[i][5] = list.get(i).getTanggal_Kadaluarsa();
         }
-        
-        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames)
-        {
+
+        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
-            public boolean isCellEditable(int row, int column) 
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
@@ -2927,13 +2881,22 @@ StorageController storageController = new StorageController();
 
     private void UpdateBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangConfirmActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (UpdateBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
-            if (UpdateBarang_NamaBarangField.getText().equals("")) throw new Exception("Nama");
-            if (UpdateBarang_HargaField.getText().equals(""))      throw new Exception("Harga");
-            if (UpdateBarang_TglMasuk.getDate() == null)           throw new Exception("TglMasuk");
-            if (UpdateBarang_TglExp.getDate() == null)             throw new Exception("TglKeluar");
+        try {
+            if (UpdateBarang_IDBarangField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (UpdateBarang_NamaBarangField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (UpdateBarang_HargaField.getText().equals("")) {
+                throw new Exception("Harga");
+            }
+            if (UpdateBarang_TglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
+            if (UpdateBarang_TglExp.getDate() == null) {
+                throw new Exception("TglKeluar");
+            }
 
             String id = UpdateBarang_IDBarangField.getText();
             String nama = UpdateBarang_NamaBarangField.getText();
@@ -2941,22 +2904,17 @@ StorageController storageController = new StorageController();
             int harga = Integer.parseInt(UpdateBarang_HargaField.getText());
             Date masuk = UpdateBarang_TglMasuk.getDate();
             Date kadaluarsa = UpdateBarang_TglExp.getDate();
-            
+
             Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
             barangController.setDml(b, OperasiCRUD.UPDATE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil diupdate!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateBarangCancelActionPerformed(null);
-        } 
-            catch (NumberFormatException ex) 
-            {
-                JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            } 
-
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_UpdateBarangConfirmActionPerformed
 
     private void UpdateBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateBarangMenuComponentShown
@@ -2966,24 +2924,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != UpdateBarang_IDKCbx.getModel().getSize()) 
-        {
+        if (size != UpdateBarang_IDKCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(UpdateBarang_IDKCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateBarang_IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -2999,7 +2951,7 @@ StorageController storageController = new StorageController();
         UpdateBarang_HargaField.setText("");
         UpdateBarang_TglMasuk.setDate(null);
         UpdateBarang_TglExp.setDate(null);
-        
+
         SearchUpdateBarang.setEnabled(true);
         UpdateBarang_IDBarangField.setEnabled(true);
         UpdateBarang_IDKCbx.setEnabled(false);
@@ -3018,24 +2970,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != HapusBarang_IDKCbx.getModel().getSize()) 
-        {
+        if (size != HapusBarang_IDKCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(HapusBarang_IDKCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusBarang_IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated)
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -3045,22 +2991,21 @@ StorageController storageController = new StorageController();
 
     private void HapusBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangConfirmActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (HapusBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
+        try {
+            if (HapusBarang_IDBarangField.getText().equals("")) {
+                throw new Exception("ID");
+            }
 
             String id = HapusBarang_IDBarangField.getText();
-            
+
             Barang b = new Barang(id, null, null, 0, null, null);
             barangController.setDml(b, OperasiCRUD.DELETE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusBarangCancelActionPerformed(null);
-        } 
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_HapusBarangConfirmActionPerformed
 
     private void HapusBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangCancelActionPerformed
@@ -3071,7 +3016,7 @@ StorageController storageController = new StorageController();
         HapusBarang_HargaField.setText("");
         HapusBarang_TglMasuk.setDate(null);
         HapusBarang_TglExp.setDate(null);
-                
+
         HapusBarang_IDBarangField.setEnabled(true);
         SearchHapusBarang.setEnabled(true);
         HapusBarangConfirm.setEnabled(false);
@@ -3085,24 +3030,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != CabangCbx.getModel().getSize()) 
-        {
+        if (size != CabangCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(CabangCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(CabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -3111,28 +3050,31 @@ StorageController storageController = new StorageController();
 
     private void AddStaf_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_SaveButtonActionPerformed
         // TODO add your handling code here:
-        try
-        {
-            if (AddStaf_IDField.getText().equals(""))    throw new Exception("ID");
-            if (AddStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
-            if (StafTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+        try {
+            if (AddStaf_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (AddStaf_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (StafTglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
 
             String id = AddStaf_IDField.getText();
             String nama = AddStaf_NamaField.getText();
             String cabang = ((Cabang) CabangCbx.getSelectedItem()).getID_Cabang();
             String shift = ShiftPagi.isSelected() ? "Pagi" : "Malam";
             Date masuk = StafTglMasuk.getDate();
-            
+
             Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
             petugasController.setDml(p, OperasiCRUD.INSERT);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddStaf_CancelButtonActionPerformed(null);
-        } 
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AddStaf_SaveButtonActionPerformed
 
     private void AddStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_CancelButtonActionPerformed
@@ -3147,36 +3089,32 @@ StorageController storageController = new StorageController();
     private void ListStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListStafMenuComponentShown
         // TODO add your handling code here:
         List<Petugas> list = petugasController.getAllPetugas();
-        if(list == null)
-        {
+        if (list == null) {
             return;
         }
-        
+
         int size = list.size();
         Object[][] data = new Object[size][5];
-        Object[] columnNames = 
-        {
-            "ID Petugas",  
-            "Nama Petugas", 
-            "ID Cabang",
-            "Shift",
-            "Tanggal Masuk"
-        };
-        
-        for(int i = 0; i < size; i++)
-        {
+        Object[] columnNames
+                = {
+                    "ID Petugas",
+                    "Nama Petugas",
+                    "ID Cabang",
+                    "Shift",
+                    "Tanggal Masuk"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Petugas();
             data[i][1] = list.get(i).getNama_Petugas();
             data[i][2] = list.get(i).getID_Cabang();
             data[i][3] = list.get(i).getShift();
             data[i][4] = list.get(i).getTanggal_Masuk();
         }
-        
-        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames)
-        {
+
+        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
-            public boolean isCellEditable(int row, int column) 
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
@@ -3189,24 +3127,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != UpdateCabangCbx.getModel().getSize()) 
-        {
+        if (size != UpdateCabangCbx.getModel().getSize()) {
             isUpdated = true;
-        }
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(UpdateCabangCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateCabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -3216,28 +3148,31 @@ StorageController storageController = new StorageController();
 
     private void UpdateSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSaveActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (UpdateStaf_IDField.getText().equals(""))    throw new Exception("ID");
-            if (UpdateStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
-            if (UpdateTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+        try {
+            if (UpdateStaf_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (UpdateStaf_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (UpdateTglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
 
             String id = UpdateStaf_IDField.getText();
             String nama = UpdateStaf_NamaField.getText();
             String cabang = ((Cabang) UpdateCabangCbx.getSelectedItem()).getID_Cabang();
             String shift = UpdateShiftPagi.isSelected() ? "Pagi" : "Malam";
             Date masuk = UpdateTglMasuk.getDate();
-            
+
             Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
             petugasController.setDml(p, OperasiCRUD.UPDATE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateCancelActionPerformed(null);
-        } 
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_UpdateSaveActionPerformed
 
     private void UpdateCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCancelActionPerformed
@@ -3247,7 +3182,7 @@ StorageController storageController = new StorageController();
         UpdateCabangCbx.setSelectedIndex(-1);
         UpdateShiftPagi.setSelected(true);
         UpdateTglMasuk.setDate(null);
-        
+
         SearchUpdate.setEnabled(true);
         UpdateStaf_IDField.setEnabled(true);
         UpdateStaf_NamaField.setEnabled(false);
@@ -3264,24 +3199,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != HapusCabangCbx.getModel().getSize()) 
-        {
+        if (size != HapusCabangCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(HapusCabangCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusCabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -3291,22 +3220,21 @@ StorageController storageController = new StorageController();
 
     private void HapusStaf_ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_ConfirmButtonActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (HapusStaf_IDField.getText().equals(""))    throw new Exception("ID");
+        try {
+            if (HapusStaf_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
 
             String id = HapusStaf_IDField.getText();
-            
+
             Petugas p = new Petugas(id, null, null, null, null);
             petugasController.setDml(p, OperasiCRUD.DELETE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusStaf_CancelButtonActionPerformed(null);
-        } 
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_HapusStaf_ConfirmButtonActionPerformed
 
     private void HapusStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_CancelButtonActionPerformed
@@ -3316,7 +3244,7 @@ StorageController storageController = new StorageController();
         HapusCabangCbx.setSelectedIndex(-1);
         HapusShiftPagi.setSelected(true);
         HapusTglMasuk.setDate(null);
-        
+
         HapusStaf_IDField.setEnabled(true);
         HapusStaf_SearchButton.setEnabled(true);
         HapusStaf_ConfirmButton.setEnabled(false);
@@ -3325,73 +3253,63 @@ StorageController storageController = new StorageController();
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         // TODO add your handling code here:
-        if(SearchBar.getText().isBlank())
-        {
-            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE); 
+        if (SearchBar.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         List<Storage> list;
         String searchType = (String) SearchCbx.getSelectedItem();
         String searchText = SearchBar.getText();
-        
-        switch(searchType)
-        {
-            case "ID Barang":
-            {
+
+        switch (searchType) {
+            case "ID Barang": {
                 list = storageController.getByID_Barang(searchText);
                 break;
             }
-            
-            case "Nama Barang":
-            {
+
+            case "Nama Barang": {
                 list = storageController.getByNama_Barang(searchText);
                 break;
             }
-            
-            case "Kata Kunci":
-            {
+
+            case "Kata Kunci": {
                 list = storageController.getByKataKunci(searchText);
                 break;
             }
-            
-            default:
-            {
+
+            default: {
                 JOptionPane.showMessageDialog(this, "Search Type: " + searchType + " not found!", "ERROR!", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
-        
-        if(list == null)
-        {
+
+        if (list == null) {
             return;
         }
-        
+
         int size = list.size();
         Object[][] data = new Object[size][5];
-        Object[] columnNames = 
-        {
-            "ID Barang",  
-            "Nama Barang", 
-            "Katagori",
-            "Supplier",
-            "Stok"
-        };
-        
-        for(int i = 0; i < size; i++)
-        {
+        Object[] columnNames
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Katagori",
+                    "Supplier",
+                    "Stok"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Barang();
             data[i][1] = list.get(i).getNama_Barang();
             data[i][2] = list.get(i).getNama_Katagori();
             data[i][3] = list.get(i).getNama_Supplier();
             data[i][4] = list.get(i).getStok();
         }
-        
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames)
-        {
+
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
-            public boolean isCellEditable(int row, int column) 
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
@@ -3400,37 +3318,33 @@ StorageController storageController = new StorageController();
     private void StokPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StokPanelComponentShown
         // TODO add your handling code here:
         List<Storage> list = storageController.getAllStorage();
-        
-        if(list == null)
-        {
+
+        if (list == null) {
             return;
         }
-        
+
         int size = list.size();
         Object[][] data = new Object[size][5];
-        Object[] columnNames = 
-        {
-            "ID Barang",  
-            "Nama Barang", 
-            "Katagori",
-            "Supplier",
-            "Stok"
-        };
-        
-        for(int i = 0; i < size; i++)
-        {
+        Object[] columnNames
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Katagori",
+                    "Supplier",
+                    "Stok"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Barang();
             data[i][1] = list.get(i).getNama_Barang();
             data[i][2] = list.get(i).getNama_Katagori();
             data[i][3] = list.get(i).getNama_Supplier();
             data[i][4] = list.get(i).getStok();
         }
-        
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames)
-        {
+
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
-            public boolean isCellEditable(int row, int column) 
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
@@ -3443,24 +3357,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != BarangSelectCbx.getModel().getSize()) 
-        {
+        if (size != BarangSelectCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(BarangSelectCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(BarangSelectCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -3471,102 +3379,88 @@ StorageController storageController = new StorageController();
     private void PembelianAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianAddtoCartActionPerformed
         // TODO add your handling code here:
         String IDBon = PembelianIDBonField.getText();
-        
-        if(IDBon.isBlank())
-        {
+
+        if (IDBon.isBlank()) {
             JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(bonController.getByID_Bon(IDBon) != null)
-        {
+
+        if (bonController.getByID_Bon(IDBon) != null) {
             JOptionPane.showMessageDialog(this, "ID BON SUDAH ADA!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(BarangSelectCbx.getSelectedIndex() == -1)
-        {
+
+        if (BarangSelectCbx.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "ID BARANG TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
         int jumlah = (int) JumlahCounter.getValue();
         long total = b.getHarga_Barang() * jumlah;
-        
-        
+
         // Update the table
         int w = TabelPembelian.getModel().getColumnCount();
         int h = TabelPembelian.getModel().getRowCount();
-        
+
         Object[] coloumnNames = new Object[w];
-        for(int k = 0; k < w; k++)
-        {
+        for (int k = 0; k < w; k++) {
             coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
         }
-        
+
         List<Object[]> dataList = new ArrayList<>();
-        for(int i = 0; i < h; i++)
-        {
+        for (int i = 0; i < h; i++) {
             dataList.add(new Object[w]);
-            
-            for(int k=0; k<w; k++)
-            {
+
+            for (int k = 0; k < w; k++) {
                 dataList.get(i)[k] = TabelPembelian.getModel().getValueAt(i, k);
             }
         }
-        
+
         Boolean isFound = false;
-        for(Object[] d : dataList)
-        {
-            if(b.getID_Barang().equals(d[0]))
-            {
+        for (Object[] d : dataList) {
+            if (b.getID_Barang().equals(d[0])) {
                 // jumlah = jumlah + InputJumlah
-                d[3] = (int)d[3] + jumlah;
-                
+                d[3] = (int) d[3] + jumlah;
+
                 // total = harga * jumlah
-                d[4] = (long)(int)d[2] *(int)d[3];
-                
+                d[4] = (long) (int) d[2] * (int) d[3];
+
                 isFound = true;
                 break;
             }
         }
-        
-        if(!isFound)
-        {
+
+        if (!isFound) {
             Object[] o = new Object[w];
-            
+
             o[0] = b.getID_Barang();
             o[1] = b.getNama_Barang();
             o[2] = b.getHarga_Barang();
             o[3] = jumlah;
             o[4] = total;
-            
+
             dataList.add(o);
         }
-        
+
         Object[][] data = dataList.toArray(new Object[dataList.size()][w]);
-        TabelPembelian.setModel(new DefaultTableModel(data, coloumnNames)
-        {
+        TabelPembelian.setModel(new DefaultTableModel(data, coloumnNames) {
             @Override
-            public boolean isCellEditable(int row, int column) 
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
-        
-        
+
         // Update Subtotal
         h = TabelPembelian.getModel().getRowCount();
         long subtotal = 0;
-        
-        for(int i = 0; i < h; i++)
-        {
+
+        for (int i = 0; i < h; i++) {
             subtotal += (long) data[i][4];
         }
-        
+
         PembelianSubtotalField.setText("" + subtotal);
-        
+
         // Disable Bon Field and reset input field
         PembelianIDBonField.setEnabled(false);
         BarangSelectCbx.setSelectedIndex(-1);
@@ -3576,14 +3470,13 @@ StorageController storageController = new StorageController();
 
     private void BarangSelectCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarangSelectCbxActionPerformed
         // TODO add your handling code here:
-        if(BarangSelectCbx.getSelectedIndex() == -1)
-        {
+        if (BarangSelectCbx.getSelectedIndex() == -1) {
             return;
         }
-        
+
         Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
-        
-        PembelianTotalField.setText(b.getHarga_Barang() * (int)JumlahCounter.getValue() + "");
+
+        PembelianTotalField.setText(b.getHarga_Barang() * (int) JumlahCounter.getValue() + "");
     }//GEN-LAST:event_BarangSelectCbxActionPerformed
 
     private void JumlahCounterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JumlahCounterStateChanged
@@ -3599,21 +3492,18 @@ StorageController storageController = new StorageController();
         JumlahCounter.setValue(1);
         PembelianTotalField.setText("");
         PembelianSubtotalField.setText("");
-        
+
         // Clear the table
         int w = TabelPembelian.getModel().getColumnCount();
-        
+
         Object[] coloumnNames = new Object[w];
-        for(int k = 0; k < w; k++)
-        {
+        for (int k = 0; k < w; k++) {
             coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
         }
-        
-        TabelPembelian.setModel(new DefaultTableModel(new Object[][]{}, coloumnNames)
-        {
+
+        TabelPembelian.setModel(new DefaultTableModel(new Object[][]{}, coloumnNames) {
             @Override
-            public boolean isCellEditable(int row, int column) 
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
@@ -3621,79 +3511,72 @@ StorageController storageController = new StorageController();
 
     private void PembelianBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianBayarActionPerformed
         // TODO add your handling code here:
-        if(PembelianIDBonField.isEnabled())
-        {
+        if (PembelianIDBonField.isEnabled()) {
             JOptionPane.showMessageDialog(this, "BELI DULU!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         Random randomGen = new Random();
-        
+
         String ID_Bon = PembelianIDBonField.getText();
-        Date now = Date.from(LocalDateTime.now().atZone( ZoneId.systemDefault()).toInstant());
+        Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         long subtotal = Long.parseLong(PembelianSubtotalField.getText());
-        
+
         Bon b = new Bon(ID_Bon, DatetoSQL(now), subtotal);
         bonController.setDml(b, OperasiCRUD.INSERT);
-        
+
         // Get Table
         int h = TabelPembelian.getModel().getRowCount();
         List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
-        
-        for(int i = 0; i < h; i++)
-        {
+
+        for (int i = 0; i < h; i++) {
             Boolean adaSama;
             String ID_Transaksi = "" + randomGen.nextInt(999999999);
-            do 
-            {
+            do {
                 adaSama = false;
-                for(Transaksi a : transaksiList)
-                {
-                    if(a.getID_Transaksi().equals(ID_Transaksi))
-                    {
+                for (Transaksi a : transaksiList) {
+                    if (a.getID_Transaksi().equals(ID_Transaksi)) {
                         ID_Transaksi = "" + randomGen.nextInt(999999999);
                         adaSama = true;
                         break;
                     }
                 }
-            } 
-            while(adaSama);
-            
-            String ID_Barang  = (String) TabelPembelian.getModel().getValueAt(i, 0);
-            int jumlah_barang = (int)    TabelPembelian.getModel().getValueAt(i, 3);
-            long Harga_Total  = (long)   TabelPembelian.getModel().getValueAt(i, 4);
-            
+            } while (adaSama);
+
+            String ID_Barang = (String) TabelPembelian.getModel().getValueAt(i, 0);
+            int jumlah_barang = (int) TabelPembelian.getModel().getValueAt(i, 3);
+            long Harga_Total = (long) TabelPembelian.getModel().getValueAt(i, 4);
+
             Transaksi t = new Transaksi(ID_Transaksi, ID_Barang, jumlah_barang, Harga_Total, ID_Bon);
             transaksiController.setDml(t, OperasiCRUD.INSERT);
         }
-        
+
         PembelianResetActionPerformed(null);
     }//GEN-LAST:event_PembelianBayarActionPerformed
 
     private void TransaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_TransaksiPanelComponentShown
         // TODO add your handling code here:
         List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
-        
-        Object[] namaKolom = 
-        {
-            "ID Barang",
-            "Nama Barang",
-            "Tanggal Transaksi",
-            "Jumlah",
-            "Harga Satuan",
-            "Total"
-        };
-        
+
+        Object[] namaKolom
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Tanggal Transaksi",
+                    "Jumlah",
+                    "Harga Satuan",
+                    "Total"
+                };
+
         int w = namaKolom.length;
         int h = transaksiList.size();
-        
+
         Object[][] data = new Object[h][w];
-        
-        for(int i = 0; i < h; i++)
-        {
+
+        for (int i = 0; i < h; i++) {
             Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
             Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
-            
+
             data[i][0] = transaksiList.get(i).getID_Barang();
             data[i][1] = b != null ? b.getNama_Barang() : null;
             data[i][2] = bon != null ? bon.getTanggal_Transaksi() : null;
@@ -3701,12 +3584,10 @@ StorageController storageController = new StorageController();
             data[i][4] = b != null ? b.getHarga_Barang() : null;
             data[i][5] = transaksiList.get(i).getHarga_Total();
         }
-        
-        TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom)
-        {
+
+        TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom) {
             @Override
-            public boolean isCellEditable(int row, int column)
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
@@ -3715,13 +3596,12 @@ StorageController storageController = new StorageController();
     private void TabelTransaksiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TabelTransaksiPropertyChange
         // TODO add your handling code here:
         long subtotal = 0;
-        
+
         int h = TabelTransaksi.getModel().getRowCount();
-        for(int i = 0; i < h; i++)
-        {
+        for (int i = 0; i < h; i++) {
             subtotal += (long) TabelTransaksi.getModel().getValueAt(i, 5);
         }
-        
+
         SubtotalField.setText("" + subtotal);
     }//GEN-LAST:event_TabelTransaksiPropertyChange
 
@@ -3730,73 +3610,61 @@ StorageController storageController = new StorageController();
         Boolean isIDMode = TransaksiSearchByIDBon.isEnabled();
         String ID = TransaksiSearchByIDBon.getText();
         Date d = TransaksiSearchByDate.getDate();
-        
-        if(isIDMode)
-        {
-            if(ID.isBlank())
-            {
+
+        if (isIDMode) {
+            if (ID.isBlank()) {
                 JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             }
-        } 
-            else 
-            {
-                if(d == null)
-                {
-                    JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-                }
+        } else {
+            if (d == null) {
+                JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             }
-        
+        }
+
         List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
-        
-        Object[] namaKolom = 
-        {
-            "ID Barang",
-            "Nama Barang",
-            "Tanggal Transaksi",
-            "Jumlah",
-            "Harga Satuan",
-            "Total"
-        };
-        
+
+        Object[] namaKolom
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Tanggal Transaksi",
+                    "Jumlah",
+                    "Harga Satuan",
+                    "Total"
+                };
+
         int w = namaKolom.length;
         int h = transaksiList.size();
-        
+
         ArrayList<Object[]> dataList = new ArrayList<>();
-        
-        for(int i = 0; i < h; i++)
-        {
+
+        for (int i = 0; i < h; i++) {
             Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
-            
-            if(isIDMode)
-            {
-                if(!bon.getID_Bon().equals(ID))
-                {
+
+            if (isIDMode) {
+                if (!bon.getID_Bon().equals(ID)) {
+                    continue;
+                }
+            } else {
+                if (!bon.getTanggal_Transaksi().equals(d)) {
                     continue;
                 }
             }
-                else 
-                {
-                    if(!bon.getTanggal_Transaksi().equals(d))
-                    {
-                        continue;
-                    }
-                }
-            
+
             Object[] data = new Object[w];
             Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
-            
+
             data[0] = transaksiList.get(i).getID_Barang();
             data[1] = b != null ? b.getNama_Barang() : null;
             data[2] = bon != null ? bon.getTanggal_Transaksi() : null;
             data[3] = transaksiList.get(i).getJumlah_Barang();
             data[4] = b != null ? b.getHarga_Barang() : null;
             data[5] = transaksiList.get(i).getHarga_Total();
-            
+
             dataList.add(data);
         }
-        
-        TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom)
-        {
+
+        TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -3811,24 +3679,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != KotaCbx.getModel().getSize()) 
-        {
+        if (size != KotaCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(KotaCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(KotaCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -3845,92 +3707,85 @@ StorageController storageController = new StorageController();
 
     private void AddSupplier_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSupplier_SaveButtonActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (AddSupplier_IDField.getText().equals(""))    throw new Exception("ID");
-            if (AddSupplier_NamaField.getText().equals(""))  throw new Exception("Nama");
-            
+        try {
+            if (AddSupplier_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (AddSupplier_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+
             String id = AddSupplier_IDField.getText();
             String nama = AddSupplier_NamaField.getText();
             String kota = ((Kota) KotaCbx.getSelectedItem()).getID_Kota();
-            
+
             Supplier su = new Supplier(id, nama, kota);
             supplierController.setDml(su, OperasiCRUD.INSERT);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddSupplier_SaveButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
         }
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }        
     }//GEN-LAST:event_AddSupplier_SaveButtonActionPerformed
 
     private void ListSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListSupplierMenuComponentShown
         // TODO add your handling code here:
         List<Supplier> list = supplierController.getAllSupplier();
-        if(list == null)
-        {
+        if (list == null) {
             return;
         }
-        
+
         int size = list.size();
         Object[][] data = new Object[size][6];
-        Object[] columnNames = 
-        {
-            "ID Supplier", 
-            "Nama Supplier", 
-            "ID Kota"
-        };
-        
-        for(int i = 0; i < size; i++)
-        {
+        Object[] columnNames
+                = {
+                    "ID Supplier",
+                    "Nama Supplier",
+                    "ID Kota"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Supplier();
             data[i][1] = list.get(i).getNama_Supplier();
             data[i][2] = list.get(i).getID_Kota();
         }
-        
-        TabelSupplier.setModel(new javax.swing.table.DefaultTableModel(data, columnNames)
-        {
+
+        TabelSupplier.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
-            public boolean isCellEditable(int row, int column) 
-            {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
     }//GEN-LAST:event_ListSupplierMenuComponentShown
 
     private void UpdateSupplier_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplier_SearchButtonActionPerformed
-        if(UpdateSupplier_IDField.getText().equals(""))
-        {
+        if (UpdateSupplier_IDField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = UpdateSupplier_IDField.getText();
         Supplier s = supplierController.getByID_Supplier(id);
-        
-        if(s == null)
-        {
+
+        if (s == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        int size=UpdateKotaCbx.getModel().getSize();
+
+        int size = UpdateKotaCbx.getModel().getSize();
         int i;
-        
-        for(i = size - 1; i >= 0; i--)
-        {
+
+        for (i = size - 1; i >= 0; i--) {
             Kota cek = (Kota) UpdateKotaCbx.getModel().getElementAt(i);
-            if (cek.getID_Kota().equals(s.getID_Kota()))
-            {
+            if (cek.getID_Kota().equals(s.getID_Kota())) {
                 break;
             }
         }
-        
+
         UpdateKotaCbx.setSelectedIndex(i);
         UpdateSupplier_NamaField.setText(s.getNama_Supplier());
-        
+
         UpdateSupplier_NamaField.setEnabled(true);
         UpdateKotaCbx.setEnabled(true);
         UpdateSupplier_SaveButton.setEnabled(true);
@@ -3944,24 +3799,18 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != UpdateKotaCbx.getModel().getSize()) 
-        {
+        if (size != UpdateKotaCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(UpdateKotaCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateKotaCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated) 
-        {
+        if (!isUpdated) {
             return;
         }
 
@@ -3971,26 +3820,29 @@ StorageController storageController = new StorageController();
 
     private void UpdateSupplier_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplier_SaveButtonActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (UpdateSupplier_IDField.getText().equals(""))    throw new Exception("ID");
-            if (UpdateSupplier_NamaField.getText().equals(""))  throw new Exception("Nama");
-            if (UpdateKotaCbx.getSelectedIndex()== -1)      throw new Exception("Kota");
+        try {
+            if (UpdateSupplier_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (UpdateSupplier_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (UpdateKotaCbx.getSelectedIndex() == -1) {
+                throw new Exception("Kota");
+            }
 
             String id = UpdateSupplier_IDField.getText();
             String nama = UpdateSupplier_NamaField.getText();
             String kota = ((Kota) UpdateKotaCbx.getSelectedItem()).getID_Kota();
-            
+
             Supplier s = new Supplier(id, nama, kota);
             supplierController.setDml(s, OperasiCRUD.UPDATE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateSupplier_CancelButtonActionPerformed(null);
-        } 
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_UpdateSupplier_SaveButtonActionPerformed
 
     private void UpdateSupplier_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplier_CancelButtonActionPerformed
@@ -3998,7 +3850,7 @@ StorageController storageController = new StorageController();
         UpdateSupplier_IDField.setText("");
         UpdateSupplier_NamaField.setText("");
         UpdateKotaCbx.setSelectedIndex(-1);
-        
+
         UpdateSupplier_IDField.setEnabled(true);
         UpdateSupplier_SearchButton.setEnabled(true);
         UpdateSupplier_NamaField.setEnabled(false);
@@ -4009,36 +3861,32 @@ StorageController storageController = new StorageController();
 
     private void HapusSupplier_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_SearchButtonActionPerformed
         // TODO add your handling code here:
-        if(HapusSupplier_IDField.getText().isBlank())
-        {
+        if (HapusSupplier_IDField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = HapusSupplier_IDField.getText();
         Supplier s = supplierController.getByID_Supplier(id);
-        
-        if(s == null)
-        {
+
+        if (s == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         int size = HapusKotaCbx.getModel().getSize();
         int i;
-        
-        for(i = size - 1; i >= 0; i--)
-        {
-            Supplier cek = (Supplier) HapusKotaCbx.getModel().getElementAt(i);         
-            if (cek.getID_Supplier().equals(s.getID_Supplier()))
-            {
+
+        for (i = size - 1; i >= 0; i--) {
+            Supplier cek = (Supplier) HapusKotaCbx.getModel().getElementAt(i);
+            if (cek.getID_Supplier().equals(s.getID_Supplier())) {
                 break;
             }
         }
-        
+
         HapusKotaCbx.setSelectedIndex(i);
         HapusSupplier_NamaField.setText(s.getNama_Supplier());
-        
+
         HapusSupplier_ConfirmButton.setEnabled(true);
         HapusSupplier_CancelButton.setEnabled(true);
     }//GEN-LAST:event_HapusSupplier_SearchButtonActionPerformed
@@ -4048,29 +3896,28 @@ StorageController storageController = new StorageController();
         HapusSupplier_IDField.setText("");
         HapusSupplier_NamaField.setText("");
         HapusKotaCbx.setSelectedIndex(-1);
-        
+
         HapusSupplier_ConfirmButton.setEnabled(false);
         HapusSupplier_CancelButton.setEnabled(false);
     }//GEN-LAST:event_HapusSupplier_CancelButtonActionPerformed
 
     private void HapusSupplier_ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_ConfirmButtonActionPerformed
         // TODO add your handling code here:
-        try 
-        {
-            if (HapusSupplier_IDField.getText().isBlank())   throw new Exception("ID");
+        try {
+            if (HapusSupplier_IDField.getText().isBlank()) {
+                throw new Exception("ID");
+            }
 
             String id = HapusSupplier_IDField.getText();
-            
+
             Supplier s = new Supplier(id, null, null);
             supplierController.setDml(s, OperasiCRUD.DELETE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusSupplier_CancelButtonActionPerformed(null);
-        } 
-            catch (Exception ex) 
-            {
-                JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_HapusSupplier_ConfirmButtonActionPerformed
 
     private void HapusSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusSupplierMenuComponentShown
@@ -4080,33 +3927,26 @@ StorageController storageController = new StorageController();
 
         Boolean isUpdated = false;
 
-        if (size != HapusKotaCbx.getModel().getSize()) 
-        {
+        if (size != HapusKotaCbx.getModel().getSize()) {
             isUpdated = true;
-        } 
-            else 
-            {
-                for (int i = 0; i < size; i++) 
-                {
-                    if (!list.get(i).toString().equals(HapusKotaCbx.getModel().getElementAt(i).toString())) 
-                    {
-                        isUpdated = true;
-                        break;
-                    }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusKotaCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
                 }
             }
+        }
 
-        if (!isUpdated)
-        {
+        if (!isUpdated) {
             return;
         }
 
         HapusKotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
-        HapusKotaCbx.setSelectedIndex(-1);        
+        HapusKotaCbx.setSelectedIndex(-1);
     }//GEN-LAST:event_HapusSupplierMenuComponentShown
 
-    public static void main(String args[]) 
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -4125,8 +3965,8 @@ StorageController storageController = new StorageController();
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(()-> 
-        {
+        java.awt.EventQueue.invokeLater(()
+                -> {
             new Menu().setVisible(true);
         });
     }
