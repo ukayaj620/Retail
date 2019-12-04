@@ -2438,7 +2438,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBarangLogoMouseExited
 
     private void SearchUpdateBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateBarangActionPerformed
-        if (UpdateBarang_IDBarangField.getText().isBlank()) {
+        if (UpdateBarang_IDBarangField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -3253,7 +3253,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         // TODO add your handling code here:
-        if (SearchBar.getText().isBlank()) {
+        if (SearchBar.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -3380,7 +3380,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         String IDBon = PembelianIDBonField.getText();
 
-        if (IDBon.isBlank()) {
+        if (IDBon.isEmpty()) {
             JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -3612,7 +3612,7 @@ public class Menu extends javax.swing.JFrame {
         Date d = TransaksiSearchByDate.getDate();
 
         if (isIDMode) {
-            if (ID.isBlank()) {
+            if (ID.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             }
         } else {
@@ -3861,7 +3861,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void HapusSupplier_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_SearchButtonActionPerformed
         // TODO add your handling code here:
-        if (HapusSupplier_IDField.getText().isBlank()) {
+        if (HapusSupplier_IDField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -3904,7 +3904,7 @@ public class Menu extends javax.swing.JFrame {
     private void HapusSupplier_ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_ConfirmButtonActionPerformed
         // TODO add your handling code here:
         try {
-            if (HapusSupplier_IDField.getText().isBlank()) {
+            if (HapusSupplier_IDField.getText().isEmpty()) {
                 throw new Exception("ID");
             }
 
