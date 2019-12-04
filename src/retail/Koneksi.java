@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class Koneksi {
     private static Connection c;
     private static String URL = "jdbc:mysql://localhost:3306/Retail";
-    private static final String DRIVERNAME = "com.mysql.jdbc.Driver";
+    private static final String DRIVERNAME = "com.mysql.cj.jdbc.Driver";
     private static final String USERNAME = "root";
     public static Connection openConnection() {
         if (c == null) {

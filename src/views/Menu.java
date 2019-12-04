@@ -1,117 +1,163 @@
 package views;
 
+import controllers.*;
 import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import models.*;
+import retail.Koneksi;
 
-public class Menu extends javax.swing.JFrame 
-{
-Color gray = new Color(255, 240, 178);
-Color yellow_tran = new Color(255, 250, 229, 230);
-Color normal_btn = new Color(255, 250, 229);
+public class Menu extends javax.swing.JFrame {
 
-    public Menu() 
-    {
+    Color gray = new Color(255, 240, 178);
+    Color yellow_tran = new Color(255, 250, 229, 230);
+    Color normal_btn = new Color(255, 250, 229);
+    Boolean hasLogin = false;
+
+    BarangController barangController = new BarangController();
+    BonController bonController = new BonController();
+    CabangController cabangController = new CabangController();
+    KatagoriController katagoriController = new KatagoriController();
+    KotaController kotaController = new KotaController();
+    PetugasController petugasController = new PetugasController();
+    SupplierController supplierController = new SupplierController();
+    TransaksiController transaksiController = new TransaksiController();
+    StorageController storageController = new StorageController();
+
+    public Menu() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        
+
         BarangLogo.setEnabled(false);
         TransaksiLogo.setEnabled(false);
         StafLogo.setEnabled(false);
         SupplyLogo.setEnabled(false);
         PembelianLogo.setEnabled(false);
         StokLogo.setEnabled(false);
-        
+
         DefaultTableCellRenderer rendererStok = (DefaultTableCellRenderer) TabelStok.getTableHeader().getDefaultRenderer();
         rendererStok.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererStaf = (DefaultTableCellRenderer) TabelStaf.getTableHeader().getDefaultRenderer();
         rendererStaf.setHorizontalAlignment(0);
 
         DefaultTableCellRenderer rendererBarang = (DefaultTableCellRenderer) TabelBarang.getTableHeader().getDefaultRenderer();
         rendererBarang.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererSupplier = (DefaultTableCellRenderer) TabelSupplier.getTableHeader().getDefaultRenderer();
         rendererSupplier.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererPembelian = (DefaultTableCellRenderer) TabelPembelian.getTableHeader().getDefaultRenderer();
         rendererPembelian.setHorizontalAlignment(0);
-        
+
         DefaultTableCellRenderer rendererTransaksi = (DefaultTableCellRenderer) TabelTransaksi.getTableHeader().getDefaultRenderer();
         rendererTransaksi.setHorizontalAlignment(0);
-        
+
         //Login
         LoginPanel.setBackground(yellow_tran);
-        
+
         //Barang
         BarangPanel.setVisible(false);
         BarangPanel.setBackground(yellow_tran);
-        
+
         AddBarangMenu.setVisible(false);
         AddBarangMenu.setBackground(yellow_tran);
-        
+
         ListBarangMenu.setVisible(false);
         ListBarangMenu.setBackground(yellow_tran);
-        
+
         UpdateBarangMenu.setVisible(false);
         UpdateBarangMenu.setBackground(yellow_tran);
-        
+
         HapusBarangMenu.setVisible(false);
-        HapusBarangMenu.setBackground(yellow_tran);        
-        
+        HapusBarangMenu.setBackground(yellow_tran);
+
         //Staf
         StafPanel.setVisible(false);
         StafPanel.setBackground(yellow_tran);
-        
+
         AddStafMenu.setVisible(false);
         AddStafMenu.setBackground(yellow_tran);
-        
+
         ListStafMenu.setVisible(false);
         ListStafMenu.setBackground(yellow_tran);
-        
+
         UpdateStafMenu.setVisible(false);
         UpdateStafMenu.setBackground(yellow_tran);
-        
+
         HapusStafMenu.setVisible(false);
         HapusStafMenu.setBackground(yellow_tran);
-        
+
         //Supplier
         SupplierPanel.setVisible(false);
         SupplierPanel.setBackground(yellow_tran);
-        
+
         AddSupplierMenu.setVisible(false);
         AddSupplierMenu.setBackground(yellow_tran);
-        
+
         ListSupplierMenu.setVisible(false);
         ListSupplierMenu.setBackground(yellow_tran);
-        
+
         UpdateSupplierMenu.setVisible(false);
         UpdateSupplierMenu.setBackground(yellow_tran);
-        
+
         HapusSupplierMenu.setVisible(false);
         HapusSupplierMenu.setBackground(yellow_tran);
-        
+
         //Stok
         StokPanel.setVisible(false);
         StokPanel.setBackground(yellow_tran);
-        
+
         //Pembelian
         PembelianPanel.setVisible(false);
         PembelianPanel.setBackground(yellow_tran);
-        
+
         //Transaksi
         TransaksiPanel.setVisible(false);
         TransaksiPanel.setBackground(yellow_tran);
         
-        TransaksiSearchByIDBon.setEnabled(false);
-        TransaksiSearchByDate.setEnabled(false);
+        // TextField Limits
+        IDBarangField.setDocument(new JTextFieldLimit(10));
+        NamaBarangField.setDocument(new JTextFieldLimit(50));
+    }
+
+    java.sql.Date DatetoSQL(Date d) {
+        return new java.sql.Date(d.getYear(), d.getMonth(), d.getDate());
+    }
+
+    public class JTextFieldLimit extends javax.swing.text.PlainDocument {
+        private final int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+        
+        @Override
+        public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
+            if (str == null) {
+                return;
+            }
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup_Staf_Add = new javax.swing.ButtonGroup();
+        btnGroup_Staf_Update = new javax.swing.ButtonGroup();
+        btnGroup_Staf_Hapus = new javax.swing.ButtonGroup();
         MainPanel = new javax.swing.JPanel();
         LoginPanel = new javax.swing.JPanel();
         Username = new javax.swing.JLabel();
@@ -155,7 +201,7 @@ Color normal_btn = new Color(255, 250, 229);
         AddBarang_TglExp = new javax.swing.JLabel();
         AddBarang_CancelButton = new javax.swing.JButton();
         AddBarang_SaveButton = new javax.swing.JButton();
-        IDKCbx = new javax.swing.JComboBox<>();
+        IDKCbx = new javax.swing.JComboBox();
         HargaBarangField = new javax.swing.JTextField();
         IDBarangField = new javax.swing.JTextField();
         BarangTglExp = new com.toedter.calendar.JDateChooser();
@@ -177,7 +223,7 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateBarangTglExp = new javax.swing.JLabel();
         UpdateBarangCancel = new javax.swing.JButton();
         UpdateBarangConfirm = new javax.swing.JButton();
-        UpdateBarang_IDKCbx = new javax.swing.JComboBox<>();
+        UpdateBarang_IDKCbx = new javax.swing.JComboBox();
         UpdateBarang_HargaField = new javax.swing.JTextField();
         UpdateBarang_IDBarangField = new javax.swing.JTextField();
         SearchUpdateBarang = new javax.swing.JButton();
@@ -194,7 +240,7 @@ Color normal_btn = new Color(255, 250, 229);
         HapusBarangTglExp = new javax.swing.JLabel();
         HapusBarangCancel = new javax.swing.JButton();
         HapusBarangConfirm = new javax.swing.JButton();
-        HapusBarang_IDKCbx = new javax.swing.JComboBox<>();
+        HapusBarang_IDKCbx = new javax.swing.JComboBox();
         HapusBarang_HargaField = new javax.swing.JTextField();
         HapusBarang_IDBarangField = new javax.swing.JTextField();
         SearchHapusBarang = new javax.swing.JButton();
@@ -222,7 +268,7 @@ Color normal_btn = new Color(255, 250, 229);
         AddStaf_SaveButton = new javax.swing.JButton();
         ShiftPagi = new javax.swing.JRadioButton();
         ShiftMalam = new javax.swing.JRadioButton();
-        CabangCbx = new javax.swing.JComboBox<>();
+        CabangCbx = new javax.swing.JComboBox();
         AddStaf_NamaField = new javax.swing.JTextField();
         AddStaf_IDField = new javax.swing.JTextField();
         StafTglMasuk = new com.toedter.calendar.JDateChooser();
@@ -241,7 +287,7 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateSave = new javax.swing.JButton();
         UpdateShiftPagi = new javax.swing.JRadioButton();
         UpdateShiftMalam = new javax.swing.JRadioButton();
-        UpdateCabangCbx = new javax.swing.JComboBox<>();
+        UpdateCabangCbx = new javax.swing.JComboBox();
         UpdateStaf_NamaField = new javax.swing.JTextField();
         UpdateStaf_IDField = new javax.swing.JTextField();
         UpdateTglMasuk = new com.toedter.calendar.JDateChooser();
@@ -257,7 +303,7 @@ Color normal_btn = new Color(255, 250, 229);
         HapusStaf_ConfirmButton = new javax.swing.JButton();
         HapusShiftPagi = new javax.swing.JRadioButton();
         HapusShiftMalam = new javax.swing.JRadioButton();
-        HapusCabangCbx = new javax.swing.JComboBox<>();
+        HapusCabangCbx = new javax.swing.JComboBox();
         HapusStaf_NamaField = new javax.swing.JTextField();
         HapusStaf_IDField = new javax.swing.JTextField();
         HapusTglMasuk = new com.toedter.calendar.JDateChooser();
@@ -330,7 +376,7 @@ Color normal_btn = new Color(255, 250, 229);
         PembelianTotal = new javax.swing.JLabel();
         PembelianSubtotalField = new javax.swing.JTextField();
         PembelianIDBonField = new javax.swing.JTextField();
-        BarangSelectCbx = new javax.swing.JComboBox<>();
+        BarangSelectCbx = new javax.swing.JComboBox();
         PembelianAddtoCart = new javax.swing.JButton();
         TransaksiPanel = new javax.swing.JPanel();
         TransaksiSearchCbx = new javax.swing.JComboBox<>();
@@ -345,6 +391,7 @@ Color normal_btn = new Color(255, 250, 229);
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
@@ -787,6 +834,11 @@ Color normal_btn = new Color(255, 250, 229);
         AddBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         AddBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         AddBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        AddBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                AddBarangMenuComponentShown(evt);
+            }
+        });
         AddBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AddBarangTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -812,14 +864,28 @@ Color normal_btn = new Color(255, 250, 229);
         AddBarang_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddBarang_CancelButton.setText("Batal");
         AddBarang_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddBarang_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBarang_CancelButtonActionPerformed(evt);
+            }
+        });
         AddBarangMenu.add(AddBarang_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 120, -1));
 
         AddBarang_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddBarang_SaveButton.setText("Simpan ");
         AddBarang_SaveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddBarang_SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBarang_SaveButtonActionPerformed(evt);
+            }
+        });
         AddBarangMenu.add(AddBarang_SaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, -1, -1));
 
-        IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Organik", "Anorganik", "B3" }));
+        IDKCbx.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IDKCbxMouseClicked(evt);
+            }
+        });
         AddBarangMenu.add(IDKCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 140, 40));
         AddBarangMenu.add(HargaBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 180, 30));
         AddBarangMenu.add(IDBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 180, 30));
@@ -840,6 +906,11 @@ Color normal_btn = new Color(255, 250, 229);
         ListBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         ListBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         ListBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        ListBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                ListBarangMenuComponentShown(evt);
+            }
+        });
         ListBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelBarang.setModel(new javax.swing.table.DefaultTableModel(
@@ -863,6 +934,11 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         UpdateBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         UpdateBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        UpdateBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                UpdateBarangMenuComponentShown(evt);
+            }
+        });
         UpdateBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UpdateBarangTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -895,16 +971,31 @@ Color normal_btn = new Color(255, 250, 229);
 
         UpdateBarangCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateBarangCancel.setText("Batal");
+        UpdateBarangCancel.setEnabled(false);
         UpdateBarangCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateBarangCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateBarangCancelActionPerformed(evt);
+            }
+        });
         UpdateBarangMenu.add(UpdateBarangCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, 120, -1));
 
         UpdateBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateBarangConfirm.setText("Simpan ");
+        UpdateBarangConfirm.setEnabled(false);
         UpdateBarangConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateBarangConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateBarangConfirmActionPerformed(evt);
+            }
+        });
         UpdateBarangMenu.add(UpdateBarangConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
 
         UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Organik", "Anorganik", "B3" }));
+        UpdateBarang_IDKCbx.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_IDKCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 140, 40));
+
+        UpdateBarang_HargaField.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_HargaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 180, 30));
         UpdateBarangMenu.add(UpdateBarang_IDBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 180, 30));
 
@@ -916,8 +1007,14 @@ Color normal_btn = new Color(255, 250, 229);
             }
         });
         UpdateBarangMenu.add(SearchUpdateBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 90, 30));
+
+        UpdateBarang_NamaBarangField.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_NamaBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 180, 30));
+
+        UpdateBarang_TglMasuk.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_TglMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 180, 30));
+
+        UpdateBarang_TglExp.setEnabled(false);
         UpdateBarangMenu.add(UpdateBarang_TglExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 180, 30));
 
         BarangPanel.add(UpdateBarangMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 710));
@@ -925,6 +1022,11 @@ Color normal_btn = new Color(255, 250, 229);
         HapusBarangMenu.setBackground(new java.awt.Color(255, 250, 229));
         HapusBarangMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         HapusBarangMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        HapusBarangMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                HapusBarangMenuComponentShown(evt);
+            }
+        });
         HapusBarangMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         HapusBarangTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -957,12 +1059,24 @@ Color normal_btn = new Color(255, 250, 229);
 
         HapusBarangCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangCancel.setText("Batal");
+        HapusBarangCancel.setEnabled(false);
         HapusBarangCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusBarangCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusBarangCancelActionPerformed(evt);
+            }
+        });
         HapusBarangMenu.add(HapusBarangCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 120, -1));
 
         HapusBarangConfirm.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusBarangConfirm.setText("Hapus");
+        HapusBarangConfirm.setEnabled(false);
         HapusBarangConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusBarangConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusBarangConfirmActionPerformed(evt);
+            }
+        });
         HapusBarangMenu.add(HapusBarangConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, -1, -1));
 
         HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Organik", "Anorganik", "B3" }));
@@ -1153,6 +1267,11 @@ Color normal_btn = new Color(255, 250, 229);
         AddStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         AddStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         AddStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        AddStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                AddStafMenuComponentShown(evt);
+            }
+        });
         AddStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AddStafTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1182,19 +1301,32 @@ Color normal_btn = new Color(255, 250, 229);
         AddStaf_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddStaf_CancelButton.setText("Batal");
         AddStaf_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddStaf_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddStaf_CancelButtonActionPerformed(evt);
+            }
+        });
         AddStafMenu.add(AddStaf_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 120, -1));
 
         AddStaf_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddStaf_SaveButton.setText("Simpan ");
         AddStaf_SaveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddStaf_SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddStaf_SaveButtonActionPerformed(evt);
+            }
+        });
         AddStafMenu.add(AddStaf_SaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, -1, -1));
 
         ShiftPagi.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Add.add(ShiftPagi);
         ShiftPagi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ShiftPagi.setSelected(true);
         ShiftPagi.setText("Pagi");
         AddStafMenu.add(ShiftPagi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         ShiftMalam.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Add.add(ShiftMalam);
         ShiftMalam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         ShiftMalam.setText("Malam");
         AddStafMenu.add(ShiftMalam, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, -1));
@@ -1210,6 +1342,11 @@ Color normal_btn = new Color(255, 250, 229);
         ListStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         ListStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         ListStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        ListStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                ListStafMenuComponentShown(evt);
+            }
+        });
         ListStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelStaf.setModel(new javax.swing.table.DefaultTableModel(
@@ -1233,6 +1370,11 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         UpdateStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         UpdateStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        UpdateStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                UpdateStafMenuComponentShown(evt);
+            }
+        });
         UpdateStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UpdateStafTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1261,28 +1403,50 @@ Color normal_btn = new Color(255, 250, 229);
 
         UpdateCancel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateCancel.setText("Batal");
+        UpdateCancel.setEnabled(false);
         UpdateCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateCancelActionPerformed(evt);
+            }
+        });
         UpdateStafMenu.add(UpdateCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 120, -1));
 
         UpdateSave.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateSave.setText("Simpan ");
+        UpdateSave.setEnabled(false);
         UpdateSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateSaveActionPerformed(evt);
+            }
+        });
         UpdateStafMenu.add(UpdateSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, -1, -1));
 
         UpdateShiftPagi.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Update.add(UpdateShiftPagi);
         UpdateShiftPagi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        UpdateShiftPagi.setSelected(true);
         UpdateShiftPagi.setText("Pagi");
+        UpdateShiftPagi.setEnabled(false);
         UpdateStafMenu.add(UpdateShiftPagi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         UpdateShiftMalam.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Update.add(UpdateShiftMalam);
         UpdateShiftMalam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         UpdateShiftMalam.setText("Malam");
+        UpdateShiftMalam.setEnabled(false);
         UpdateStafMenu.add(UpdateShiftMalam, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
 
         UpdateCabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UBM-A", "UBM-S" }));
+        UpdateCabangCbx.setEnabled(false);
         UpdateStafMenu.add(UpdateCabangCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 40));
+
+        UpdateStaf_NamaField.setEnabled(false);
         UpdateStafMenu.add(UpdateStaf_NamaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 180, 30));
         UpdateStafMenu.add(UpdateStaf_IDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 180, 30));
+
+        UpdateTglMasuk.setEnabled(false);
         UpdateStafMenu.add(UpdateTglMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 180, 30));
 
         SearchUpdate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -1299,6 +1463,11 @@ Color normal_btn = new Color(255, 250, 229);
         HapusStafMenu.setBackground(new java.awt.Color(255, 250, 229));
         HapusStafMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         HapusStafMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        HapusStafMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                HapusStafMenuComponentShown(evt);
+            }
+        });
         HapusStafMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         HapusStafTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1327,21 +1496,35 @@ Color normal_btn = new Color(255, 250, 229);
 
         HapusStaf_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusStaf_CancelButton.setText("Batal");
+        HapusStaf_CancelButton.setEnabled(false);
         HapusStaf_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusStaf_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusStaf_CancelButtonActionPerformed(evt);
+            }
+        });
         HapusStafMenu.add(HapusStaf_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 120, -1));
 
         HapusStaf_ConfirmButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusStaf_ConfirmButton.setText("Hapus");
+        HapusStaf_ConfirmButton.setEnabled(false);
         HapusStaf_ConfirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusStaf_ConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusStaf_ConfirmButtonActionPerformed(evt);
+            }
+        });
         HapusStafMenu.add(HapusStaf_ConfirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, -1, -1));
 
         HapusShiftPagi.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Hapus.add(HapusShiftPagi);
         HapusShiftPagi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         HapusShiftPagi.setText("Pagi");
         HapusShiftPagi.setEnabled(false);
         HapusStafMenu.add(HapusShiftPagi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, -1, -1));
 
         HapusShiftMalam.setBackground(new java.awt.Color(255, 250, 229));
+        btnGroup_Staf_Hapus.add(HapusShiftMalam);
         HapusShiftMalam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         HapusShiftMalam.setText("Malam");
         HapusShiftMalam.setEnabled(false);
@@ -1679,6 +1862,11 @@ Color normal_btn = new Color(255, 250, 229);
         StokPanel.setBackground(new java.awt.Color(255, 250, 229));
         StokPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         StokPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        StokPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                StokPanelComponentShown(evt);
+            }
+        });
         StokPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SearchCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Barang", "Nama Barang", "Kata Kunci" }));
@@ -1688,6 +1876,11 @@ Color normal_btn = new Color(255, 250, 229);
         SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SearchButton.setText("Cari");
         SearchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchButtonActionPerformed(evt);
+            }
+        });
         StokPanel.add(SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 90, 40));
 
         TabelStok.setModel(new javax.swing.table.DefaultTableModel(
@@ -1711,6 +1904,11 @@ Color normal_btn = new Color(255, 250, 229);
         PembelianPanel.setBackground(new java.awt.Color(255, 250, 229));
         PembelianPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         PembelianPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        PembelianPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                PembelianPanelComponentShown(evt);
+            }
+        });
         PembelianPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelPembelian.setModel(new javax.swing.table.DefaultTableModel(
@@ -1720,13 +1918,22 @@ Color normal_btn = new Color(255, 250, 229);
             new String [] {
                 "ID Barang", "Nama Barang", "Harga Satuan", "Jumlah", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         PembelianTable.setViewportView(TabelPembelian);
 
         PembelianPanel.add(PembelianTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 510, 370));
 
+        PembelianTotalField.setEditable(false);
         PembelianTotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        PembelianTotalField.setEnabled(false);
+        PembelianTotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         PembelianPanel.add(PembelianTotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 250, 40));
 
         PembelianBayar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -1734,6 +1941,11 @@ Color normal_btn = new Color(255, 250, 229);
         PembelianBayar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PembelianBayarMouseClicked(evt);
+            }
+        });
+        PembelianBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianBayarActionPerformed(evt);
             }
         });
         PembelianPanel.add(PembelianBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 490, 120, 50));
@@ -1745,11 +1957,23 @@ Color normal_btn = new Color(255, 250, 229);
                 PembelianResetMouseClicked(evt);
             }
         });
+        PembelianReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianResetActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(PembelianReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 490, 120, 50));
 
         PembelianTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         PembelianTitle.setText("Pembelian");
         PembelianPanel.add(PembelianTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        JumlahCounter.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        JumlahCounter.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                JumlahCounterStateChanged(evt);
+            }
+        });
         PembelianPanel.add(JumlahCounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 50, 30));
 
         PembelianSubtotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -1772,14 +1996,19 @@ Color normal_btn = new Color(255, 250, 229);
         PembelianTotal.setText("Harga Total");
         PembelianPanel.add(PembelianTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
 
+        PembelianSubtotalField.setEditable(false);
         PembelianSubtotalField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        PembelianSubtotalField.setEnabled(false);
+        PembelianSubtotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         PembelianPanel.add(PembelianSubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 420, 250, 40));
 
         PembelianIDBonField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         PembelianPanel.add(PembelianIDBonField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 250, 40));
 
-        BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BarangSelectCbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BarangSelectCbxActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(BarangSelectCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 250, 40));
 
         PembelianAddtoCart.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -1789,6 +2018,11 @@ Color normal_btn = new Color(255, 250, 229);
                 PembelianAddtoCartMouseClicked(evt);
             }
         });
+        PembelianAddtoCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PembelianAddtoCartActionPerformed(evt);
+            }
+        });
         PembelianPanel.add(PembelianAddtoCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 120, 50));
 
         MainPanel.add(PembelianPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 1110, 580));
@@ -1796,6 +2030,11 @@ Color normal_btn = new Color(255, 250, 229);
         TransaksiPanel.setBackground(new java.awt.Color(255, 250, 229));
         TransaksiPanel.setMaximumSize(new java.awt.Dimension(1280, 600));
         TransaksiPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
+        TransaksiPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                TransaksiPanelComponentShown(evt);
+            }
+        });
         TransaksiPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TransaksiSearchCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Bon", "Tanggal Transaksi" }));
@@ -1806,11 +2045,18 @@ Color normal_btn = new Color(255, 250, 229);
         });
         TransaksiPanel.add(TransaksiSearchCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 140, 40));
         TransaksiPanel.add(TransaksiSearchByIDBon, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 250, 40));
+
+        TransaksiSearchByDate.setEnabled(false);
         TransaksiPanel.add(TransaksiSearchByDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 250, 40));
 
         Transaksi_SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Transaksi_SearchButton.setText("Cari");
         Transaksi_SearchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Transaksi_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Transaksi_SearchButtonActionPerformed(evt);
+            }
+        });
         TransaksiPanel.add(Transaksi_SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 90, 40));
 
         TabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
@@ -1821,6 +2067,11 @@ Color normal_btn = new Color(255, 250, 229);
                 "ID Barang", "Nama Barang", "Tanggal Transaksi", "Jumlah", "Harga Satuan", "Total"
             }
         ));
+        TabelTransaksi.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                TabelTransaksiPropertyChange(evt);
+            }
+        });
         TransaksiTable.setViewportView(TabelTransaksi);
 
         TransaksiPanel.add(TransaksiTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 1010, 330));
@@ -1833,7 +2084,8 @@ Color normal_btn = new Color(255, 250, 229);
         Subtotal.setText("Subtotal");
         TransaksiPanel.add(Subtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, -1, -1));
 
-        SubtotalField.setEnabled(false);
+        SubtotalField.setEditable(false);
+        SubtotalField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TransaksiPanel.add(SubtotalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 250, 40));
 
         MainPanel.add(TransaksiPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 1110, 580));
@@ -1859,21 +2111,25 @@ Color normal_btn = new Color(255, 250, 229);
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
-        if ("user".equals(UsernameField.getText()) && "pass".equals(PasswordField.getText()))
-        {
+        if (Koneksi.openConnection() == null) {
+            return;
+        }
+
+        if ("user".equals(UsernameField.getText()) && "pass".equals(PasswordField.getText())) {
             BarangLogo.setEnabled(true);
             TransaksiLogo.setEnabled(true);
             StafLogo.setEnabled(true);
             SupplyLogo.setEnabled(true);
             PembelianLogo.setEnabled(true);
             StokLogo.setEnabled(true);
-            
+
             LoginPanel.setVisible(false);
+
+            hasLogin = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Username atau password salah");
         }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Username atau password salah");
-            }
+        Koneksi.closeConnection();
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void AddStafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddStafLogoMouseClicked
@@ -1931,11 +2187,76 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_UpdateStafLogoMouseExited
 
     private void SearchUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateActionPerformed
-        // TODO add your handling code here:
+        if(UpdateStaf_IDField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = UpdateStaf_IDField.getText();
+        Petugas p = petugasController.getByID_Petugas(id);
+        
+        if(p == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        SearchUpdate.setEnabled(false);
+        UpdateStaf_IDField.setEnabled(false);
+        UpdateStaf_NamaField.setEnabled(true);
+        UpdateCabangCbx.setEnabled(true);
+        UpdateShiftPagi.setEnabled(true);
+        UpdateShiftMalam.setEnabled(true);
+        UpdateTglMasuk.setEnabled(true);
+        UpdateSave.setEnabled(true);
+        UpdateCancel.setEnabled(true);
+        
+        int size=UpdateCabangCbx.getModel().getSize();
+        int i;
+        for(i=size-1; i>=0; i--){
+            Cabang cek = (Cabang) UpdateCabangCbx.getModel().getElementAt(i);
+            if (cek.getID_Cabang().equals(p.getID_Cabang()))
+                break;
+        }
+        
+        UpdateCabangCbx.setSelectedIndex(i);
+        UpdateStaf_NamaField.setText(p.getNama_Petugas());
+        if(p.getShift().equals("Pagi")) UpdateShiftPagi.setSelected(true);
+        else UpdateShiftMalam.setSelected(true);
+        UpdateTglMasuk.setDate(p.getTanggal_Masuk());
     }//GEN-LAST:event_SearchUpdateActionPerformed
 
     private void HapusStaf_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_SearchButtonActionPerformed
-        // TODO add your handling code here:
+        if(HapusStaf_IDField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = HapusStaf_IDField.getText();
+        Petugas p = petugasController.getByID_Petugas(id);
+        
+        if(p == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int size=HapusCabangCbx.getModel().getSize();
+        int i;
+        for(i=size-1; i>=0; i--){
+            Cabang cek = (Cabang) HapusCabangCbx.getModel().getElementAt(i);
+            if (cek.getID_Cabang().equals(p.getID_Cabang()))
+                break;
+        }
+        
+        HapusCabangCbx.setSelectedIndex(i);
+        HapusStaf_NamaField.setText(p.getNama_Petugas());
+        if(p.getShift().equals("Pagi")) HapusShiftPagi.setSelected(true);
+        else HapusShiftMalam.setSelected(true);
+        HapusTglMasuk.setDate(p.getTanggal_Masuk());
+        
+        HapusStaf_IDField.setEnabled(false);
+        HapusStaf_SearchButton.setEnabled(false);
+        HapusStaf_ConfirmButton.setEnabled(true);
+        HapusStaf_CancelButton.setEnabled(true);
     }//GEN-LAST:event_HapusStaf_SearchButtonActionPerformed
 
     private void HapusStafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusStafLogoMouseClicked
@@ -1979,12 +2300,12 @@ Color normal_btn = new Color(255, 250, 229);
         ListBarangMenu.setVisible(true);
         AddBarangMenu.setVisible(false);
         UpdateBarangMenu.setVisible(false);
-        HapusBarangMenu.setVisible(false);        
+        HapusBarangMenu.setVisible(false);
     }//GEN-LAST:event_ListBarangLogoMouseClicked
 
     private void ListBarangLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListBarangLogoMouseEntered
         // TODO add your handling code here:
-        ListBarang.setBackground(gray);        
+        ListBarang.setBackground(gray);
     }//GEN-LAST:event_ListBarangLogoMouseEntered
 
     private void ListBarangLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListBarangLogoMouseExited
@@ -1997,7 +2318,7 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateBarangMenu.setVisible(true);
         AddBarangMenu.setVisible(false);
         ListBarangMenu.setVisible(false);
-        HapusBarangMenu.setVisible(false);        
+        HapusBarangMenu.setVisible(false);
     }//GEN-LAST:event_UpdataBarangLogoMouseClicked
 
     private void UpdataBarangLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdataBarangLogoMouseEntered
@@ -2029,11 +2350,76 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_DeleteBarangLogoMouseExited
 
     private void SearchUpdateBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateBarangActionPerformed
-        // TODO add your handling code here:
+        if(UpdateBarang_IDBarangField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = UpdateBarang_IDBarangField.getText();
+        Barang b = barangController.getByID_Barang(id);
+        
+        if(b == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        SearchUpdateBarang.setEnabled(false);
+        UpdateBarang_IDBarangField.setEnabled(false);
+        UpdateBarang_IDKCbx.setEnabled(true);
+        UpdateBarang_NamaBarangField.setEnabled(true);
+        UpdateBarang_HargaField.setEnabled(true);
+        UpdateBarang_TglMasuk.setEnabled(true);
+        UpdateBarang_TglExp.setEnabled(true);
+        UpdateBarangConfirm.setEnabled(true);
+        UpdateBarangCancel.setEnabled(true);
+        
+        int size=UpdateBarang_IDKCbx.getModel().getSize();
+        int i;
+        for(i=size-1; i>=0; i--){
+            Katagori cek = (Katagori) UpdateBarang_IDKCbx.getModel().getElementAt(i);
+            if (cek.getID_Katagori().equals(b.getID_Katagori()))
+                break;
+        }
+        
+        UpdateBarang_IDKCbx.setSelectedIndex(i);
+        UpdateBarang_NamaBarangField.setText(b.getNama_Barang());
+        UpdateBarang_HargaField.setText("" + b.getHarga_Barang());
+        UpdateBarang_TglMasuk.setDate(b.getTanggal_Masuk());
+        UpdateBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
     }//GEN-LAST:event_SearchUpdateBarangActionPerformed
 
     private void SearchHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHapusBarangActionPerformed
-        // TODO add your handling code here:
+        if(HapusBarang_IDBarangField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String id = HapusBarang_IDBarangField.getText();
+        Barang b = barangController.getByID_Barang(id);
+        
+        if(b == null){
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int size=HapusBarang_IDKCbx.getModel().getSize();
+        int i;
+        for(i=size-1; i>=0; i--){
+            Katagori cek = (Katagori) HapusBarang_IDKCbx.getModel().getElementAt(i);
+            if (cek.getID_Katagori().equals(b.getID_Katagori()))
+                break;
+        }
+        
+        HapusBarang_IDKCbx.setSelectedIndex(i);
+        HapusBarang_NamaBarangField.setText(b.getNama_Barang());
+        HapusBarang_HargaField.setText("" + b.getHarga_Barang());
+        HapusBarang_TglMasuk.setDate(b.getTanggal_Masuk());
+        HapusBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
+        
+        HapusBarang_IDBarangField.setEnabled(false);
+        SearchHapusBarang.setEnabled(false);
+        HapusBarangConfirm.setEnabled(true);
+        HapusBarangCancel.setEnabled(true);
     }//GEN-LAST:event_SearchHapusBarangActionPerformed
 
     private void AddSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseClicked
@@ -2041,17 +2427,17 @@ Color normal_btn = new Color(255, 250, 229);
         AddSupplierMenu.setVisible(true);
         ListSupplierMenu.setVisible(false);
         UpdateSupplierMenu.setVisible(false);
-        HapusSupplierMenu.setVisible(false);        
+        HapusSupplierMenu.setVisible(false);
     }//GEN-LAST:event_AddSupplierLogoMouseClicked
 
     private void AddSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseEntered
         // TODO add your handling code here:
-        AddSupplier.setBackground(gray);        
+        AddSupplier.setBackground(gray);
     }//GEN-LAST:event_AddSupplierLogoMouseEntered
 
     private void AddSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddSupplierLogoMouseExited
         // TODO add your handling code here:
-        AddSupplier.setBackground(yellow_tran);        
+        AddSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_AddSupplierLogoMouseExited
 
     private void ListSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSupplierLogoMouseClicked
@@ -2059,17 +2445,17 @@ Color normal_btn = new Color(255, 250, 229);
         ListSupplierMenu.setVisible(true);
         AddSupplierMenu.setVisible(false);
         UpdateSupplierMenu.setVisible(false);
-        HapusSupplierMenu.setVisible(false);           
+        HapusSupplierMenu.setVisible(false);
     }//GEN-LAST:event_ListSupplierLogoMouseClicked
 
     private void ListSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSupplierLogoMouseEntered
         // TODO add your handling code here:
-        ListSupplier.setBackground(gray);         
+        ListSupplier.setBackground(gray);
     }//GEN-LAST:event_ListSupplierLogoMouseEntered
 
     private void ListSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSupplierLogoMouseExited
         // TODO add your handling code here:
-        ListSupplier.setBackground(yellow_tran);         
+        ListSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_ListSupplierLogoMouseExited
 
     private void UpdateSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateSupplierLogoMouseClicked
@@ -2077,38 +2463,42 @@ Color normal_btn = new Color(255, 250, 229);
         UpdateSupplierMenu.setVisible(true);
         AddSupplierMenu.setVisible(false);
         ListSupplierMenu.setVisible(false);
-        HapusSupplierMenu.setVisible(false);          
+        HapusSupplierMenu.setVisible(false);
     }//GEN-LAST:event_UpdateSupplierLogoMouseClicked
 
     private void UpdateSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateSupplierLogoMouseEntered
         // TODO add your handling code here:
-        UpdateSupplier.setBackground(gray);         
+        UpdateSupplier.setBackground(gray);
     }//GEN-LAST:event_UpdateSupplierLogoMouseEntered
 
     private void UpdateSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateSupplierLogoMouseExited
         // TODO add your handling code here:
-        UpdateSupplier.setBackground(yellow_tran);         
+        UpdateSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_UpdateSupplierLogoMouseExited
 
     private void HapusSupplierLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusSupplierLogoMouseClicked
         // TODO add your handling code here:
-        HapusSupplierMenu.setVisible(true);  
+        HapusSupplierMenu.setVisible(true);
         AddSupplierMenu.setVisible(false);
         ListSupplierMenu.setVisible(false);
-        UpdateSupplierMenu.setVisible(false); 
+        UpdateSupplierMenu.setVisible(false);
     }//GEN-LAST:event_HapusSupplierLogoMouseClicked
 
     private void HapusSupplierLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusSupplierLogoMouseEntered
         // TODO add your handling code here:
-        HapusSupplier.setBackground(gray); 
+        HapusSupplier.setBackground(gray);
     }//GEN-LAST:event_HapusSupplierLogoMouseEntered
 
     private void HapusSupplierLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HapusSupplierLogoMouseExited
         // TODO add your handling code here:
-        HapusSupplier.setBackground(yellow_tran); 
+        HapusSupplier.setBackground(yellow_tran);
     }//GEN-LAST:event_HapusSupplierLogoMouseExited
 
     private void BarangLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
+
         // TODO add your handling code here:
         BarangPanel.setVisible(true);
         StokPanel.setVisible(false);
@@ -2129,6 +2519,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_BarangLogoMouseExited
 
     private void StafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StafLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         StafPanel.setVisible(true);
         StokPanel.setVisible(false);
@@ -2149,6 +2542,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_StafLogoMouseExited
 
     private void StokLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StokLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         StokPanel.setVisible(true);
         StafPanel.setVisible(false);
@@ -2169,6 +2565,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_StokLogoMouseExited
 
     private void SupplyLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplyLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         SupplierPanel.setVisible(true);
         StokPanel.setVisible(false);
@@ -2189,6 +2588,9 @@ Color normal_btn = new Color(255, 250, 229);
     }//GEN-LAST:event_SupplyLogoMouseExited
 
     private void TransaksiLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransaksiLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         TransaksiPanel.setVisible(true);
         BarangPanel.setVisible(false);
@@ -2210,19 +2612,19 @@ Color normal_btn = new Color(255, 250, 229);
 
     private void TransaksiSearchCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiSearchCbxActionPerformed
         // TODO add your handling code here:
-        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Barang"))
-        {
+        if (TransaksiSearchCbx.getSelectedItem().toString().equals("ID Bon")) {
             TransaksiSearchByIDBon.setEnabled(true);
             TransaksiSearchByDate.setEnabled(false);
+        } else {
+            TransaksiSearchByDate.setEnabled(true);
+            TransaksiSearchByIDBon.setEnabled(false);
         }
-            else
-            {
-                TransaksiSearchByDate.setEnabled(true);
-                TransaksiSearchByIDBon.setEnabled(false);
-            }
     }//GEN-LAST:event_TransaksiSearchCbxActionPerformed
 
     private void PembelianLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PembelianLogoMouseClicked
+        if (!hasLogin) {
+            return;
+        }
         // TODO add your handling code here:
         PembelianPanel.setVisible(true);
         BarangPanel.setVisible(false);
@@ -2252,13 +2654,10 @@ Color normal_btn = new Color(255, 250, 229);
         // TODO add your handling code here:
         PembelianIDBonField.setText(null);
         PembelianIDBonField.setEnabled(true);
-        
-        
+
         //SOMETHING MISSING HERE
         //MASUKKAN ISI TABEL PEMBELIAN SEBAGAI HISTORY TRANSAKSI DI SINI
         //WHEN FIXED, PLS DELETE THIS COMMENT
-        
-        
         DefaultTableModel model = (DefaultTableModel) TabelPembelian.getModel();
         model.setRowCount(0);
     }//GEN-LAST:event_PembelianBayarMouseClicked
@@ -2267,17 +2666,844 @@ Color normal_btn = new Color(255, 250, 229);
         // TODO add your handling code here:
         PembelianIDBonField.setText(null);
         PembelianIDBonField.setEnabled(true);
-        
+
         DefaultTableModel model = (DefaultTableModel) TabelPembelian.getModel();
         model.setRowCount(0);
     }//GEN-LAST:event_PembelianResetMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    public static void main(String args[]) 
-    {
+    private void AddBarang_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBarang_SaveButtonActionPerformed
+        try {
+            if (IDBarangField.getText().equals(""))    throw new Exception("ID");
+            if (NamaBarangField.getText().equals(""))  throw new Exception("Nama");
+            if (HargaBarangField.getText().equals("")) throw new Exception("Harga");
+            if (BarangTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+            if (BarangTglExp.getDate() == null)        throw new Exception("TglKeluar");
+
+            String id = IDBarangField.getText();
+            String nama = NamaBarangField.getText();
+            String kategori = ((Katagori) IDKCbx.getSelectedItem()).getID_Katagori();
+            int harga = Integer.parseInt(HargaBarangField.getText());
+            Date masuk = BarangTglMasuk.getDate();
+            Date kadaluarsa = BarangTglExp.getDate();
+            
+            Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            barangController.setDml(b, OperasiCRUD.INSERT);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
+            AddBarang_CancelButtonActionPerformed(null);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_AddBarang_SaveButtonActionPerformed
+
+    private void AddBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddBarangMenuComponentShown
+        List<Katagori> list = katagoriController.getAllKatagori();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != IDKCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+    }//GEN-LAST:event_AddBarangMenuComponentShown
+
+    private void IDKCbxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDKCbxMouseClicked
+        AddBarangMenuComponentShown(null);
+    }//GEN-LAST:event_IDKCbxMouseClicked
+
+    private void AddBarang_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBarang_CancelButtonActionPerformed
+        IDBarangField.setText("");
+        NamaBarangField.setText("");
+        HargaBarangField.setText("");
+        BarangTglMasuk.setDate(null);
+        BarangTglExp.setDate(null);
+        IDKCbx.setSelectedIndex(0);
+    }//GEN-LAST:event_AddBarang_CancelButtonActionPerformed
+
+    private void ListBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListBarangMenuComponentShown
+        List<Barang> list = barangController.getAllBarang();
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][6];
+        Object[] columnNames = {
+            "ID Barang", 
+            "ID Katagori", 
+            "Nama Barang", 
+            "Harga Barang", 
+            "Tanggal Masuk", 
+            "Tanggal Kadaluarsa"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Barang();
+            data[i][1] = list.get(i).getID_Katagori();
+            data[i][2] = list.get(i).getNama_Barang();
+            data[i][3] = list.get(i).getHarga_Barang();
+            data[i][4] = list.get(i).getTanggal_Masuk();
+            data[i][5] = list.get(i).getTanggal_Kadaluarsa();
+        }
+        
+        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_ListBarangMenuComponentShown
+
+    private void UpdateBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangConfirmActionPerformed
+        try {
+            if (UpdateBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
+            if (UpdateBarang_NamaBarangField.getText().equals("")) throw new Exception("Nama");
+            if (UpdateBarang_HargaField.getText().equals(""))      throw new Exception("Harga");
+            if (UpdateBarang_TglMasuk.getDate() == null)           throw new Exception("TglMasuk");
+            if (UpdateBarang_TglExp.getDate() == null)             throw new Exception("TglKeluar");
+
+            String id = UpdateBarang_IDBarangField.getText();
+            String nama = UpdateBarang_NamaBarangField.getText();
+            String kategori = ((Katagori) UpdateBarang_IDKCbx.getSelectedItem()).getID_Katagori();
+            int harga = Integer.parseInt(UpdateBarang_HargaField.getText());
+            Date masuk = UpdateBarang_TglMasuk.getDate();
+            Date kadaluarsa = UpdateBarang_TglExp.getDate();
+            
+            Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
+            barangController.setDml(b, OperasiCRUD.UPDATE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil diupdate!", "Message", JOptionPane.PLAIN_MESSAGE);
+            UpdateBarangCancelActionPerformed(null);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_UpdateBarangConfirmActionPerformed
+
+    private void UpdateBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateBarangMenuComponentShown
+        List<Katagori> list = katagoriController.getAllKatagori();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != UpdateBarang_IDKCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateBarang_IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        UpdateBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        UpdateBarang_IDKCbx.setSelectedIndex(-1);
+    }//GEN-LAST:event_UpdateBarangMenuComponentShown
+
+    private void UpdateBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangCancelActionPerformed
+        UpdateBarang_IDBarangField.setText("");
+        UpdateBarang_NamaBarangField.setText("");
+        UpdateBarang_IDKCbx.setSelectedIndex(-1);
+        UpdateBarang_HargaField.setText("");
+        UpdateBarang_TglMasuk.setDate(null);
+        UpdateBarang_TglExp.setDate(null);
+        
+        SearchUpdateBarang.setEnabled(true);
+        UpdateBarang_IDBarangField.setEnabled(true);
+        UpdateBarang_IDKCbx.setEnabled(false);
+        UpdateBarang_NamaBarangField.setEnabled(false);
+        UpdateBarang_HargaField.setEnabled(false);
+        UpdateBarang_TglMasuk.setEnabled(false);
+        UpdateBarang_TglExp.setEnabled(false);
+        UpdateBarangConfirm.setEnabled(false);
+        UpdateBarangCancel.setEnabled(false);
+    }//GEN-LAST:event_UpdateBarangCancelActionPerformed
+
+    private void HapusBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusBarangMenuComponentShown
+        List<Katagori> list = katagoriController.getAllKatagori();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != HapusBarang_IDKCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusBarang_IDKCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        HapusBarang_IDKCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        HapusBarang_IDKCbx.setSelectedIndex(-1);
+    }//GEN-LAST:event_HapusBarangMenuComponentShown
+
+    private void HapusBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangConfirmActionPerformed
+        try {
+            if (HapusBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
+
+            String id = HapusBarang_IDBarangField.getText();
+            
+            Barang b = new Barang(id, null, null, 0, null, null);
+            barangController.setDml(b, OperasiCRUD.DELETE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
+            HapusBarangCancelActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_HapusBarangConfirmActionPerformed
+
+    private void HapusBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangCancelActionPerformed
+        HapusBarang_IDBarangField.setText("");
+        HapusBarang_NamaBarangField.setText("");
+        HapusBarang_IDKCbx.setSelectedIndex(-1);
+        HapusBarang_HargaField.setText("");
+        HapusBarang_TglMasuk.setDate(null);
+        HapusBarang_TglExp.setDate(null);
+        
+        
+        HapusBarang_IDBarangField.setEnabled(true);
+        SearchHapusBarang.setEnabled(true);
+        HapusBarangConfirm.setEnabled(false);
+        HapusBarangCancel.setEnabled(false);
+    }//GEN-LAST:event_HapusBarangCancelActionPerformed
+
+    private void AddStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddStafMenuComponentShown
+        List<Cabang> list = cabangController.getAllCabang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != CabangCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(CabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        CabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+    }//GEN-LAST:event_AddStafMenuComponentShown
+
+    private void AddStaf_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_SaveButtonActionPerformed
+        try {
+            if (AddStaf_IDField.getText().equals(""))    throw new Exception("ID");
+            if (AddStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
+            if (StafTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+
+            String id = AddStaf_IDField.getText();
+            String nama = AddStaf_NamaField.getText();
+            String cabang = ((Cabang) CabangCbx.getSelectedItem()).getID_Cabang();
+            String shift = ShiftPagi.isSelected() ? "Pagi" : "Malam";
+            Date masuk = StafTglMasuk.getDate();
+            
+            Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
+            petugasController.setDml(p, OperasiCRUD.INSERT);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
+            AddStaf_CancelButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_AddStaf_SaveButtonActionPerformed
+
+    private void AddStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_CancelButtonActionPerformed
+        AddStaf_IDField.setText("");
+        AddStaf_NamaField.setText("");
+        ShiftPagi.setSelected(true);
+        StafTglMasuk.setDate(null);
+        CabangCbx.setSelectedIndex(0);
+    }//GEN-LAST:event_AddStaf_CancelButtonActionPerformed
+
+    private void ListStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListStafMenuComponentShown
+        List<Petugas> list = petugasController.getAllPetugas();
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][5];
+        Object[] columnNames = {
+            "ID Petugas",  
+            "Nama Petugas", 
+            "ID Cabang",
+            "Shift",
+            "Tanggal Masuk"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Petugas();
+            data[i][1] = list.get(i).getNama_Petugas();
+            data[i][2] = list.get(i).getID_Cabang();
+            data[i][3] = list.get(i).getShift();
+            data[i][4] = list.get(i).getTanggal_Masuk();
+        }
+        
+        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_ListStafMenuComponentShown
+
+    private void UpdateStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateStafMenuComponentShown
+        List<Cabang> list = cabangController.getAllCabang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != UpdateCabangCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateCabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        UpdateCabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        UpdateCabangCbx.setSelectedItem(-1);
+    }//GEN-LAST:event_UpdateStafMenuComponentShown
+
+    private void UpdateSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSaveActionPerformed
+        try {
+            if (UpdateStaf_IDField.getText().equals(""))    throw new Exception("ID");
+            if (UpdateStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
+            if (UpdateTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+
+            String id = UpdateStaf_IDField.getText();
+            String nama = UpdateStaf_NamaField.getText();
+            String cabang = ((Cabang) UpdateCabangCbx.getSelectedItem()).getID_Cabang();
+            String shift = UpdateShiftPagi.isSelected() ? "Pagi" : "Malam";
+            Date masuk = UpdateTglMasuk.getDate();
+            
+            Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
+            petugasController.setDml(p, OperasiCRUD.UPDATE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
+            UpdateCancelActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_UpdateSaveActionPerformed
+
+    private void UpdateCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCancelActionPerformed
+        UpdateStaf_IDField.setText("");
+        UpdateStaf_NamaField.setText("");
+        UpdateCabangCbx.setSelectedIndex(-1);
+        UpdateShiftPagi.setSelected(true);
+        UpdateTglMasuk.setDate(null);
+        
+        SearchUpdate.setEnabled(true);
+        UpdateStaf_IDField.setEnabled(true);
+        UpdateStaf_NamaField.setEnabled(false);
+        UpdateCabangCbx.setEnabled(false);
+        UpdateShiftPagi.setEnabled(false);
+        UpdateShiftMalam.setEnabled(false);
+        UpdateTglMasuk.setEnabled(false);
+    }//GEN-LAST:event_UpdateCancelActionPerformed
+
+    private void HapusStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusStafMenuComponentShown
+        List<Cabang> list = cabangController.getAllCabang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != HapusCabangCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusCabangCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        HapusCabangCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        HapusCabangCbx.setSelectedItem(-1);
+    }//GEN-LAST:event_HapusStafMenuComponentShown
+
+    private void HapusStaf_ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_ConfirmButtonActionPerformed
+        try {
+            if (HapusStaf_IDField.getText().equals(""))    throw new Exception("ID");
+
+            String id = HapusStaf_IDField.getText();
+            
+            Petugas p = new Petugas(id, null, null, null, null);
+            petugasController.setDml(p, OperasiCRUD.DELETE);
+            
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
+            HapusStaf_CancelButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_HapusStaf_ConfirmButtonActionPerformed
+
+    private void HapusStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_CancelButtonActionPerformed
+        HapusStaf_IDField.setText("");
+        HapusStaf_NamaField.setText("");
+        HapusCabangCbx.setSelectedIndex(-1);
+        HapusShiftPagi.setSelected(true);
+        HapusTglMasuk.setDate(null);
+        
+        HapusStaf_IDField.setEnabled(true);
+        HapusStaf_SearchButton.setEnabled(true);
+        HapusStaf_ConfirmButton.setEnabled(false);
+        HapusStaf_CancelButton.setEnabled(false);
+    }//GEN-LAST:event_HapusStaf_CancelButtonActionPerformed
+
+    private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
+        if(SearchBar.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE); 
+            return;
+        }
+        
+        List<Storage> list;
+        String searchType = (String) SearchCbx.getSelectedItem();
+        String searchText = SearchBar.getText();
+        
+        switch(searchType){
+            case "ID Barang":
+                list = storageController.getByID_Barang(searchText);
+                break;
+            case "Nama Barang":
+                list = storageController.getByNama_Barang(searchText);
+                break;
+            case "Kata Kunci":
+                list = storageController.getByKataKunci(searchText);
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Search Type: " + searchType + " not found!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+        
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][5];
+        Object[] columnNames = {
+            "ID Barang",  
+            "Nama Barang", 
+            "Katagori",
+            "Supplier",
+            "Stok"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Barang();
+            data[i][1] = list.get(i).getNama_Barang();
+            data[i][2] = list.get(i).getNama_Katagori();
+            data[i][3] = list.get(i).getNama_Supplier();
+            data[i][4] = list.get(i).getStok();
+        }
+        
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_SearchButtonActionPerformed
+
+    private void StokPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StokPanelComponentShown
+        List<Storage> list = storageController.getAllStorage();
+        
+        if(list == null)
+            return;
+        
+        int size = list.size();
+        Object[][] data = new Object[size][5];
+        Object[] columnNames = {
+            "ID Barang",  
+            "Nama Barang", 
+            "Katagori",
+            "Supplier",
+            "Stok"
+        };
+        
+        for(int i=0; i<size; i++){
+            data[i][0] = list.get(i).getID_Barang();
+            data[i][1] = list.get(i).getNama_Barang();
+            data[i][2] = list.get(i).getNama_Katagori();
+            data[i][3] = list.get(i).getNama_Supplier();
+            data[i][4] = list.get(i).getStok();
+        }
+        
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_StokPanelComponentShown
+
+    private void PembelianPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PembelianPanelComponentShown
+        List<Barang> list = barangController.getAllBarang();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != BarangSelectCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(BarangSelectCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        BarangSelectCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        BarangSelectCbx.setSelectedIndex(-1);
+    }//GEN-LAST:event_PembelianPanelComponentShown
+
+    private void PembelianAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianAddtoCartActionPerformed
+        String IDBon = PembelianIDBonField.getText();
+        
+        if(IDBon.isBlank()){
+            JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(bonController.getByID_Bon(IDBon) != null){
+            JOptionPane.showMessageDialog(this, "ID BON SUDAH ADA!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(BarangSelectCbx.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "ID BARANG TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
+        int jumlah = (int) JumlahCounter.getValue();
+        long total = b.getHarga_Barang() * jumlah;
+        
+        
+        // Update the table
+        int w = TabelPembelian.getModel().getColumnCount();
+        int h = TabelPembelian.getModel().getRowCount();
+        
+        Object[] coloumnNames = new Object[w];
+        for(int k=0; k<w; k++){
+            coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
+        }
+        
+        List<Object[]> dataList = new ArrayList<>();
+        for(int i=0; i<h; i++){
+            dataList.add(new Object[w]);
+            for(int k=0; k<w; k++){
+                dataList.get(i)[k] = TabelPembelian.getModel().getValueAt(i, k);
+            }
+        }
+        
+        Boolean isFound = false;
+        for(Object[] d : dataList){
+            if(b.getID_Barang().equals(d[0])){
+                // jumlah = jumlah + InputJumlah
+                d[3] = (int)d[3] + jumlah;
+                
+                // total = harga * jumlah
+                d[4] = (long)(int)d[2] *(int)d[3];
+                
+                isFound = true;
+                break;
+            }
+        }
+        
+        if(!isFound){
+            Object[] o = new Object[w];
+            
+            o[0] = b.getID_Barang();
+            o[1] = b.getNama_Barang();
+            o[2] = b.getHarga_Barang();
+            o[3] = jumlah;
+            o[4] = total;
+            
+            dataList.add(o);
+        }
+        
+        Object[][] data = dataList.toArray(new Object[dataList.size()][w]);
+        TabelPembelian.setModel(new DefaultTableModel(data, coloumnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        
+        
+        // Update Subtotal
+        h = TabelPembelian.getModel().getRowCount();
+        long subtotal = 0;
+        for(int i=0; i<h; i++){
+            subtotal += (long) data[i][4];
+        }
+        PembelianSubtotalField.setText("" + subtotal);
+        
+        
+        // Disable Bon Field and reset input field
+        PembelianIDBonField.setEnabled(false);
+        BarangSelectCbx.setSelectedIndex(-1);
+        JumlahCounter.setValue(1);
+        PembelianTotalField.setText("");
+    }//GEN-LAST:event_PembelianAddtoCartActionPerformed
+
+    private void BarangSelectCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarangSelectCbxActionPerformed
+        if(BarangSelectCbx.getSelectedIndex() == -1){
+            return;
+        }
+        
+        Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
+        
+        PembelianTotalField.setText(b.getHarga_Barang() * (int)JumlahCounter.getValue() + "");
+    }//GEN-LAST:event_BarangSelectCbxActionPerformed
+
+    private void JumlahCounterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JumlahCounterStateChanged
+        BarangSelectCbxActionPerformed(null);
+    }//GEN-LAST:event_JumlahCounterStateChanged
+
+    private void PembelianResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianResetActionPerformed
+        PembelianIDBonField.setEnabled(true);
+        PembelianIDBonField.setText("");
+        BarangSelectCbx.setSelectedIndex(-1);
+        JumlahCounter.setValue(1);
+        PembelianTotalField.setText("");
+        PembelianSubtotalField.setText("");
+        
+        // Clear the table
+        int w = TabelPembelian.getModel().getColumnCount();
+        
+        Object[] coloumnNames = new Object[w];
+        for(int k=0; k<w; k++){
+            coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
+        }
+        
+        TabelPembelian.setModel(new DefaultTableModel(new Object[][]{}, coloumnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_PembelianResetActionPerformed
+
+    private void PembelianBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianBayarActionPerformed
+        if(PembelianIDBonField.isEnabled()){
+            JOptionPane.showMessageDialog(this, "BELI DULU!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Random randomGen = new Random();
+        
+        String ID_Bon = PembelianIDBonField.getText();
+        Date now = Date.from(LocalDateTime.now().atZone( ZoneId.systemDefault()).toInstant());
+        long Subtotal = Long.parseLong(PembelianSubtotalField.getText());
+        
+        String ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
+        if(ID_Petugas == null || ID_Petugas.isBlank()){
+            return;
+        }
+        while(petugasController.getByID_Petugas(ID_Petugas) == null) {
+            if(ID_Petugas == null || ID_Petugas.isBlank()){
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Error! ID Petugas tidak ditemukan!");
+            ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
+        } 
+        
+        Bon b = new Bon(ID_Bon, DatetoSQL(now), Subtotal, ID_Petugas);
+        bonController.setDml(b, OperasiCRUD.INSERT);
+        
+        // Get Table
+        int h = TabelPembelian.getModel().getRowCount();
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        for(int i=0; i<h; i++){
+            Boolean adaSama;
+            String ID_Transaksi = "" + randomGen.nextInt(999999999);
+            do {
+                adaSama = false;
+                for(Transaksi a : transaksiList){
+                    if(a.getID_Transaksi().equals(ID_Transaksi)){
+                        ID_Transaksi = "" + randomGen.nextInt(999999999);
+                        adaSama = true;
+                        break;
+                    }
+                }
+            } while(adaSama);
+            
+            String ID_Barang  = (String) TabelPembelian.getModel().getValueAt(i, 0);
+            int jumlah_barang = (int)    TabelPembelian.getModel().getValueAt(i, 3);
+            long Harga_Total  = (long)   TabelPembelian.getModel().getValueAt(i, 4);
+            
+            Transaksi t = new Transaksi(ID_Transaksi, ID_Barang, jumlah_barang, Harga_Total, ID_Bon);
+            transaksiController.setDml(t, OperasiCRUD.INSERT);
+        }
+        
+        PembelianResetActionPerformed(null);
+    }//GEN-LAST:event_PembelianBayarActionPerformed
+
+    private void TransaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_TransaksiPanelComponentShown
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        Object[] namaKolom = {
+            "ID Barang",
+            "Nama Barang",
+            "Tanggal Transaksi",
+            "Jumlah",
+            "Harga Satuan",
+            "Total"
+        };
+        
+        int w = namaKolom.length;
+        int h = transaksiList.size();
+        
+        Object[][] data = new Object[h][w];
+        for(int i=0; i<h; i++){
+            Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
+            Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
+            
+            data[i][0] = transaksiList.get(i).getID_Barang();
+            data[i][1] = b != null ? b.getNama_Barang() : null;
+            data[i][2] = bon != null ? bon.getTanggal_Transaksi() : null;
+            data[i][3] = transaksiList.get(i).getJumlah_Barang();
+            data[i][4] = b != null ? b.getHarga_Barang() : null;
+            data[i][5] = transaksiList.get(i).getHarga_Total();
+        }
+        
+        TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_TransaksiPanelComponentShown
+
+    private void TabelTransaksiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TabelTransaksiPropertyChange
+        long subtotal = 0;
+        
+        int h = TabelTransaksi.getModel().getRowCount();
+        for(int i=0; i<h; i++){
+            subtotal += (long) TabelTransaksi.getModel().getValueAt(i, 5);
+        }
+        
+        SubtotalField.setText("" + subtotal);
+    }//GEN-LAST:event_TabelTransaksiPropertyChange
+
+    private void Transaksi_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transaksi_SearchButtonActionPerformed
+        Boolean isIDMode = TransaksiSearchByIDBon.isEnabled();
+        String ID = TransaksiSearchByIDBon.getText();
+        Date d = TransaksiSearchByDate.getDate();
+        
+        if(isIDMode){
+            if(ID.isBlank()){
+                JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if(d == null){
+                JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
+        
+        Object[] namaKolom = {
+            "ID Barang",
+            "Nama Barang",
+            "Tanggal Transaksi",
+            "Jumlah",
+            "Harga Satuan",
+            "Total"
+        };
+        
+        int w = namaKolom.length;
+        int h = transaksiList.size();
+        
+        ArrayList<Object[]> dataList = new ArrayList<>();
+        for(int i=0; i<h; i++){
+            Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
+            if(isIDMode){
+                if(!bon.getID_Bon().equals(ID)){
+                    continue;
+                }
+            } else {
+                if(!bon.getTanggal_Transaksi().equals(d)){
+                    continue;
+                }
+            }
+            
+            Object[] data = new Object[w];
+            Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
+            
+            data[0] = transaksiList.get(i).getID_Barang();
+            data[1] = b != null ? b.getNama_Barang() : null;
+            data[2] = bon != null ? bon.getTanggal_Transaksi() : null;
+            data[3] = transaksiList.get(i).getJumlah_Barang();
+            data[4] = b != null ? b.getHarga_Barang() : null;
+            data[5] = transaksiList.get(i).getHarga_Total();
+            
+            dataList.add(data);
+        }
+        
+        TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_Transaksi_SearchButtonActionPerformed
+
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -2293,15 +3519,10 @@ Color normal_btn = new Color(255, 250, 229);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    //</editor-fold>
-    //</editor-fold>
-    
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> 
-        {
+        java.awt.EventQueue.invokeLater(()-> {
             new Menu().setVisible(true);
         });
     }
@@ -2348,11 +3569,11 @@ Color normal_btn = new Color(255, 250, 229);
     private javax.swing.JPanel BarangBar;
     private javax.swing.JLabel BarangLogo;
     private javax.swing.JPanel BarangPanel;
-    private javax.swing.JComboBox<String> BarangSelectCbx;
+    private javax.swing.JComboBox BarangSelectCbx;
     private javax.swing.JScrollPane BarangTable;
     private com.toedter.calendar.JDateChooser BarangTglExp;
     private com.toedter.calendar.JDateChooser BarangTglMasuk;
-    private javax.swing.JComboBox<String> CabangCbx;
+    private javax.swing.JComboBox CabangCbx;
     private javax.swing.JLabel DeleteBarangLogo;
     private javax.swing.JPanel DeleteStaf;
     private javax.swing.JPanel HapusBarang;
@@ -2368,11 +3589,11 @@ Color normal_btn = new Color(255, 250, 229);
     private javax.swing.JLabel HapusBarangTitle;
     private javax.swing.JTextField HapusBarang_HargaField;
     private javax.swing.JTextField HapusBarang_IDBarangField;
-    private javax.swing.JComboBox<String> HapusBarang_IDKCbx;
+    private javax.swing.JComboBox HapusBarang_IDKCbx;
     private javax.swing.JTextField HapusBarang_NamaBarangField;
     private com.toedter.calendar.JDateChooser HapusBarang_TglExp;
     private com.toedter.calendar.JDateChooser HapusBarang_TglMasuk;
-    private javax.swing.JComboBox<String> HapusCabangCbx;
+    private javax.swing.JComboBox HapusCabangCbx;
     private javax.swing.JComboBox<String> HapusKotaCbx;
     private javax.swing.JRadioButton HapusShiftMalam;
     private javax.swing.JRadioButton HapusShiftPagi;
@@ -2404,7 +3625,7 @@ Color normal_btn = new Color(255, 250, 229);
     private com.toedter.calendar.JDateChooser HapusTglMasuk;
     private javax.swing.JTextField HargaBarangField;
     private javax.swing.JTextField IDBarangField;
-    private javax.swing.JComboBox<String> IDKCbx;
+    private javax.swing.JComboBox IDKCbx;
     private javax.swing.JSpinner JumlahCounter;
     private javax.swing.JComboBox<String> KotaCbx;
     private javax.swing.JPanel ListBarang;
@@ -2502,11 +3723,11 @@ Color normal_btn = new Color(255, 250, 229);
     private javax.swing.JLabel UpdateBarangTitle;
     private javax.swing.JTextField UpdateBarang_HargaField;
     private javax.swing.JTextField UpdateBarang_IDBarangField;
-    private javax.swing.JComboBox<String> UpdateBarang_IDKCbx;
+    private javax.swing.JComboBox UpdateBarang_IDKCbx;
     private javax.swing.JTextField UpdateBarang_NamaBarangField;
     private com.toedter.calendar.JDateChooser UpdateBarang_TglExp;
     private com.toedter.calendar.JDateChooser UpdateBarang_TglMasuk;
-    private javax.swing.JComboBox<String> UpdateCabangCbx;
+    private javax.swing.JComboBox UpdateCabangCbx;
     private javax.swing.JButton UpdateCancel;
     private javax.swing.JComboBox<String> UpdateKotaCbx;
     private javax.swing.JButton UpdateSave;
@@ -2538,5 +3759,8 @@ Color normal_btn = new Color(255, 250, 229);
     private com.toedter.calendar.JDateChooser UpdateTglMasuk;
     private javax.swing.JLabel Username;
     private javax.swing.JTextField UsernameField;
+    private javax.swing.ButtonGroup btnGroup_Staf_Add;
+    private javax.swing.ButtonGroup btnGroup_Staf_Hapus;
+    private javax.swing.ButtonGroup btnGroup_Staf_Update;
     // End of variables declaration//GEN-END:variables
 }
