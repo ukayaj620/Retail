@@ -3,8 +3,7 @@ package interfaces;
 import java.util.List;
 import models.Cabang;
 
-public interface CabangInterface 
-{
+public interface CabangInterface {
     public boolean insert(Cabang cabang);
     public boolean update(Cabang cabang);
     public boolean delete(Cabang cabang);
