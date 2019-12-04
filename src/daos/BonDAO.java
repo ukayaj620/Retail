@@ -11,13 +11,12 @@ import interfaces.BonInterface;
 public class BonDAO implements BonInterface {
     @Override
     public boolean insert(Bon bon) {
-        String sql = "INSERT INTO bon VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO bon VALUES(?, ?, ?)";
         try {
             PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql);
             statement.setString(1, bon.getID_Bon());
             statement.setDate(2, bon.getTanggal_Transaksi());
             statement.setLong(3, bon.getSubtotal());
-            statement.setString(4, bon.getID_Petugas());
             
             int row = statement.executeUpdate();
             statement.close();
@@ -33,13 +32,12 @@ public class BonDAO implements BonInterface {
 
     @Override
     public boolean update(Bon bon) {
-        String sql = "UPDATE bon SET bon.Tanggal_Transaksi = ?, bon.Subtotal = ?, bon.ID_Petugas = ? WHERE bon.ID_Bon = ?";
+        String sql = "UPDATE bon SET bon.Tanggal_Transaksi = ?, bon.Subtotal = ? WHERE bon.ID_Bon = ?";
         try {
             PreparedStatement statement = Koneksi.openConnection().prepareStatement(sql);
             statement.setDate(1, bon.getTanggal_Transaksi());
             statement.setLong(2, bon.getSubtotal());
-            statement.setString(3, bon.getID_Petugas());
-            statement.setString(4, bon.getID_Bon());
+            statement.setString(3, bon.getID_Bon());
 
             int row = statement.executeUpdate();
             statement.close();
@@ -81,7 +79,7 @@ public class BonDAO implements BonInterface {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                Bon bon = new Bon(rs.getString(1), rs.getDate(2), rs.getLong(3), rs.getString(4));
+                Bon bon = new Bon(rs.getString(1), rs.getDate(2), rs.getLong(3));
                 bonList.add(bon);
             }
             statement.close();
@@ -101,7 +99,7 @@ public class BonDAO implements BonInterface {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                bon = new Bon(rs.getString(1), rs.getDate(2), rs.getLong(3), rs.getString(4));
+                bon = new Bon(rs.getString(1), rs.getDate(2), rs.getLong(3));
             }
         } catch (Exception e) {
             Logger.getLogger(Bon.class.getName()).log(Level.SEVERE, null, e);

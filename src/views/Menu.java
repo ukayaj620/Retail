@@ -2,15 +2,16 @@ package views;
 
 import controllers.*;
 import java.awt.Color;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+
 import models.*;
 import retail.Koneksi;
 
@@ -121,7 +122,7 @@ public class Menu extends javax.swing.JFrame {
         //Transaksi
         TransaksiPanel.setVisible(false);
         TransaksiPanel.setBackground(yellow_tran);
-        
+
         // TextField Limits
         IDBarangField.setDocument(new JTextFieldLimit(10));
         NamaBarangField.setDocument(new JTextFieldLimit(50));
@@ -132,13 +133,14 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public class JTextFieldLimit extends javax.swing.text.PlainDocument {
+
         private final int limit;
 
         JTextFieldLimit(int limit) {
             super();
             this.limit = limit;
         }
-        
+
         @Override
         public void insertString(int offset, String str, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
             if (str == null) {
@@ -309,7 +311,7 @@ public class Menu extends javax.swing.JFrame {
         HapusTglMasuk = new com.toedter.calendar.JDateChooser();
         HapusStaf_SearchButton = new javax.swing.JButton();
         SupplierPanel = new javax.swing.JPanel();
-        StafBar1 = new javax.swing.JPanel();
+        SupplierBar = new javax.swing.JPanel();
         AddSupplier = new javax.swing.JPanel();
         AddSupplierLogo = new javax.swing.JLabel();
         ListSupplier = new javax.swing.JPanel();
@@ -325,7 +327,7 @@ public class Menu extends javax.swing.JFrame {
         AddSupplierKotaID = new javax.swing.JLabel();
         AddSupplier_CancelButton = new javax.swing.JButton();
         AddSupplier_SaveButton = new javax.swing.JButton();
-        KotaCbx = new javax.swing.JComboBox<>();
+        KotaCbx = new javax.swing.JComboBox();
         AddSupplier_NamaField = new javax.swing.JTextField();
         AddSupplier_IDField = new javax.swing.JTextField();
         ListSupplierMenu = new javax.swing.JPanel();
@@ -339,7 +341,7 @@ public class Menu extends javax.swing.JFrame {
         UpdateSupplierKotaID = new javax.swing.JLabel();
         UpdateSupplier_CancelButton = new javax.swing.JButton();
         UpdateSupplier_SaveButton = new javax.swing.JButton();
-        UpdateKotaCbx = new javax.swing.JComboBox<>();
+        UpdateKotaCbx = new javax.swing.JComboBox();
         UpdateSupplier_NamaField = new javax.swing.JTextField();
         UpdateSupplier_IDField = new javax.swing.JTextField();
         UpdateSupplier_SearchButton = new javax.swing.JButton();
@@ -350,7 +352,7 @@ public class Menu extends javax.swing.JFrame {
         HapusSupplierKotaID = new javax.swing.JLabel();
         HapusSupplier_CancelButton = new javax.swing.JButton();
         HapusSupplier_ConfirmButton = new javax.swing.JButton();
-        HapusKotaCbx = new javax.swing.JComboBox<>();
+        HapusKotaCbx = new javax.swing.JComboBox();
         HapusSupplier_NamaField = new javax.swing.JTextField();
         HapusSupplier_IDField = new javax.swing.JTextField();
         HapusSupplier_SearchButton = new javax.swing.JButton();
@@ -1559,8 +1561,8 @@ public class Menu extends javax.swing.JFrame {
         SupplierPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
         SupplierPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        StafBar1.setBackground(new java.awt.Color(255, 227, 128));
-        StafBar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        SupplierBar.setBackground(new java.awt.Color(255, 227, 128));
+        SupplierBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AddSupplier.setBackground(new java.awt.Color(255, 250, 229));
         AddSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1597,7 +1599,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        StafBar1.add(AddSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        SupplierBar.add(AddSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         ListSupplier.setBackground(new java.awt.Color(255, 250, 229));
         ListSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1633,7 +1635,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        StafBar1.add(ListSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, -1));
+        SupplierBar.add(ListSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, -1));
 
         UpdateSupplier.setBackground(new java.awt.Color(255, 250, 229));
         UpdateSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1669,7 +1671,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        StafBar1.add(UpdateSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
+        SupplierBar.add(UpdateSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
 
         HapusSupplier.setBackground(new java.awt.Color(255, 250, 229));
         HapusSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1705,13 +1707,18 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        StafBar1.add(HapusSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, -1, -1));
+        SupplierBar.add(HapusSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, -1, -1));
 
-        SupplierPanel.add(StafBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 0, 150, 580));
+        SupplierPanel.add(SupplierBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 0, 150, 580));
 
         AddSupplierMenu.setBackground(new java.awt.Color(255, 250, 229));
         AddSupplierMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         AddSupplierMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        AddSupplierMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                AddSupplierMenuComponentShown(evt);
+            }
+        });
         AddSupplierMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AddSupplierTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1733,11 +1740,21 @@ public class Menu extends javax.swing.JFrame {
         AddSupplier_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddSupplier_CancelButton.setText("Batal");
         AddSupplier_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddSupplier_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddSupplier_CancelButtonActionPerformed(evt);
+            }
+        });
         AddSupplierMenu.add(AddSupplier_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, 120, -1));
 
         AddSupplier_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddSupplier_SaveButton.setText("Simpan ");
         AddSupplier_SaveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddSupplier_SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddSupplier_SaveButtonActionPerformed(evt);
+            }
+        });
         AddSupplierMenu.add(AddSupplier_SaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
 
         KotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JKT", "BDG", "BGR", "U-DNKY", "S&P", "SSK" }));
@@ -1750,6 +1767,11 @@ public class Menu extends javax.swing.JFrame {
         ListSupplierMenu.setBackground(new java.awt.Color(255, 250, 229));
         ListSupplierMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         ListSupplierMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        ListSupplierMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                ListSupplierMenuComponentShown(evt);
+            }
+        });
         ListSupplierMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelSupplier.setModel(new javax.swing.table.DefaultTableModel(
@@ -1773,6 +1795,11 @@ public class Menu extends javax.swing.JFrame {
         UpdateSupplierMenu.setBackground(new java.awt.Color(255, 250, 229));
         UpdateSupplierMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         UpdateSupplierMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        UpdateSupplierMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                UpdateSupplierMenuComponentShown(evt);
+            }
+        });
         UpdateSupplierMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UpdateSupplierTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1793,21 +1820,41 @@ public class Menu extends javax.swing.JFrame {
 
         UpdateSupplier_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateSupplier_CancelButton.setText("Batal");
+        UpdateSupplier_CancelButton.setEnabled(false);
         UpdateSupplier_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateSupplier_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateSupplier_CancelButtonActionPerformed(evt);
+            }
+        });
         UpdateSupplierMenu.add(UpdateSupplier_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, 120, -1));
 
         UpdateSupplier_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateSupplier_SaveButton.setText("Simpan ");
+        UpdateSupplier_SaveButton.setEnabled(false);
         UpdateSupplier_SaveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        UpdateSupplier_SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateSupplier_SaveButtonActionPerformed(evt);
+            }
+        });
         UpdateSupplierMenu.add(UpdateSupplier_SaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
 
         UpdateKotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JKT", "BDG", "BGR", "U-DNKY", "S&P", "SSK" }));
+        UpdateKotaCbx.setEnabled(false);
         UpdateSupplierMenu.add(UpdateKotaCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 140, 40));
+
+        UpdateSupplier_NamaField.setEnabled(false);
         UpdateSupplierMenu.add(UpdateSupplier_NamaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 180, 30));
         UpdateSupplierMenu.add(UpdateSupplier_IDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 180, 30));
 
         UpdateSupplier_SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         UpdateSupplier_SearchButton.setText("Cari");
+        UpdateSupplier_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateSupplier_SearchButtonActionPerformed(evt);
+            }
+        });
         UpdateSupplierMenu.add(UpdateSupplier_SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 121, 80, 30));
 
         SupplierPanel.add(UpdateSupplierMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 710));
@@ -1815,6 +1862,11 @@ public class Menu extends javax.swing.JFrame {
         HapusSupplierMenu.setBackground(new java.awt.Color(255, 250, 229));
         HapusSupplierMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
         HapusSupplierMenu.setMinimumSize(new java.awt.Dimension(1280, 600));
+        HapusSupplierMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                HapusSupplierMenuComponentShown(evt);
+            }
+        });
         HapusSupplierMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         HapusSupplierTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1835,12 +1887,24 @@ public class Menu extends javax.swing.JFrame {
 
         HapusSupplier_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusSupplier_CancelButton.setText("Batal");
+        HapusSupplier_CancelButton.setEnabled(false);
         HapusSupplier_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusSupplier_CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusSupplier_CancelButtonActionPerformed(evt);
+            }
+        });
         HapusSupplierMenu.add(HapusSupplier_CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, 120, -1));
 
         HapusSupplier_ConfirmButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusSupplier_ConfirmButton.setText("Hapus");
+        HapusSupplier_ConfirmButton.setEnabled(false);
         HapusSupplier_ConfirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HapusSupplier_ConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusSupplier_ConfirmButtonActionPerformed(evt);
+            }
+        });
         HapusSupplierMenu.add(HapusSupplier_ConfirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
 
         HapusKotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JKT", "BDG", "BGR", "U-DNKY", "S&P", "SSK" }));
@@ -1853,6 +1917,11 @@ public class Menu extends javax.swing.JFrame {
 
         HapusSupplier_SearchButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         HapusSupplier_SearchButton.setText("Cari");
+        HapusSupplier_SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusSupplier_SearchButtonActionPerformed(evt);
+            }
+        });
         HapusSupplierMenu.add(HapusSupplier_SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 121, 80, 30));
 
         SupplierPanel.add(HapusSupplierMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 710));
@@ -2129,6 +2198,7 @@ public class Menu extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Username atau password salah");
         }
+
         Koneksi.closeConnection();
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -2187,19 +2257,20 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateStafLogoMouseExited
 
     private void SearchUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateActionPerformed
-        if(UpdateStaf_IDField.getText().equals("")){
+        // TODO add your handling code here:
+        if (UpdateStaf_IDField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = UpdateStaf_IDField.getText();
         Petugas p = petugasController.getByID_Petugas(id);
-        
-        if(p == null){
+
+        if (p == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         SearchUpdate.setEnabled(false);
         UpdateStaf_IDField.setEnabled(false);
         UpdateStaf_NamaField.setEnabled(true);
@@ -2209,50 +2280,67 @@ public class Menu extends javax.swing.JFrame {
         UpdateTglMasuk.setEnabled(true);
         UpdateSave.setEnabled(true);
         UpdateCancel.setEnabled(true);
-        
-        int size=UpdateCabangCbx.getModel().getSize();
+
+        int size = UpdateCabangCbx.getModel().getSize();
         int i;
-        for(i=size-1; i>=0; i--){
+
+        for (i = size - 1; i >= 0; i--) {
             Cabang cek = (Cabang) UpdateCabangCbx.getModel().getElementAt(i);
-            if (cek.getID_Cabang().equals(p.getID_Cabang()))
+
+            if (cek.getID_Cabang().equals(p.getID_Cabang())) {
                 break;
+            }
         }
-        
+
         UpdateCabangCbx.setSelectedIndex(i);
         UpdateStaf_NamaField.setText(p.getNama_Petugas());
-        if(p.getShift().equals("Pagi")) UpdateShiftPagi.setSelected(true);
-        else UpdateShiftMalam.setSelected(true);
+
+        if (p.getShift().equals("Pagi")) {
+            UpdateShiftPagi.setSelected(true);
+        } else {
+            UpdateShiftMalam.setSelected(true);
+        }
+
         UpdateTglMasuk.setDate(p.getTanggal_Masuk());
     }//GEN-LAST:event_SearchUpdateActionPerformed
 
     private void HapusStaf_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_SearchButtonActionPerformed
-        if(HapusStaf_IDField.getText().equals("")){
+        // TODO add your handling code here:
+        if (HapusStaf_IDField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = HapusStaf_IDField.getText();
         Petugas p = petugasController.getByID_Petugas(id);
-        
-        if(p == null){
+
+        if (p == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        int size=HapusCabangCbx.getModel().getSize();
+
+        int size = HapusCabangCbx.getModel().getSize();
         int i;
-        for(i=size-1; i>=0; i--){
+
+        for (i = size - 1; i >= 0; i--) {
             Cabang cek = (Cabang) HapusCabangCbx.getModel().getElementAt(i);
-            if (cek.getID_Cabang().equals(p.getID_Cabang()))
+
+            if (cek.getID_Cabang().equals(p.getID_Cabang())) {
                 break;
+            }
         }
-        
+
         HapusCabangCbx.setSelectedIndex(i);
         HapusStaf_NamaField.setText(p.getNama_Petugas());
-        if(p.getShift().equals("Pagi")) HapusShiftPagi.setSelected(true);
-        else HapusShiftMalam.setSelected(true);
+
+        if (p.getShift().equals("Pagi")) {
+            HapusShiftPagi.setSelected(true);
+        } else {
+            HapusShiftMalam.setSelected(true);
+        }
+
         HapusTglMasuk.setDate(p.getTanggal_Masuk());
-        
+
         HapusStaf_IDField.setEnabled(false);
         HapusStaf_SearchButton.setEnabled(false);
         HapusStaf_ConfirmButton.setEnabled(true);
@@ -2350,19 +2438,19 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBarangLogoMouseExited
 
     private void SearchUpdateBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateBarangActionPerformed
-        if(UpdateBarang_IDBarangField.getText().equals("")){
+        if (UpdateBarang_IDBarangField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = UpdateBarang_IDBarangField.getText();
         Barang b = barangController.getByID_Barang(id);
-        
-        if(b == null){
+
+        if (b == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         SearchUpdateBarang.setEnabled(false);
         UpdateBarang_IDBarangField.setEnabled(false);
         UpdateBarang_IDKCbx.setEnabled(true);
@@ -2372,15 +2460,17 @@ public class Menu extends javax.swing.JFrame {
         UpdateBarang_TglExp.setEnabled(true);
         UpdateBarangConfirm.setEnabled(true);
         UpdateBarangCancel.setEnabled(true);
-        
-        int size=UpdateBarang_IDKCbx.getModel().getSize();
+
+        int size = UpdateBarang_IDKCbx.getModel().getSize();
         int i;
-        for(i=size-1; i>=0; i--){
+
+        for (i = size - 1; i >= 0; i--) {
             Katagori cek = (Katagori) UpdateBarang_IDKCbx.getModel().getElementAt(i);
-            if (cek.getID_Katagori().equals(b.getID_Katagori()))
+            if (cek.getID_Katagori().equals(b.getID_Katagori())) {
                 break;
+            }
         }
-        
+
         UpdateBarang_IDKCbx.setSelectedIndex(i);
         UpdateBarang_NamaBarangField.setText(b.getNama_Barang());
         UpdateBarang_HargaField.setText("" + b.getHarga_Barang());
@@ -2389,33 +2479,35 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchUpdateBarangActionPerformed
 
     private void SearchHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHapusBarangActionPerformed
-        if(HapusBarang_IDBarangField.getText().equals("")){
+        if (HapusBarang_IDBarangField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String id = HapusBarang_IDBarangField.getText();
         Barang b = barangController.getByID_Barang(id);
-        
-        if(b == null){
+
+        if (b == null) {
             JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        int size=HapusBarang_IDKCbx.getModel().getSize();
+
+        int size = HapusBarang_IDKCbx.getModel().getSize();
         int i;
-        for(i=size-1; i>=0; i--){
+
+        for (i = size - 1; i >= 0; i--) {
             Katagori cek = (Katagori) HapusBarang_IDKCbx.getModel().getElementAt(i);
-            if (cek.getID_Katagori().equals(b.getID_Katagori()))
+            if (cek.getID_Katagori().equals(b.getID_Katagori())) {
                 break;
+            }
         }
-        
+
         HapusBarang_IDKCbx.setSelectedIndex(i);
         HapusBarang_NamaBarangField.setText(b.getNama_Barang());
         HapusBarang_HargaField.setText("" + b.getHarga_Barang());
         HapusBarang_TglMasuk.setDate(b.getTanggal_Masuk());
         HapusBarang_TglExp.setDate(b.getTanggal_Kadaluarsa());
-        
+
         HapusBarang_IDBarangField.setEnabled(false);
         SearchHapusBarang.setEnabled(false);
         HapusBarangConfirm.setEnabled(true);
@@ -2495,11 +2587,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_HapusSupplierLogoMouseExited
 
     private void BarangLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangLogoMouseClicked
+        // TODO add your handling code here:
         if (!hasLogin) {
             return;
         }
 
-        // TODO add your handling code here:
         BarangPanel.setVisible(true);
         StokPanel.setVisible(false);
         StafPanel.setVisible(false);
@@ -2519,10 +2611,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_BarangLogoMouseExited
 
     private void StafLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StafLogoMouseClicked
+        // TODO add your handling code here:
         if (!hasLogin) {
             return;
         }
-        // TODO add your handling code here:
+
         StafPanel.setVisible(true);
         StokPanel.setVisible(false);
         BarangPanel.setVisible(false);
@@ -2542,10 +2635,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_StafLogoMouseExited
 
     private void StokLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StokLogoMouseClicked
+        // TODO add your handling code here:
         if (!hasLogin) {
             return;
         }
-        // TODO add your handling code here:
+
         StokPanel.setVisible(true);
         StafPanel.setVisible(false);
         BarangPanel.setVisible(false);
@@ -2565,10 +2659,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_StokLogoMouseExited
 
     private void SupplyLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplyLogoMouseClicked
+        // TODO add your handling code here:
         if (!hasLogin) {
             return;
         }
-        // TODO add your handling code here:
+
         SupplierPanel.setVisible(true);
         StokPanel.setVisible(false);
         StafPanel.setVisible(false);
@@ -2588,10 +2683,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_SupplyLogoMouseExited
 
     private void TransaksiLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransaksiLogoMouseClicked
+        // TODO add your handling code here:
         if (!hasLogin) {
             return;
         }
-        // TODO add your handling code here:
+
         TransaksiPanel.setVisible(true);
         BarangPanel.setVisible(false);
         StokPanel.setVisible(false);
@@ -2622,10 +2718,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_TransaksiSearchCbxActionPerformed
 
     private void PembelianLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PembelianLogoMouseClicked
+        // TODO add your handling code here:
         if (!hasLogin) {
             return;
         }
-        // TODO add your handling code here:
+
         PembelianPanel.setVisible(true);
         BarangPanel.setVisible(false);
         StokPanel.setVisible(false);
@@ -2655,9 +2752,6 @@ public class Menu extends javax.swing.JFrame {
         PembelianIDBonField.setText(null);
         PembelianIDBonField.setEnabled(true);
 
-        //SOMETHING MISSING HERE
-        //MASUKKAN ISI TABEL PEMBELIAN SEBAGAI HISTORY TRANSAKSI DI SINI
-        //WHEN FIXED, PLS DELETE THIS COMMENT
         DefaultTableModel model = (DefaultTableModel) TabelPembelian.getModel();
         model.setRowCount(0);
     }//GEN-LAST:event_PembelianBayarMouseClicked
@@ -2672,12 +2766,23 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_PembelianResetMouseClicked
 
     private void AddBarang_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBarang_SaveButtonActionPerformed
+        // TODO add your handling code here:
         try {
-            if (IDBarangField.getText().equals(""))    throw new Exception("ID");
-            if (NamaBarangField.getText().equals(""))  throw new Exception("Nama");
-            if (HargaBarangField.getText().equals("")) throw new Exception("Harga");
-            if (BarangTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
-            if (BarangTglExp.getDate() == null)        throw new Exception("TglKeluar");
+            if (IDBarangField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (NamaBarangField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (HargaBarangField.getText().equals("")) {
+                throw new Exception("Harga");
+            }
+            if (BarangTglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
+            if (BarangTglExp.getDate() == null) {
+                throw new Exception("TglKeluar");
+            }
 
             String id = IDBarangField.getText();
             String nama = NamaBarangField.getText();
@@ -2685,10 +2790,10 @@ public class Menu extends javax.swing.JFrame {
             int harga = Integer.parseInt(HargaBarangField.getText());
             Date masuk = BarangTglMasuk.getDate();
             Date kadaluarsa = BarangTglExp.getDate();
-            
+
             Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
             barangController.setDml(b, OperasiCRUD.INSERT);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddBarang_CancelButtonActionPerformed(null);
         } catch (NumberFormatException ex) {
@@ -2699,6 +2804,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AddBarang_SaveButtonActionPerformed
 
     private void AddBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddBarangMenuComponentShown
+        // TODO add your handling code here:
         List<Katagori> list = katagoriController.getAllKatagori();
         int size = list.size();
 
@@ -2723,10 +2829,12 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AddBarangMenuComponentShown
 
     private void IDKCbxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDKCbxMouseClicked
+        // TODO add your handling code here:
         AddBarangMenuComponentShown(null);
     }//GEN-LAST:event_IDKCbxMouseClicked
 
     private void AddBarang_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBarang_CancelButtonActionPerformed
+        // TODO add your handling code here:
         IDBarangField.setText("");
         NamaBarangField.setText("");
         HargaBarangField.setText("");
@@ -2736,22 +2844,25 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AddBarang_CancelButtonActionPerformed
 
     private void ListBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListBarangMenuComponentShown
+        // TODO add your handling code here:
         List<Barang> list = barangController.getAllBarang();
-        if(list == null)
+        if (list == null) {
             return;
-        
+        }
+
         int size = list.size();
         Object[][] data = new Object[size][6];
-        Object[] columnNames = {
-            "ID Barang", 
-            "ID Katagori", 
-            "Nama Barang", 
-            "Harga Barang", 
-            "Tanggal Masuk", 
-            "Tanggal Kadaluarsa"
-        };
-        
-        for(int i=0; i<size; i++){
+        Object[] columnNames
+                = {
+                    "ID Barang",
+                    "ID Katagori",
+                    "Nama Barang",
+                    "Harga Barang",
+                    "Tanggal Masuk",
+                    "Tanggal Kadaluarsa"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Barang();
             data[i][1] = list.get(i).getID_Katagori();
             data[i][2] = list.get(i).getNama_Barang();
@@ -2759,8 +2870,8 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = list.get(i).getTanggal_Masuk();
             data[i][5] = list.get(i).getTanggal_Kadaluarsa();
         }
-        
-        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+
+        TabelBarang.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -2769,12 +2880,23 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_ListBarangMenuComponentShown
 
     private void UpdateBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangConfirmActionPerformed
+        // TODO add your handling code here:
         try {
-            if (UpdateBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
-            if (UpdateBarang_NamaBarangField.getText().equals("")) throw new Exception("Nama");
-            if (UpdateBarang_HargaField.getText().equals(""))      throw new Exception("Harga");
-            if (UpdateBarang_TglMasuk.getDate() == null)           throw new Exception("TglMasuk");
-            if (UpdateBarang_TglExp.getDate() == null)             throw new Exception("TglKeluar");
+            if (UpdateBarang_IDBarangField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (UpdateBarang_NamaBarangField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (UpdateBarang_HargaField.getText().equals("")) {
+                throw new Exception("Harga");
+            }
+            if (UpdateBarang_TglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
+            if (UpdateBarang_TglExp.getDate() == null) {
+                throw new Exception("TglKeluar");
+            }
 
             String id = UpdateBarang_IDBarangField.getText();
             String nama = UpdateBarang_NamaBarangField.getText();
@@ -2782,10 +2904,10 @@ public class Menu extends javax.swing.JFrame {
             int harga = Integer.parseInt(UpdateBarang_HargaField.getText());
             Date masuk = UpdateBarang_TglMasuk.getDate();
             Date kadaluarsa = UpdateBarang_TglExp.getDate();
-            
+
             Barang b = new Barang(id, kategori, nama, harga, DatetoSQL(masuk), DatetoSQL(kadaluarsa));
             barangController.setDml(b, OperasiCRUD.UPDATE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil diupdate!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateBarangCancelActionPerformed(null);
         } catch (NumberFormatException ex) {
@@ -2796,6 +2918,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateBarangConfirmActionPerformed
 
     private void UpdateBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateBarangMenuComponentShown
+        // TODO add your handling code here:
         List<Katagori> list = katagoriController.getAllKatagori();
         int size = list.size();
 
@@ -2821,13 +2944,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateBarangMenuComponentShown
 
     private void UpdateBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBarangCancelActionPerformed
+        // TODO add your handling code here:
         UpdateBarang_IDBarangField.setText("");
         UpdateBarang_NamaBarangField.setText("");
         UpdateBarang_IDKCbx.setSelectedIndex(-1);
         UpdateBarang_HargaField.setText("");
         UpdateBarang_TglMasuk.setDate(null);
         UpdateBarang_TglExp.setDate(null);
-        
+
         SearchUpdateBarang.setEnabled(true);
         UpdateBarang_IDBarangField.setEnabled(true);
         UpdateBarang_IDKCbx.setEnabled(false);
@@ -2840,6 +2964,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateBarangCancelActionPerformed
 
     private void HapusBarangMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusBarangMenuComponentShown
+        // TODO add your handling code here:
         List<Katagori> list = katagoriController.getAllKatagori();
         int size = list.size();
 
@@ -2865,14 +2990,17 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_HapusBarangMenuComponentShown
 
     private void HapusBarangConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangConfirmActionPerformed
+        // TODO add your handling code here:
         try {
-            if (HapusBarang_IDBarangField.getText().equals(""))   throw new Exception("ID");
+            if (HapusBarang_IDBarangField.getText().equals("")) {
+                throw new Exception("ID");
+            }
 
             String id = HapusBarang_IDBarangField.getText();
-            
+
             Barang b = new Barang(id, null, null, 0, null, null);
             barangController.setDml(b, OperasiCRUD.DELETE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusBarangCancelActionPerformed(null);
         } catch (Exception ex) {
@@ -2881,14 +3009,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_HapusBarangConfirmActionPerformed
 
     private void HapusBarangCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusBarangCancelActionPerformed
+        // TODO add your handling code here:
         HapusBarang_IDBarangField.setText("");
         HapusBarang_NamaBarangField.setText("");
         HapusBarang_IDKCbx.setSelectedIndex(-1);
         HapusBarang_HargaField.setText("");
         HapusBarang_TglMasuk.setDate(null);
         HapusBarang_TglExp.setDate(null);
-        
-        
+
         HapusBarang_IDBarangField.setEnabled(true);
         SearchHapusBarang.setEnabled(true);
         HapusBarangConfirm.setEnabled(false);
@@ -2896,6 +3024,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_HapusBarangCancelActionPerformed
 
     private void AddStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddStafMenuComponentShown
+        // TODO add your handling code here:        
         List<Cabang> list = cabangController.getAllCabang();
         int size = list.size();
 
@@ -2920,20 +3049,27 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AddStafMenuComponentShown
 
     private void AddStaf_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_SaveButtonActionPerformed
+        // TODO add your handling code here:
         try {
-            if (AddStaf_IDField.getText().equals(""))    throw new Exception("ID");
-            if (AddStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
-            if (StafTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+            if (AddStaf_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (AddStaf_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (StafTglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
 
             String id = AddStaf_IDField.getText();
             String nama = AddStaf_NamaField.getText();
             String cabang = ((Cabang) CabangCbx.getSelectedItem()).getID_Cabang();
             String shift = ShiftPagi.isSelected() ? "Pagi" : "Malam";
             Date masuk = StafTglMasuk.getDate();
-            
+
             Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
             petugasController.setDml(p, OperasiCRUD.INSERT);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddStaf_CancelButtonActionPerformed(null);
         } catch (Exception ex) {
@@ -2942,6 +3078,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AddStaf_SaveButtonActionPerformed
 
     private void AddStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStaf_CancelButtonActionPerformed
+        // TODO add your handling code here:
         AddStaf_IDField.setText("");
         AddStaf_NamaField.setText("");
         ShiftPagi.setSelected(true);
@@ -2950,29 +3087,32 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AddStaf_CancelButtonActionPerformed
 
     private void ListStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListStafMenuComponentShown
+        // TODO add your handling code here:
         List<Petugas> list = petugasController.getAllPetugas();
-        if(list == null)
+        if (list == null) {
             return;
-        
+        }
+
         int size = list.size();
         Object[][] data = new Object[size][5];
-        Object[] columnNames = {
-            "ID Petugas",  
-            "Nama Petugas", 
-            "ID Cabang",
-            "Shift",
-            "Tanggal Masuk"
-        };
-        
-        for(int i=0; i<size; i++){
+        Object[] columnNames
+                = {
+                    "ID Petugas",
+                    "Nama Petugas",
+                    "ID Cabang",
+                    "Shift",
+                    "Tanggal Masuk"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Petugas();
             data[i][1] = list.get(i).getNama_Petugas();
             data[i][2] = list.get(i).getID_Cabang();
             data[i][3] = list.get(i).getShift();
             data[i][4] = list.get(i).getTanggal_Masuk();
         }
-        
-        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+
+        TabelStaf.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -2981,6 +3121,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_ListStafMenuComponentShown
 
     private void UpdateStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateStafMenuComponentShown
+        // TODO add your handling code here:
         List<Cabang> list = cabangController.getAllCabang();
         int size = list.size();
 
@@ -3006,20 +3147,27 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateStafMenuComponentShown
 
     private void UpdateSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSaveActionPerformed
+        // TODO add your handling code here:
         try {
-            if (UpdateStaf_IDField.getText().equals(""))    throw new Exception("ID");
-            if (UpdateStaf_NamaField.getText().equals(""))  throw new Exception("Nama");
-            if (UpdateTglMasuk.getDate() == null)      throw new Exception("TglMasuk");
+            if (UpdateStaf_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (UpdateStaf_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (UpdateTglMasuk.getDate() == null) {
+                throw new Exception("TglMasuk");
+            }
 
             String id = UpdateStaf_IDField.getText();
             String nama = UpdateStaf_NamaField.getText();
             String cabang = ((Cabang) UpdateCabangCbx.getSelectedItem()).getID_Cabang();
             String shift = UpdateShiftPagi.isSelected() ? "Pagi" : "Malam";
             Date masuk = UpdateTglMasuk.getDate();
-            
+
             Petugas p = new Petugas(id, nama, cabang, shift, DatetoSQL(masuk));
             petugasController.setDml(p, OperasiCRUD.UPDATE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateCancelActionPerformed(null);
         } catch (Exception ex) {
@@ -3028,12 +3176,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateSaveActionPerformed
 
     private void UpdateCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCancelActionPerformed
+        // TODO add your handling code here:
         UpdateStaf_IDField.setText("");
         UpdateStaf_NamaField.setText("");
         UpdateCabangCbx.setSelectedIndex(-1);
         UpdateShiftPagi.setSelected(true);
         UpdateTglMasuk.setDate(null);
-        
+
         SearchUpdate.setEnabled(true);
         UpdateStaf_IDField.setEnabled(true);
         UpdateStaf_NamaField.setEnabled(false);
@@ -3044,6 +3193,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateCancelActionPerformed
 
     private void HapusStafMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusStafMenuComponentShown
+        // TODO add your handling code here:
         List<Cabang> list = cabangController.getAllCabang();
         int size = list.size();
 
@@ -3069,14 +3219,17 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_HapusStafMenuComponentShown
 
     private void HapusStaf_ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_ConfirmButtonActionPerformed
+        // TODO add your handling code here:
         try {
-            if (HapusStaf_IDField.getText().equals(""))    throw new Exception("ID");
+            if (HapusStaf_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
 
             String id = HapusStaf_IDField.getText();
-            
+
             Petugas p = new Petugas(id, null, null, null, null);
             petugasController.setDml(p, OperasiCRUD.DELETE);
-            
+
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusStaf_CancelButtonActionPerformed(null);
         } catch (Exception ex) {
@@ -3085,12 +3238,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_HapusStaf_ConfirmButtonActionPerformed
 
     private void HapusStaf_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_CancelButtonActionPerformed
+        // TODO add your handling code here:
         HapusStaf_IDField.setText("");
         HapusStaf_NamaField.setText("");
         HapusCabangCbx.setSelectedIndex(-1);
         HapusShiftPagi.setSelected(true);
         HapusTglMasuk.setDate(null);
-        
+
         HapusStaf_IDField.setEnabled(true);
         HapusStaf_SearchButton.setEnabled(true);
         HapusStaf_ConfirmButton.setEnabled(false);
@@ -3098,52 +3252,62 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_HapusStaf_CancelButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        if(SearchBar.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE); 
+        // TODO add your handling code here:
+        if (SearchBar.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         List<Storage> list;
         String searchType = (String) SearchCbx.getSelectedItem();
         String searchText = SearchBar.getText();
-        
-        switch(searchType){
-            case "ID Barang":
+
+        switch (searchType) {
+            case "ID Barang": {
                 list = storageController.getByID_Barang(searchText);
                 break;
-            case "Nama Barang":
+            }
+
+            case "Nama Barang": {
                 list = storageController.getByNama_Barang(searchText);
                 break;
-            case "Kata Kunci":
+            }
+
+            case "Kata Kunci": {
                 list = storageController.getByKataKunci(searchText);
                 break;
-            default:
+            }
+
+            default: {
                 JOptionPane.showMessageDialog(this, "Search Type: " + searchType + " not found!", "ERROR!", JOptionPane.ERROR_MESSAGE);
                 return;
+            }
         }
-        
-        if(list == null)
+
+        if (list == null) {
             return;
-        
+        }
+
         int size = list.size();
         Object[][] data = new Object[size][5];
-        Object[] columnNames = {
-            "ID Barang",  
-            "Nama Barang", 
-            "Katagori",
-            "Supplier",
-            "Stok"
-        };
-        
-        for(int i=0; i<size; i++){
+        Object[] columnNames
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Katagori",
+                    "Supplier",
+                    "Stok"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Barang();
             data[i][1] = list.get(i).getNama_Barang();
             data[i][2] = list.get(i).getNama_Katagori();
             data[i][3] = list.get(i).getNama_Supplier();
             data[i][4] = list.get(i).getStok();
         }
-        
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -3152,30 +3316,33 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void StokPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StokPanelComponentShown
+        // TODO add your handling code here:
         List<Storage> list = storageController.getAllStorage();
-        
-        if(list == null)
+
+        if (list == null) {
             return;
-        
+        }
+
         int size = list.size();
         Object[][] data = new Object[size][5];
-        Object[] columnNames = {
-            "ID Barang",  
-            "Nama Barang", 
-            "Katagori",
-            "Supplier",
-            "Stok"
-        };
-        
-        for(int i=0; i<size; i++){
+        Object[] columnNames
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Katagori",
+                    "Supplier",
+                    "Stok"
+                };
+
+        for (int i = 0; i < size; i++) {
             data[i][0] = list.get(i).getID_Barang();
             data[i][1] = list.get(i).getNama_Barang();
             data[i][2] = list.get(i).getNama_Katagori();
             data[i][3] = list.get(i).getNama_Supplier();
             data[i][4] = list.get(i).getStok();
         }
-        
-        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames){
+
+        TabelStok.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -3184,6 +3351,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_StokPanelComponentShown
 
     private void PembelianPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PembelianPanelComponentShown
+        // TODO add your handling code here:
         List<Barang> list = barangController.getAllBarang();
         int size = list.size();
 
@@ -3209,89 +3377,90 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_PembelianPanelComponentShown
 
     private void PembelianAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianAddtoCartActionPerformed
+        // TODO add your handling code here:
         String IDBon = PembelianIDBonField.getText();
-        
-        if(IDBon.isBlank()){
+
+        if (IDBon.isBlank()) {
             JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(bonController.getByID_Bon(IDBon) != null){
+
+        if (bonController.getByID_Bon(IDBon) != null) {
             JOptionPane.showMessageDialog(this, "ID BON SUDAH ADA!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(BarangSelectCbx.getSelectedIndex() == -1){
+
+        if (BarangSelectCbx.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "ID BARANG TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
         int jumlah = (int) JumlahCounter.getValue();
         long total = b.getHarga_Barang() * jumlah;
-        
-        
+
         // Update the table
         int w = TabelPembelian.getModel().getColumnCount();
         int h = TabelPembelian.getModel().getRowCount();
-        
+
         Object[] coloumnNames = new Object[w];
-        for(int k=0; k<w; k++){
+        for (int k = 0; k < w; k++) {
             coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
         }
-        
+
         List<Object[]> dataList = new ArrayList<>();
-        for(int i=0; i<h; i++){
+        for (int i = 0; i < h; i++) {
             dataList.add(new Object[w]);
-            for(int k=0; k<w; k++){
+
+            for (int k = 0; k < w; k++) {
                 dataList.get(i)[k] = TabelPembelian.getModel().getValueAt(i, k);
             }
         }
-        
+
         Boolean isFound = false;
-        for(Object[] d : dataList){
-            if(b.getID_Barang().equals(d[0])){
+        for (Object[] d : dataList) {
+            if (b.getID_Barang().equals(d[0])) {
                 // jumlah = jumlah + InputJumlah
-                d[3] = (int)d[3] + jumlah;
-                
+                d[3] = (int) d[3] + jumlah;
+
                 // total = harga * jumlah
-                d[4] = (long)(int)d[2] *(int)d[3];
-                
+                d[4] = (long) (int) d[2] * (int) d[3];
+
                 isFound = true;
                 break;
             }
         }
-        
-        if(!isFound){
+
+        if (!isFound) {
             Object[] o = new Object[w];
-            
+
             o[0] = b.getID_Barang();
             o[1] = b.getNama_Barang();
             o[2] = b.getHarga_Barang();
             o[3] = jumlah;
             o[4] = total;
-            
+
             dataList.add(o);
         }
-        
+
         Object[][] data = dataList.toArray(new Object[dataList.size()][w]);
-        TabelPembelian.setModel(new DefaultTableModel(data, coloumnNames){
+        TabelPembelian.setModel(new DefaultTableModel(data, coloumnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
-        
-        
+
         // Update Subtotal
         h = TabelPembelian.getModel().getRowCount();
         long subtotal = 0;
-        for(int i=0; i<h; i++){
+
+        for (int i = 0; i < h; i++) {
             subtotal += (long) data[i][4];
         }
+
         PembelianSubtotalField.setText("" + subtotal);
-        
-        
+
         // Disable Bon Field and reset input field
         PembelianIDBonField.setEnabled(false);
         BarangSelectCbx.setSelectedIndex(-1);
@@ -3300,36 +3469,39 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_PembelianAddtoCartActionPerformed
 
     private void BarangSelectCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarangSelectCbxActionPerformed
-        if(BarangSelectCbx.getSelectedIndex() == -1){
+        // TODO add your handling code here:
+        if (BarangSelectCbx.getSelectedIndex() == -1) {
             return;
         }
-        
+
         Barang b = (Barang) BarangSelectCbx.getModel().getSelectedItem();
-        
-        PembelianTotalField.setText(b.getHarga_Barang() * (int)JumlahCounter.getValue() + "");
+
+        PembelianTotalField.setText(b.getHarga_Barang() * (int) JumlahCounter.getValue() + "");
     }//GEN-LAST:event_BarangSelectCbxActionPerformed
 
     private void JumlahCounterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JumlahCounterStateChanged
+        // TODO add your handling code here:
         BarangSelectCbxActionPerformed(null);
     }//GEN-LAST:event_JumlahCounterStateChanged
 
     private void PembelianResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianResetActionPerformed
+        // TODO add your handling code here:
         PembelianIDBonField.setEnabled(true);
         PembelianIDBonField.setText("");
         BarangSelectCbx.setSelectedIndex(-1);
         JumlahCounter.setValue(1);
         PembelianTotalField.setText("");
         PembelianSubtotalField.setText("");
-        
+
         // Clear the table
         int w = TabelPembelian.getModel().getColumnCount();
-        
+
         Object[] coloumnNames = new Object[w];
-        for(int k=0; k<w; k++){
+        for (int k = 0; k < w; k++) {
             coloumnNames[k] = TabelPembelian.getModel().getColumnName(k);
         }
-        
-        TabelPembelian.setModel(new DefaultTableModel(new Object[][]{}, coloumnNames){
+
+        TabelPembelian.setModel(new DefaultTableModel(new Object[][]{}, coloumnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -3338,81 +3510,73 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_PembelianResetActionPerformed
 
     private void PembelianBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianBayarActionPerformed
-        if(PembelianIDBonField.isEnabled()){
+        // TODO add your handling code here:
+        if (PembelianIDBonField.isEnabled()) {
             JOptionPane.showMessageDialog(this, "BELI DULU!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         Random randomGen = new Random();
-        
+
         String ID_Bon = PembelianIDBonField.getText();
-        Date now = Date.from(LocalDateTime.now().atZone( ZoneId.systemDefault()).toInstant());
-        long Subtotal = Long.parseLong(PembelianSubtotalField.getText());
-        
-        String ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
-        if(ID_Petugas == null || ID_Petugas.isBlank()){
-            return;
-        }
-        while(petugasController.getByID_Petugas(ID_Petugas) == null) {
-            if(ID_Petugas == null || ID_Petugas.isBlank()){
-                return;
-            }
-            JOptionPane.showMessageDialog(this, "Error! ID Petugas tidak ditemukan!");
-            ID_Petugas = JOptionPane.showInputDialog(this, "Masukan ID Petugas");
-        } 
-        
-        Bon b = new Bon(ID_Bon, DatetoSQL(now), Subtotal, ID_Petugas);
+        Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        long subtotal = Long.parseLong(PembelianSubtotalField.getText());
+
+        Bon b = new Bon(ID_Bon, DatetoSQL(now), subtotal);
         bonController.setDml(b, OperasiCRUD.INSERT);
-        
+
         // Get Table
         int h = TabelPembelian.getModel().getRowCount();
         List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
-        
-        for(int i=0; i<h; i++){
+
+        for (int i = 0; i < h; i++) {
             Boolean adaSama;
             String ID_Transaksi = "" + randomGen.nextInt(999999999);
             do {
                 adaSama = false;
-                for(Transaksi a : transaksiList){
-                    if(a.getID_Transaksi().equals(ID_Transaksi)){
+                for (Transaksi a : transaksiList) {
+                    if (a.getID_Transaksi().equals(ID_Transaksi)) {
                         ID_Transaksi = "" + randomGen.nextInt(999999999);
                         adaSama = true;
                         break;
                     }
                 }
-            } while(adaSama);
-            
-            String ID_Barang  = (String) TabelPembelian.getModel().getValueAt(i, 0);
-            int jumlah_barang = (int)    TabelPembelian.getModel().getValueAt(i, 3);
-            long Harga_Total  = (long)   TabelPembelian.getModel().getValueAt(i, 4);
-            
+            } while (adaSama);
+
+            String ID_Barang = (String) TabelPembelian.getModel().getValueAt(i, 0);
+            int jumlah_barang = (int) TabelPembelian.getModel().getValueAt(i, 3);
+            long Harga_Total = (long) TabelPembelian.getModel().getValueAt(i, 4);
+
             Transaksi t = new Transaksi(ID_Transaksi, ID_Barang, jumlah_barang, Harga_Total, ID_Bon);
             transaksiController.setDml(t, OperasiCRUD.INSERT);
         }
-        
+
         PembelianResetActionPerformed(null);
     }//GEN-LAST:event_PembelianBayarActionPerformed
 
     private void TransaksiPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_TransaksiPanelComponentShown
+        // TODO add your handling code here:
         List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
-        
-        Object[] namaKolom = {
-            "ID Barang",
-            "Nama Barang",
-            "Tanggal Transaksi",
-            "Jumlah",
-            "Harga Satuan",
-            "Total"
-        };
-        
+
+        Object[] namaKolom
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Tanggal Transaksi",
+                    "Jumlah",
+                    "Harga Satuan",
+                    "Total"
+                };
+
         int w = namaKolom.length;
         int h = transaksiList.size();
-        
+
         Object[][] data = new Object[h][w];
-        for(int i=0; i<h; i++){
+
+        for (int i = 0; i < h; i++) {
             Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
             Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
-            
+
             data[i][0] = transaksiList.get(i).getID_Barang();
             data[i][1] = b != null ? b.getNama_Barang() : null;
             data[i][2] = bon != null ? bon.getTanggal_Transaksi() : null;
@@ -3420,8 +3584,8 @@ public class Menu extends javax.swing.JFrame {
             data[i][4] = b != null ? b.getHarga_Barang() : null;
             data[i][5] = transaksiList.get(i).getHarga_Total();
         }
-        
-        TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom){
+
+        TabelTransaksi.setModel(new DefaultTableModel(data, namaKolom) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -3430,78 +3594,357 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_TransaksiPanelComponentShown
 
     private void TabelTransaksiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TabelTransaksiPropertyChange
+        // TODO add your handling code here:
         long subtotal = 0;
-        
+
         int h = TabelTransaksi.getModel().getRowCount();
-        for(int i=0; i<h; i++){
+        for (int i = 0; i < h; i++) {
             subtotal += (long) TabelTransaksi.getModel().getValueAt(i, 5);
         }
-        
+
         SubtotalField.setText("" + subtotal);
     }//GEN-LAST:event_TabelTransaksiPropertyChange
 
     private void Transaksi_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transaksi_SearchButtonActionPerformed
+        // TODO add your handling code here:
         Boolean isIDMode = TransaksiSearchByIDBon.isEnabled();
         String ID = TransaksiSearchByIDBon.getText();
         Date d = TransaksiSearchByDate.getDate();
-        
-        if(isIDMode){
-            if(ID.isBlank()){
+
+        if (isIDMode) {
+            if (ID.isBlank()) {
                 JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            if(d == null){
+            if (d == null) {
                 JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+
         List<Transaksi> transaksiList = transaksiController.getAllTransaksi();
-        
-        Object[] namaKolom = {
-            "ID Barang",
-            "Nama Barang",
-            "Tanggal Transaksi",
-            "Jumlah",
-            "Harga Satuan",
-            "Total"
-        };
-        
+
+        Object[] namaKolom
+                = {
+                    "ID Barang",
+                    "Nama Barang",
+                    "Tanggal Transaksi",
+                    "Jumlah",
+                    "Harga Satuan",
+                    "Total"
+                };
+
         int w = namaKolom.length;
         int h = transaksiList.size();
-        
+
         ArrayList<Object[]> dataList = new ArrayList<>();
-        for(int i=0; i<h; i++){
+
+        for (int i = 0; i < h; i++) {
             Bon bon = bonController.getByID_Bon(transaksiList.get(i).getID_Bon());
-            if(isIDMode){
-                if(!bon.getID_Bon().equals(ID)){
+
+            if (isIDMode) {
+                if (!bon.getID_Bon().equals(ID)) {
                     continue;
                 }
             } else {
-                if(!bon.getTanggal_Transaksi().equals(d)){
+                if (!bon.getTanggal_Transaksi().equals(d)) {
                     continue;
                 }
             }
-            
+
             Object[] data = new Object[w];
             Barang b = barangController.getByID_Barang(transaksiList.get(i).getID_Barang());
-            
+
             data[0] = transaksiList.get(i).getID_Barang();
             data[1] = b != null ? b.getNama_Barang() : null;
             data[2] = bon != null ? bon.getTanggal_Transaksi() : null;
             data[3] = transaksiList.get(i).getJumlah_Barang();
             data[4] = b != null ? b.getHarga_Barang() : null;
             data[5] = transaksiList.get(i).getHarga_Total();
-            
+
             dataList.add(data);
         }
-        
-        TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom){
+
+        TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
     }//GEN-LAST:event_Transaksi_SearchButtonActionPerformed
+
+    private void AddSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddSupplierMenuComponentShown
+        // TODO add your handling code here:
+        List<Supplier> list = supplierController.getAllSupplier();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != KotaCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(KotaCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        KotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+    }//GEN-LAST:event_AddSupplierMenuComponentShown
+
+    private void AddSupplier_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSupplier_CancelButtonActionPerformed
+        // TODO add your handling code here:
+        AddSupplier_IDField.setText("");
+        AddSupplier_NamaField.setText("");
+        HargaBarangField.setText("");
+        KotaCbx.setSelectedIndex(0);
+    }//GEN-LAST:event_AddSupplier_CancelButtonActionPerformed
+
+    private void AddSupplier_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSupplier_SaveButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (AddSupplier_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (AddSupplier_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+
+            String id = AddSupplier_IDField.getText();
+            String nama = AddSupplier_NamaField.getText();
+            String kota = ((Kota) KotaCbx.getSelectedItem()).getID_Kota();
+
+            Supplier su = new Supplier(id, nama, kota);
+            supplierController.setDml(su, OperasiCRUD.INSERT);
+
+            JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
+            AddSupplier_SaveButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_AddSupplier_SaveButtonActionPerformed
+
+    private void ListSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListSupplierMenuComponentShown
+        // TODO add your handling code here:
+        List<Supplier> list = supplierController.getAllSupplier();
+        if (list == null) {
+            return;
+        }
+
+        int size = list.size();
+        Object[][] data = new Object[size][6];
+        Object[] columnNames
+                = {
+                    "ID Supplier",
+                    "Nama Supplier",
+                    "ID Kota"
+                };
+
+        for (int i = 0; i < size; i++) {
+            data[i][0] = list.get(i).getID_Supplier();
+            data[i][1] = list.get(i).getNama_Supplier();
+            data[i][2] = list.get(i).getID_Kota();
+        }
+
+        TabelSupplier.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }//GEN-LAST:event_ListSupplierMenuComponentShown
+
+    private void UpdateSupplier_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplier_SearchButtonActionPerformed
+        if (UpdateSupplier_IDField.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String id = UpdateSupplier_IDField.getText();
+        Supplier s = supplierController.getByID_Supplier(id);
+
+        if (s == null) {
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int size = UpdateKotaCbx.getModel().getSize();
+        int i;
+
+        for (i = size - 1; i >= 0; i--) {
+            Kota cek = (Kota) UpdateKotaCbx.getModel().getElementAt(i);
+            if (cek.getID_Kota().equals(s.getID_Kota())) {
+                break;
+            }
+        }
+
+        UpdateKotaCbx.setSelectedIndex(i);
+        UpdateSupplier_NamaField.setText(s.getNama_Supplier());
+
+        UpdateSupplier_NamaField.setEnabled(true);
+        UpdateKotaCbx.setEnabled(true);
+        UpdateSupplier_SaveButton.setEnabled(true);
+        UpdateSupplier_CancelButton.setEnabled(true);
+    }//GEN-LAST:event_UpdateSupplier_SearchButtonActionPerformed
+
+    private void UpdateSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_UpdateSupplierMenuComponentShown
+        // TODO add your handling code here:
+        List<Kota> list = kotaController.getAllKota();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != UpdateKotaCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(UpdateKotaCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        UpdateKotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        UpdateKotaCbx.setSelectedIndex(-1);
+    }//GEN-LAST:event_UpdateSupplierMenuComponentShown
+
+    private void UpdateSupplier_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplier_SaveButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (UpdateSupplier_IDField.getText().equals("")) {
+                throw new Exception("ID");
+            }
+            if (UpdateSupplier_NamaField.getText().equals("")) {
+                throw new Exception("Nama");
+            }
+            if (UpdateKotaCbx.getSelectedIndex() == -1) {
+                throw new Exception("Kota");
+            }
+
+            String id = UpdateSupplier_IDField.getText();
+            String nama = UpdateSupplier_NamaField.getText();
+            String kota = ((Kota) UpdateKotaCbx.getSelectedItem()).getID_Kota();
+
+            Supplier s = new Supplier(id, nama, kota);
+            supplierController.setDml(s, OperasiCRUD.UPDATE);
+
+            JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
+            UpdateSupplier_CancelButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_UpdateSupplier_SaveButtonActionPerformed
+
+    private void UpdateSupplier_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplier_CancelButtonActionPerformed
+        // TODO add your handling code here:
+        UpdateSupplier_IDField.setText("");
+        UpdateSupplier_NamaField.setText("");
+        UpdateKotaCbx.setSelectedIndex(-1);
+
+        UpdateSupplier_IDField.setEnabled(true);
+        UpdateSupplier_SearchButton.setEnabled(true);
+        UpdateSupplier_NamaField.setEnabled(false);
+        UpdateKotaCbx.setEnabled(false);
+        UpdateSupplier_SaveButton.setEnabled(false);
+        UpdateSupplier_CancelButton.setEnabled(false);
+    }//GEN-LAST:event_UpdateSupplier_CancelButtonActionPerformed
+
+    private void HapusSupplier_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_SearchButtonActionPerformed
+        // TODO add your handling code here:
+        if (HapusSupplier_IDField.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String id = HapusSupplier_IDField.getText();
+        Supplier s = supplierController.getByID_Supplier(id);
+
+        if (s == null) {
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int size = HapusKotaCbx.getModel().getSize();
+        int i;
+
+        for (i = size - 1; i >= 0; i--) {
+            Supplier cek = (Supplier) HapusKotaCbx.getModel().getElementAt(i);
+            if (cek.getID_Supplier().equals(s.getID_Supplier())) {
+                break;
+            }
+        }
+
+        HapusKotaCbx.setSelectedIndex(i);
+        HapusSupplier_NamaField.setText(s.getNama_Supplier());
+
+        HapusSupplier_ConfirmButton.setEnabled(true);
+        HapusSupplier_CancelButton.setEnabled(true);
+    }//GEN-LAST:event_HapusSupplier_SearchButtonActionPerformed
+
+    private void HapusSupplier_CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_CancelButtonActionPerformed
+        // TODO add your handling code here:
+        HapusSupplier_IDField.setText("");
+        HapusSupplier_NamaField.setText("");
+        HapusKotaCbx.setSelectedIndex(-1);
+
+        HapusSupplier_ConfirmButton.setEnabled(false);
+        HapusSupplier_CancelButton.setEnabled(false);
+    }//GEN-LAST:event_HapusSupplier_CancelButtonActionPerformed
+
+    private void HapusSupplier_ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_ConfirmButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (HapusSupplier_IDField.getText().isBlank()) {
+                throw new Exception("ID");
+            }
+
+            String id = HapusSupplier_IDField.getText();
+
+            Supplier s = new Supplier(id, null, null);
+            supplierController.setDml(s, OperasiCRUD.DELETE);
+
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
+            HapusSupplier_CancelButtonActionPerformed(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_HapusSupplier_ConfirmButtonActionPerformed
+
+    private void HapusSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusSupplierMenuComponentShown
+        // TODO add your handling code here:
+        List<Supplier> list = supplierController.getAllSupplier();
+        int size = list.size();
+
+        Boolean isUpdated = false;
+
+        if (size != HapusKotaCbx.getModel().getSize()) {
+            isUpdated = true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!list.get(i).toString().equals(HapusKotaCbx.getModel().getElementAt(i).toString())) {
+                    isUpdated = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isUpdated) {
+            return;
+        }
+
+        HapusKotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(list.toArray()));
+        HapusKotaCbx.setSelectedIndex(-1);
+    }//GEN-LAST:event_HapusSupplierMenuComponentShown
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -3522,7 +3965,8 @@ public class Menu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(()-> {
+        java.awt.EventQueue.invokeLater(()
+                -> {
             new Menu().setVisible(true);
         });
     }
@@ -3594,7 +4038,7 @@ public class Menu extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser HapusBarang_TglExp;
     private com.toedter.calendar.JDateChooser HapusBarang_TglMasuk;
     private javax.swing.JComboBox HapusCabangCbx;
-    private javax.swing.JComboBox<String> HapusKotaCbx;
+    private javax.swing.JComboBox HapusKotaCbx;
     private javax.swing.JRadioButton HapusShiftMalam;
     private javax.swing.JRadioButton HapusShiftPagi;
     private javax.swing.JLabel HapusStafCabang;
@@ -3627,7 +4071,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextField IDBarangField;
     private javax.swing.JComboBox IDKCbx;
     private javax.swing.JSpinner JumlahCounter;
-    private javax.swing.JComboBox<String> KotaCbx;
+    private javax.swing.JComboBox KotaCbx;
     private javax.swing.JPanel ListBarang;
     private javax.swing.JLabel ListBarangLogo;
     private javax.swing.JPanel ListBarangMenu;
@@ -3673,7 +4117,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JRadioButton ShiftPagi;
     private javax.swing.JPanel Staf;
     private javax.swing.JPanel StafBar;
-    private javax.swing.JPanel StafBar1;
     private javax.swing.JLabel StafLogo;
     private javax.swing.JPanel StafPanel;
     private javax.swing.JScrollPane StafTable;
@@ -3685,6 +4128,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel StokTitle;
     private javax.swing.JLabel Subtotal;
     private javax.swing.JTextField SubtotalField;
+    private javax.swing.JPanel SupplierBar;
     private javax.swing.JPanel SupplierPanel;
     private javax.swing.JScrollPane SupplierTable;
     private javax.swing.JPanel Supply;
@@ -3729,7 +4173,7 @@ public class Menu extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser UpdateBarang_TglMasuk;
     private javax.swing.JComboBox UpdateCabangCbx;
     private javax.swing.JButton UpdateCancel;
-    private javax.swing.JComboBox<String> UpdateKotaCbx;
+    private javax.swing.JComboBox UpdateKotaCbx;
     private javax.swing.JButton UpdateSave;
     private javax.swing.JRadioButton UpdateShiftMalam;
     private javax.swing.JRadioButton UpdateShiftPagi;
