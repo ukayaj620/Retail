@@ -7,61 +7,75 @@ import java.util.Observable;
 import models.OperasiCRUD;
 import models.Storage;
 
-public class StorageController extends Observable {
-
-    private StorageInterface dao = new StorageDAO();
-    private OperasiCRUD crud;
-
-    public void setDAO(StorageInterface petugas) {
+public class StorageController extends Observable
+{
+private StorageInterface dao = new StorageDAO();
+private OperasiCRUD crud;
+    
+    public void setDAO(StorageInterface petugas)
+    {
         dao = petugas;
     }
-
-    public void setDml(Storage storage, OperasiCRUD c) {
+    
+    public void setDml(Storage storage, OperasiCRUD c)
+    {
         boolean hasil = false;
         this.crud = c;
-
-        switch (c) {
-            case INSERT: {
+        
+        switch(c)
+        {
+            case INSERT: 
+            {
                 hasil = dao.insert(storage);
                 break;
-            }
-
-            case UPDATE: {
+            } 
+                
+            case UPDATE: 
+            {
                 hasil = dao.update(storage);
                 break;
-            }
-
-            case DELETE: {
+            } 
+                
+            case DELETE: 
+            {
                 hasil = dao.delete(storage);
                 break;
             }
         }
         setChanged();
-
-        if (hasil) {
+        
+        if(hasil)
+        {
             notifyObservers(storage);
-        } else {
-            notifyObservers();
         }
+            else
+            {
+                notifyObservers();
+            }
     }
-
-    public OperasiCRUD getCrudState() {
+    
+    public OperasiCRUD getCrudState()
+    {
         return crud;
-    }
-
-    public List<Storage> getAllStorage() {
+    }    
+    
+    public List<Storage> getAllStorage()
+    {
         return dao.getAllStorage();
     }
-
-    public List<Storage> getByID_Barang(String ID_Barang) {
+    
+    public List<Storage> getByID_Barang(String ID_Barang)
+    {
         return dao.getByID_Barang(ID_Barang);
     }
-
-    public List<Storage> getByNama_Barang(String Nama_Barang) {
+    
+    public List<Storage> getByNama_Barang(String Nama_Barang)
+    {
         return dao.getByNama_Barang(Nama_Barang);
     }
-
-    public List<Storage> getByKataKunci(String KataKunci) {
+    
+    public List<Storage> getByKataKunci(String KataKunci)
+    {
         return dao.getByKataKunci(KataKunci);
     }
 }

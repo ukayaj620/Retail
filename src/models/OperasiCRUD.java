@@ -1,5 +1,6 @@
 package models;
 
-public enum OperasiCRUD {
+public enum OperasiCRUD
+{
     INSERT, UPDATE, DELETE, QUERY
 }
