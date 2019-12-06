@@ -2252,7 +2252,7 @@ public class Menu extends javax.swing.JFrame {
     private void SearchUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateActionPerformed
         // TODO add your handling code here:
         if (UpdateStaf_IDField.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2260,7 +2260,7 @@ public class Menu extends javax.swing.JFrame {
         Petugas p = petugasController.getByID_Petugas(id);
 
         if (p == null) {
-            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2300,7 +2300,7 @@ public class Menu extends javax.swing.JFrame {
     private void HapusStaf_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusStaf_SearchButtonActionPerformed
         // TODO add your handling code here:
         if (HapusStaf_IDField.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2308,7 +2308,7 @@ public class Menu extends javax.swing.JFrame {
         Petugas p = petugasController.getByID_Petugas(id);
 
         if (p == null) {
-            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2432,7 +2432,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void SearchUpdateBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUpdateBarangActionPerformed
         if (UpdateBarang_IDBarangField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2440,7 +2440,7 @@ public class Menu extends javax.swing.JFrame {
         Barang b = barangController.getByID_Barang(id);
 
         if (b == null) {
-            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2473,7 +2473,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void SearchHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchHapusBarangActionPerformed
         if (HapusBarang_IDBarangField.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2481,7 +2481,7 @@ public class Menu extends javax.swing.JFrame {
         Barang b = barangController.getByID_Barang(id);
 
         if (b == null) {
-            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2790,9 +2790,9 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddBarang_CancelButtonActionPerformed(null);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_AddBarang_SaveButtonActionPerformed
 
@@ -2904,9 +2904,9 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil diupdate!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateBarangCancelActionPerformed(null);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tulis angka dengan benar!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_UpdateBarangConfirmActionPerformed
 
@@ -2997,7 +2997,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusBarangCancelActionPerformed(null);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_HapusBarangConfirmActionPerformed
 
@@ -3066,7 +3066,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddStaf_CancelButtonActionPerformed(null);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_AddStaf_SaveButtonActionPerformed
 
@@ -3164,7 +3164,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateCancelActionPerformed(null);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_UpdateSaveActionPerformed
 
@@ -3226,7 +3226,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusStaf_CancelButtonActionPerformed(null);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_HapusStaf_ConfirmButtonActionPerformed
 
@@ -3247,7 +3247,7 @@ public class Menu extends javax.swing.JFrame {
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         // TODO add your handling code here:
         if (SearchBar.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "SEARCH TEXT TIDAK BOLEH KOSONG", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -3374,17 +3374,17 @@ public class Menu extends javax.swing.JFrame {
         String IDBon = PembelianIDBonField.getText();
 
         if (IDBon.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID BON TIDAK BOLEH KOSONG!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (bonController.getByID_Bon(IDBon) != null) {
-            JOptionPane.showMessageDialog(this, "ID BON SUDAH ADA!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID BON SUDAH ADA!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (BarangSelectCbx.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "ID BARANG TIDAK BOLEH KOSONG!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID BARANG TIDAK BOLEH KOSONG!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -3505,7 +3505,7 @@ public class Menu extends javax.swing.JFrame {
     private void PembelianBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PembelianBayarActionPerformed
         // TODO add your handling code here:
         if (PembelianIDBonField.isEnabled()) {
-            JOptionPane.showMessageDialog(this, "BELI DULU!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "BELI DULU!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -3606,11 +3606,11 @@ public class Menu extends javax.swing.JFrame {
 
         if (isIDMode) {
             if (ID.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "ID Bon tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             if (d == null) {
-                JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Tanggal tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -3718,7 +3718,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil masuk!", "Message", JOptionPane.PLAIN_MESSAGE);
             AddSupplier_SaveButtonActionPerformed(null);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_AddSupplier_SaveButtonActionPerformed
 
@@ -3754,7 +3754,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void UpdateSupplier_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplier_SearchButtonActionPerformed
         if (UpdateSupplier_IDField.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -3762,7 +3762,7 @@ public class Menu extends javax.swing.JFrame {
         Supplier s = supplierController.getByID_Supplier(id);
 
         if (s == null) {
-            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -3834,7 +3834,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil update!", "Message", JOptionPane.PLAIN_MESSAGE);
             UpdateSupplier_CancelButtonActionPerformed(null);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_UpdateSupplier_SaveButtonActionPerformed
 
@@ -3855,7 +3855,7 @@ public class Menu extends javax.swing.JFrame {
     private void HapusSupplier_SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusSupplier_SearchButtonActionPerformed
         // TODO add your handling code here:
         if (HapusSupplier_IDField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "THE TEXT FIELD IS EMPTY!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -3863,7 +3863,7 @@ public class Menu extends javax.swing.JFrame {
         Supplier s = supplierController.getByID_Supplier(id);
 
         if (s == null) {
-            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ID: " + id + " not found!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -3909,7 +3909,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Message", JOptionPane.PLAIN_MESSAGE);
             HapusSupplier_CancelButtonActionPerformed(null);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "YOU DONKEY!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage() + " tidak boleh kosong!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_HapusSupplier_ConfirmButtonActionPerformed
 
