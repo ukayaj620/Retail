@@ -394,6 +394,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Retail - FJDJ");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png")).getImage());
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
@@ -3657,7 +3658,7 @@ public class Menu extends javax.swing.JFrame {
 
             dataList.add(data);
         }
-
+        
         TabelTransaksi.setModel(new DefaultTableModel(dataList.toArray(new Object[dataList.size()][w]), namaKolom) {
             @Override
             public boolean isCellEditable(int row, int column) {
