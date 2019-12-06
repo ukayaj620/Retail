@@ -393,6 +393,7 @@ public class Menu extends javax.swing.JFrame {
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Retail - FJDJ");
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
