@@ -888,7 +888,7 @@ public class Menu extends javax.swing.JFrame {
                 IDKCbxMouseClicked(evt);
             }
         });
-        AddBarangMenu.add(IDKCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 140, 40));
+        AddBarangMenu.add(IDKCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 180, 40));
         AddBarangMenu.add(HargaBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 180, 30));
         AddBarangMenu.add(IDBarangField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 180, 30));
         AddBarangMenu.add(BarangTglExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, 180, 30));

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2019 at 10:57 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- Generation Time: Dec 06, 2019 at 07:25 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -60,6 +60,17 @@ CREATE TABLE `cabang` (
   `ID_Kota` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cabang`
+--
+
+INSERT INTO `cabang` (`ID_Cabang`, `ID_Kota`) VALUES
+('C011', 'K001'),
+('C021', 'K002'),
+('C031', 'K003'),
+('C041', 'K004'),
+('C051', 'K005');
+
 -- --------------------------------------------------------
 
 --
@@ -71,6 +82,19 @@ CREATE TABLE `katagori` (
   `Nama_Katagori` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `katagori`
+--
+
+INSERT INTO `katagori` (`ID_Katagori`, `Nama_Katagori`) VALUES
+('01A', 'Makanan'),
+('01B', 'Makanan Ringan'),
+('02A', 'Minuman'),
+('02B', 'Minuman Ringan'),
+('03', 'Kebersihan & Produk Personal'),
+('04', 'Obat-obatan'),
+('05', 'Lain-lain');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +105,17 @@ CREATE TABLE `kota` (
   `ID_Kota` varchar(5) NOT NULL,
   `Nama_Kota` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kota`
+--
+
+INSERT INTO `kota` (`ID_Kota`, `Nama_Kota`) VALUES
+('K001', 'Jakarta'),
+('K002', 'Bogor'),
+('K003', 'Depok'),
+('K004', 'Tangerang'),
+('K005', 'Bekasi');
 
 -- --------------------------------------------------------
 
