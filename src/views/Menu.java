@@ -311,7 +311,7 @@ public class Menu extends javax.swing.JFrame {
         HapusTglMasuk = new com.toedter.calendar.JDateChooser();
         HapusStaf_SearchButton = new javax.swing.JButton();
         SupplierPanel = new javax.swing.JPanel();
-        SupplierBar = new javax.swing.JPanel();
+        StafBar1 = new javax.swing.JPanel();
         AddSupplier = new javax.swing.JPanel();
         AddSupplierLogo = new javax.swing.JLabel();
         ListSupplier = new javax.swing.JPanel();
@@ -1561,8 +1561,8 @@ public class Menu extends javax.swing.JFrame {
         SupplierPanel.setMinimumSize(new java.awt.Dimension(1280, 600));
         SupplierPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SupplierBar.setBackground(new java.awt.Color(255, 227, 128));
-        SupplierBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        StafBar1.setBackground(new java.awt.Color(255, 227, 128));
+        StafBar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AddSupplier.setBackground(new java.awt.Color(255, 250, 229));
         AddSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1599,7 +1599,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        SupplierBar.add(AddSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        StafBar1.add(AddSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         ListSupplier.setBackground(new java.awt.Color(255, 250, 229));
         ListSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1635,7 +1635,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        SupplierBar.add(ListSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, -1));
+        StafBar1.add(ListSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, -1));
 
         UpdateSupplier.setBackground(new java.awt.Color(255, 250, 229));
         UpdateSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1671,7 +1671,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        SupplierBar.add(UpdateSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
+        StafBar1.add(UpdateSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
 
         HapusSupplier.setBackground(new java.awt.Color(255, 250, 229));
         HapusSupplier.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -1707,9 +1707,9 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        SupplierBar.add(HapusSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, -1, -1));
+        StafBar1.add(HapusSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, -1, -1));
 
-        SupplierPanel.add(SupplierBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 0, 150, 580));
+        SupplierPanel.add(StafBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 0, 150, 580));
 
         AddSupplierMenu.setBackground(new java.awt.Color(255, 250, 229));
         AddSupplierMenu.setMaximumSize(new java.awt.Dimension(1280, 600));
@@ -1820,7 +1820,6 @@ public class Menu extends javax.swing.JFrame {
 
         UpdateSupplier_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateSupplier_CancelButton.setText("Batal");
-        UpdateSupplier_CancelButton.setEnabled(false);
         UpdateSupplier_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         UpdateSupplier_CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1831,7 +1830,6 @@ public class Menu extends javax.swing.JFrame {
 
         UpdateSupplier_SaveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         UpdateSupplier_SaveButton.setText("Simpan ");
-        UpdateSupplier_SaveButton.setEnabled(false);
         UpdateSupplier_SaveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         UpdateSupplier_SaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1841,10 +1839,7 @@ public class Menu extends javax.swing.JFrame {
         UpdateSupplierMenu.add(UpdateSupplier_SaveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
 
         UpdateKotaCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JKT", "BDG", "BGR", "U-DNKY", "S&P", "SSK" }));
-        UpdateKotaCbx.setEnabled(false);
         UpdateSupplierMenu.add(UpdateKotaCbx, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 140, 40));
-
-        UpdateSupplier_NamaField.setEnabled(false);
         UpdateSupplierMenu.add(UpdateSupplier_NamaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 180, 30));
         UpdateSupplierMenu.add(UpdateSupplier_IDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 180, 30));
 
@@ -1887,7 +1882,6 @@ public class Menu extends javax.swing.JFrame {
 
         HapusSupplier_CancelButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusSupplier_CancelButton.setText("Batal");
-        HapusSupplier_CancelButton.setEnabled(false);
         HapusSupplier_CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         HapusSupplier_CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1898,7 +1892,6 @@ public class Menu extends javax.swing.JFrame {
 
         HapusSupplier_ConfirmButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HapusSupplier_ConfirmButton.setText("Hapus");
-        HapusSupplier_ConfirmButton.setEnabled(false);
         HapusSupplier_ConfirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         HapusSupplier_ConfirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3674,7 +3667,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void AddSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AddSupplierMenuComponentShown
         // TODO add your handling code here:
-        List<Supplier> list = supplierController.getAllSupplier();
+        List<Kota> list = kotaController.getAllKota();
         int size = list.size();
 
         Boolean isUpdated = false;
@@ -3878,8 +3871,8 @@ public class Menu extends javax.swing.JFrame {
         int i;
 
         for (i = size - 1; i >= 0; i--) {
-            Supplier cek = (Supplier) HapusKotaCbx.getModel().getElementAt(i);
-            if (cek.getID_Supplier().equals(s.getID_Supplier())) {
+            Kota cek = (Kota) HapusKotaCbx.getModel().getElementAt(i);
+            if (cek.getID_Kota().equals(s.getID_Kota())) {
                 break;
             }
         }
@@ -3922,8 +3915,10 @@ public class Menu extends javax.swing.JFrame {
 
     private void HapusSupplierMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_HapusSupplierMenuComponentShown
         // TODO add your handling code here:
-        List<Supplier> list = supplierController.getAllSupplier();
+        List<Kota> list = kotaController.getAllKota();
         int size = list.size();
+        
+        System.out.println(list);
 
         Boolean isUpdated = false;
 
@@ -4117,6 +4112,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JRadioButton ShiftPagi;
     private javax.swing.JPanel Staf;
     private javax.swing.JPanel StafBar;
+    private javax.swing.JPanel StafBar1;
     private javax.swing.JLabel StafLogo;
     private javax.swing.JPanel StafPanel;
     private javax.swing.JScrollPane StafTable;
@@ -4128,7 +4124,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel StokTitle;
     private javax.swing.JLabel Subtotal;
     private javax.swing.JTextField SubtotalField;
-    private javax.swing.JPanel SupplierBar;
     private javax.swing.JPanel SupplierPanel;
     private javax.swing.JScrollPane SupplierTable;
     private javax.swing.JPanel Supply;

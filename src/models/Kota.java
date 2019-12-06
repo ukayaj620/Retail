@@ -25,4 +25,9 @@ public class Kota {
     public void setNama_Kota(String Nama_Kota){
         this.Nama_Kota = Nama_Kota;
     }
+
+    @Override
+    public String toString() {
+        return Nama_Kota;
+    }
 }
