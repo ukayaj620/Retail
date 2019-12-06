@@ -28,6 +28,6 @@ public class Kota {
 
     @Override
     public String toString() {
-        return Nama_Kota;
+        return ID_Kota;
     }
 }
